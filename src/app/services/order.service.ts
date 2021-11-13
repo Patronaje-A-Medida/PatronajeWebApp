@@ -19,8 +19,8 @@ export class OrderService {
       client: { name: 'Silvana Camero', email: 'scamero@mail.com', phone: '123456789' },
       code: 'ORD00001',
       price: 'S/. 230.00',
-      date: new Date(2021, 9, 6),
-      state: OrderState.Active,
+      date: new Date(2021, Math.random() * (11), Math.random() * (18 - 1) + 1),
+      state: OrderState.Attended,
   }));
 
   constructor() { }
@@ -30,12 +30,15 @@ export class OrderService {
     const lastItem = this.getLastItem(firstItem, itemsPerPage, this.orders.length);
 
     return {
-      orders: this.orders.slice(firstItem - 1, lastItem),
+      orders: this.getOrdersSortedByDate(this.orders).slice(firstItem - 1, lastItem),
       total: this.orders.length,
       startIndex: firstItem,
       endIndex: lastItem,
     };
   }
+
+  private getOrdersSortedByDate = (orders: OrderItem[]) =>
+    orders.sort((a, b) => a.date.getTime() - b.date.getTime())
 
   private getFirstItem = (page: number, itemsPerPage: number): number => page * itemsPerPage + 1;
 

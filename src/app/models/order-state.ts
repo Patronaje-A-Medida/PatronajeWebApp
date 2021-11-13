@@ -1,3 +1,3 @@
 export enum OrderState {
-  Active,
+  Attended = 'Atendido',
 }
