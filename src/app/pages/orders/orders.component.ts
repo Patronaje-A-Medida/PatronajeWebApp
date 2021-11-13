@@ -11,6 +11,8 @@ export class OrdersComponent implements OnInit {
 
   orders: OrderItem[] = [];
 
+  search = '';
+
   page = 0;
   itemsPerPage = 4;
 
@@ -24,25 +26,30 @@ export class OrdersComponent implements OnInit {
     this.getOrders();
   }
 
+  onSearchChange = (): void => {
+    this.page = 0;
+    this.getOrders(this.search);
+  }
+
   getNextPage(): void {
     if (this.hasNext()) {
       this.page += 1;
-      this.getOrders();
+      this.getOrders(this.search);
     }
   }
 
   getPrevPage(): void {
     if (this.hasPrev()) {
       this.page -= 1;
-      this.getOrders();
+      this.getOrders(this.search);
     }
   }
 
   hasNext = () => (this.page + 1) * this.itemsPerPage < this.totalItems;
   hasPrev = () => this.page > 0;
 
-  private getOrders(): void {
-    const result = this.orderService.getAllFromPage(this.page, this.itemsPerPage);
+  private getOrders(search?: string): void {
+    const result = this.orderService.getAll(search, this.page, this.itemsPerPage);
 
     this.orders = result.orders;
 

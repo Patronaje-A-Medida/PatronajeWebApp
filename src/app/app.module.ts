@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ComponentExampleComponent } from './components/component-example/component-example.component';
 import { PageExampleComponent } from './pages/page-example/page-example.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,10 +15,11 @@ import { OrdersComponent } from './pages/orders/orders.component';
     PageExampleComponent,
     OrdersComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

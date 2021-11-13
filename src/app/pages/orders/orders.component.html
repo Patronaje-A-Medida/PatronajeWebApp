@@ -1,7 +1,10 @@
 <h2>Pedidos</h2>
 <div>
   <div>
-    <input type="text" placeholder="Ingrese un código de prenda" />
+    <input type="text"
+           placeholder="Ingrese un código de prenda"
+           [(ngModel)]="search"
+           (ngModelChange)="onSearchChange()" />
     <!-- search icon -->
   </div>
   <select>
@@ -38,6 +41,7 @@
         </div>
       </td>
     </tr>
+    <tr *ngFor="let i of [].constructor(itemsPerPage - orders.length)"></tr>
   </tbody>
 </table>
 <div>

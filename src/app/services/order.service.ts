@@ -14,7 +14,7 @@ interface OrdersResponse {
 })
 export class OrderService {
 
-  private orders: OrderItem[] = Array(20).fill({}).map(() => ({
+  private orders: OrderItem[] = Array(19).fill({}).map(() => ({
       garmentCode: `PR001${Math.random()}`,
       client: { name: 'Silvana Camero', email: 'scamero@mail.com', phone: '123456789' },
       code: 'ORD00001',
@@ -25,13 +25,16 @@ export class OrderService {
 
   constructor() { }
 
-  public getAllFromPage(page: number, itemsPerPage: number): OrdersResponse {
+  public getAll(search?: string, page: number = 0, itemsPerPage: number = this.orders.length): OrdersResponse {
     const firstItem = this.getFirstItem(page, itemsPerPage);
     const lastItem = this.getLastItem(firstItem, itemsPerPage, this.orders.length);
 
+    const allItems = this.getOrdersSortedByDate(this.orders)
+      .filter(order => search ? order.garmentCode.includes(search) : true);
+
     return {
-      orders: this.getOrdersSortedByDate(this.orders).slice(firstItem - 1, lastItem),
-      total: this.orders.length,
+      orders: allItems.slice(firstItem - 1, lastItem),
+      total: allItems.length,
       startIndex: firstItem,
       endIndex: lastItem,
     };
