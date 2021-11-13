@@ -1,0 +1,48 @@
+<h2>Pedidos</h2>
+<div>
+  <div>
+    <input type="text" placeholder="Ingrese un código de prenda" />
+    <!-- search icon -->
+  </div>
+  <select>
+    <option value="Atendidos" selected>Atendidos</option>
+  </select>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Cód. Prenda</th>
+      <th>Cliente</th>
+      <th>Cód. Orden</th>
+      <th>Precio Estimado</th>
+      <th>Fecha Realizada</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.garmentCode }}</td>
+      <td>
+        <ul>
+          <li>{{ order.client.name }}</li>
+          <li>{{ order.client.email }}</li>
+          <li>{{ order.client.phone }}</li>
+        </ul>
+      </td>
+      <td>{{ order.code }}</td>
+      <td>{{ order.price }}</td>
+      <td>{{ order.date | date: 'dd/MM/yyyy' }}</td>
+      <td>
+        <div>
+          {{ order.state }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <span>Mostrando {{ firstItem }}-{{ lastItem }} de {{ totalItems }} resultados</span>
+  <button (click)="getPrevPage()" [disabled]="!hasPrev()">prev</button>
+  <button (click)="getNextPage()" [disabled]="!hasNext()">next</button>
+</div>
+
