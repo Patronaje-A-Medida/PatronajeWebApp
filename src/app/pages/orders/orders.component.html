@@ -7,8 +7,8 @@
            (ngModelChange)="onSearchChange()" />
     <!-- search icon -->
   </div>
-  <select>
-    <option value="Atendidos" selected>Atendidos</option>
+  <select [(ngModel)]="state" (ngModelChange)="onStateChange()">
+    <option value="Atendido">Atendidos</option>
   </select>
 </div>
 <table>

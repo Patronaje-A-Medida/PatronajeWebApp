@@ -25,12 +25,14 @@ export class OrderService {
 
   constructor() { }
 
-  public getAll(search?: string, page: number = 0, itemsPerPage: number = this.orders.length): OrdersResponse {
+  public getAll(search?: string, state?: OrderState, page: number = 0, itemsPerPage: number = this.orders.length)
+    : OrdersResponse {
     const firstItem = this.getFirstItem(page, itemsPerPage);
     const lastItem = this.getLastItem(firstItem, itemsPerPage, this.orders.length);
 
     const allItems = this.getOrdersSortedByDate(this.orders)
-      .filter(order => search ? order.garmentCode.includes(search) : true);
+      .filter(order => search ? order.garmentCode.includes(search) : true)
+      .filter(order => state ? order.state === state : true);
 
     return {
       orders: allItems.slice(firstItem - 1, lastItem),
