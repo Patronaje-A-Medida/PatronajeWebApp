@@ -1,33 +1,46 @@
-<div class="min-h-screen fixed w-60 border-r border-gray-400 divide-y-4 divide-gray-300 p-3">
-  <div class="bg-gray-400 text-center h-40">logo</div>
-  <ul class="font-medium text-lg space-y-10">
-    <li class="mt-5 flex items-center cursor-pointer hover:text-yellow-500"
-        [class.text-yellow-500]="selected === 'orders'">
-      <div class="w-10 flex justify-center items-center">
-        <i class="fas fa-clipboard-list fa-2x"></i>
-      </div>
-      <span class="ml-5">Pedidos</span>
-    </li>
-    <li class="mt-5 flex items-center cursor-pointer hover:text-yellow-500"
-        [class.text-yellow-500]="selected === 'catalog'">
-      <div class="w-10 flex justify-center items-center">
-        <i class="fas fa-tshirt fa-2x"></i>
-      </div>
-      <span class="ml-5">Catálogo</span>
-    </li>
-    <li class="mt-5 flex items-center cursor-pointer hover:text-yellow-500"
-        [class.text-yellow-500]="selected === 'account'">
-      <div class="w-10 flex justify-center items-center">
-        <i class="fas fa-user-circle fa-2x"></i>
-      </div>
-      <span class="ml-5">Personal</span>
-    </li>
-    <li class="mt-5 flex items-center cursor-pointer hover:text-yellow-500"
-        [class.text-yellow-500]="selected === 'settings'">
-      <div class="w-10 flex justify-center items-center">
-        <i class="fas fa-cog fa-2x"></i>
-      </div>
-      <span class="ml-5">Configuración</span>
-    </li>
-  </ul>
+<div class="min-h-screen fixed w-60 border-r border-gray-400 p-3 bg-white">
+  <div class="flex justify-end items-center mt-3 mb-5 md:hidden">
+    <i class="fas fa-arrow-left fa-lg" (click)="closeSideNavHandler()"></i>
+  </div>
+  <div class="divide-y-4 divide-gray-300">
+    <div class="bg-gray-400 text-center h-40">logo</div>
+    <ul class="font-medium text-lg space-y-10">
+      <li class="mt-5 cursor-pointer hover:text-yellow-500"
+          [class.text-yellow-500]="selected === 'orders'">
+        <a routerLink="/orders" class="flex items-center">
+          <div class="w-10 flex justify-center items-center">
+            <i class="fas fa-clipboard-list fa-2x"></i>
+          </div>
+          <span class="ml-5">Pedidos</span>
+        </a>
+      </li>
+      <li class="mt-5 cursor-pointer hover:text-yellow-500"
+          [class.text-yellow-500]="selected === 'catalog'">
+        <a routerLink="/catalog" class="flex items-center">
+          <div class="w-10 flex justify-center items-center">
+            <i class="fas fa-tshirt fa-2x"></i>
+          </div>
+          <span class="ml-5">Catálogo</span>
+        </a>
+      </li>
+      <li class="mt-5 cursor-pointer hover:text-yellow-500"
+          [class.text-yellow-500]="selected === 'account'">
+        <a routerLink="/account" class="flex items-center">
+          <div class="w-10 flex justify-center items-center">
+            <i class="fas fa-user-circle fa-2x"></i>
+          </div>
+          <span class="ml-5">Personal</span>
+        </a>
+      </li>
+      <li class="mt-5 cursor-pointer hover:text-yellow-500"
+          [class.text-yellow-500]="selected === 'settings'">
+        <a routerLink="/settings" class="flex items-center">
+          <div class="w-10 flex justify-center items-center">
+            <i class="fas fa-cog fa-2x"></i>
+          </div>
+          <span class="ml-5">Configuración</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

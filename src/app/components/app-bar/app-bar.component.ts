@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-app-bar',
@@ -7,6 +7,10 @@ import {Component, Input} from '@angular/core';
 })
 export class AppBarComponent {
 
+  @Output() menuClick = new EventEmitter<void>();
+
   @Input() username = '';
+
+  menuClickHandler = (): void => this.menuClick.emit();
 
 }

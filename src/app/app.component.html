@@ -1,6 +1,7 @@
+<app-side-nav [class.hidden]="!open" (closeSideNav)="closeSideNavHandler()"></app-side-nav>
 <app-side-nav class="hidden md:block"></app-side-nav>
 <div class="flex flex-col min-h-screen flex-1 md:pl-60">
-  <app-app-bar username="Anahí"></app-app-bar>
+  <app-app-bar username="Anahí" (menuClick)="menuClickHandler()"></app-app-bar>
   <main class="bg-gray-100 flex-1">
     <router-outlet></router-outlet>
   </main>
