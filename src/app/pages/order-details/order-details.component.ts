@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Order} from '../../models/order';
 import {OrderState} from '../../models/order-state';
+import {ClientDetails} from '../../models/client-details';
 
 @Component({
   selector: 'app-order-details',
@@ -20,6 +21,12 @@ export class OrderDetailsComponent implements OnInit {
     selectedColor: '#343351',
     state: OrderState.Attended,
     price: 'S/. 230.00',
+  };
+
+  client: ClientDetails = {
+    name: 'Silvana Camero',
+    email: 'scamero@mail.com',
+    phone: '123456789',
   };
 
   constructor() {
