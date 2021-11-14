@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComponentExampleComponent } from './component-example.component';
+import { StateChipComponent } from './state-chip.component';
 
-describe('ComponentExampleComponent', () => {
-  let component: ComponentExampleComponent;
-  let fixture: ComponentFixture<ComponentExampleComponent>;
+describe('StateChipComponent', () => {
+  let component: StateChipComponent;
+  let fixture: ComponentFixture<StateChipComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ComponentExampleComponent ]
+      declarations: [ StateChipComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComponentExampleComponent);
+    fixture = TestBed.createComponent(StateChipComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

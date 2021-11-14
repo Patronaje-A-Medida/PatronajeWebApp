@@ -1,0 +1,9 @@
+<button class="rounded-full bg-white border border-gray-400 h-7 w-7 ml-4"
+        (click)="arrowClickHandler()"
+        [class.cursor-not-allowed]="disabled"
+        [class.text-gray-400]="disabled"
+        [disabled]="disabled"
+>
+  <i class="fas fa-chevron-left" *ngIf="direction === 'left'"></i>
+  <i class="fas fa-chevron-right" *ngIf="direction === 'right'"></i>
+</button>
