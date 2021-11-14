@@ -10,6 +10,7 @@ import { PaginationButtonComponent } from './components/pagination-button/pagina
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
+import { OrderDataComponent } from './components/order-data/order-data.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { OrderDetailsComponent } from './pages/order-details/order-details.compo
     AppBarComponent,
     SideNavComponent,
     OrderDetailsComponent,
+    OrderDataComponent,
   ],
   imports: [
     BrowserModule,
