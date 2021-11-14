@@ -34,7 +34,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let order of orders" class="table-border h-32">
+    <tr *ngFor="let order of orders"
+        class="table-border h-32 cursor-pointer hover:bg-gray-100"
+        (click)="goToDetails(order)">
       <td class="table-body-cell text-left">{{ order.garmentCode }}</td> <!-- p-3 text-xs md:text-sm lg:text-base -->
       <td class="p-3 text-left">
         <ul>

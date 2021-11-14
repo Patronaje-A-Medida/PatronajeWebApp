@@ -6,7 +6,7 @@
     <div class="bg-gray-400 text-center h-40">logo</div>
     <ul class="font-medium text-lg space-y-10">
       <li class="mt-5 cursor-pointer hover:text-yellow-500"
-          [class.text-yellow-500]="selected === 'orders'">
+          [class.text-yellow-500]="selected === 'orders'" (click)="closeSideNavHandler()">
         <a routerLink="/orders" class="flex items-center">
           <div class="w-10 flex justify-center items-center">
             <i class="fas fa-clipboard-list fa-2x"></i>
@@ -15,7 +15,7 @@
         </a>
       </li>
       <li class="mt-5 cursor-pointer hover:text-yellow-500"
-          [class.text-yellow-500]="selected === 'catalog'">
+          [class.text-yellow-500]="selected === 'catalog'" (click)="closeSideNavHandler()">
         <a routerLink="/catalog" class="flex items-center">
           <div class="w-10 flex justify-center items-center">
             <i class="fas fa-tshirt fa-2x"></i>
@@ -24,7 +24,7 @@
         </a>
       </li>
       <li class="mt-5 cursor-pointer hover:text-yellow-500"
-          [class.text-yellow-500]="selected === 'account'">
+          [class.text-yellow-500]="selected === 'account'" (click)="closeSideNavHandler()">
         <a routerLink="/account" class="flex items-center">
           <div class="w-10 flex justify-center items-center">
             <i class="fas fa-user-circle fa-2x"></i>
@@ -33,7 +33,7 @@
         </a>
       </li>
       <li class="mt-5 cursor-pointer hover:text-yellow-500"
-          [class.text-yellow-500]="selected === 'settings'">
+          [class.text-yellow-500]="selected === 'settings'" (click)="closeSideNavHandler()">
         <a routerLink="/settings" class="flex items-center">
           <div class="w-10 flex justify-center items-center">
             <i class="fas fa-cog fa-2x"></i>

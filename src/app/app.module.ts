@@ -9,6 +9,7 @@ import { StateChipComponent } from './components/state-chip/state-chip.component
 import { PaginationButtonComponent } from './components/pagination-button/pagination-button.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     PaginationButtonComponent,
     AppBarComponent,
     SideNavComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
