@@ -15,7 +15,7 @@ interface OrdersResponse {
 export class OrderService {
 
   private orders: OrderItem[] = Array(19).fill({}).map(() => ({
-      garmentCode: `PR001${Math.random()}`,
+      garmentCode: 'PR001',
       client: { name: 'Silvana Camero', email: 'scamero@mail.com', phone: '123456789' },
       code: 'ORD00001',
       price: 'S/. 230.00',

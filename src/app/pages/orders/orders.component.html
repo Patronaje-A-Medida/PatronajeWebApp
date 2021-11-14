@@ -1,52 +1,77 @@
-<h2>Pedidos</h2>
-<div>
-  <div>
-    <input type="text"
-           placeholder="Ingrese un código de prenda"
-           [(ngModel)]="search"
-           (ngModelChange)="onSearchChange()" />
-    <!-- search icon -->
+<div class="px-3 py-5">
+  <h1 class="text-xl md:text-2xl lg:text-3xl font-bold">Pedidos</h1>
+  <div class="flex justify-between my-10">
+    <div class="flex-1 border-2 rounded-3xl border-yellow-500 px-3 md:py-2">
+      <input class="w-full outline-none text-xs md:text-base"
+             type="text"
+             placeholder="Ingrese un código de prenda"
+             [(ngModel)]="search"
+             (ngModelChange)="onSearchChange()"/>
+      <!-- search icon -->
+    </div>
+    <select
+      class="ml-5 rounded-3xl bg-yellow-500 text-white px-4 md:px-10 lg:px-20 appearance-none outline-none text-xs md:text-base md:py-2"
+      [(ngModel)]="state"
+      (ngModelChange)="onStateChange()">
+      <option value="Atendido">Atendidos</option>
+      <option value="Sin antender">Atendidos</option>
+      <option value="En progreso">Atendidos</option>
+    </select>
   </div>
-  <select [(ngModel)]="state" (ngModelChange)="onStateChange()">
-    <option value="Atendido">Atendidos</option>
-  </select>
 </div>
-<table>
-  <thead>
-    <tr>
-      <th>Cód. Prenda</th>
-      <th>Cliente</th>
-      <th>Cód. Orden</th>
-      <th>Precio Estimado</th>
-      <th>Fecha Realizada</th>
-      <th>Estado</th>
+<div class="overflow-x-auto">
+  <table class="bg-white w-full">
+    <thead>
+    <tr class="border-t border-b border-gray-400">
+      <th class="font-medium text-xs md:text-sm lg:text-lg p-3 text-left">Cód. Prenda</th>
+      <th class="font-medium text-xs md:text-sm lg:text-lg p-3 text-left">Cliente</th>
+      <th class="font-medium text-xs md:text-sm lg:text-lg p-3 text-left">Cód. Orden</th>
+      <th class="font-medium text-xs md:text-sm lg:text-lg p-3 text-left">Precio Estimado</th>
+      <th class="font-medium text-xs md:text-sm lg:text-lg p-3 text-center">Fecha Realizada</th>
+      <th class="font-medium text-xs md:text-sm lg:text-lg p-3 text-center">Estado</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let order of orders">
-      <td>{{ order.garmentCode }}</td>
-      <td>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders" class="border-t border-b border-gray-400 h-32">
+      <td class="p-3 text-xs md:text-sm lg:text-base text-left">{{ order.garmentCode }}</td>
+      <td class="p-3 text-left">
         <ul>
-          <li>{{ order.client.name }}</li>
-          <li>{{ order.client.email }}</li>
-          <li>{{ order.client.phone }}</li>
+          <li class="text-sm md:text-lg lg:text-xl mb-1">{{ order.client.name }}</li>
+          <li class="text-xs md:text-sm mb-1">{{ order.client.email }}</li>
+          <li class="text-xs md:text-sm">{{ order.client.phone }}</li>
         </ul>
       </td>
-      <td>{{ order.code }}</td>
-      <td>{{ order.price }}</td>
-      <td>{{ order.date | date: 'dd/MM/yyyy' }}</td>
-      <td>
-        <div>
+      <td class="p-3 text-xs md:text-sm lg:text-base text-left">{{ order.code }}</td>
+      <td class="p-3 text-xs md:text-sm lg:text-base text-right">{{ order.price }}</td>
+      <td class="p-3 text-xs md:text-sm lg:text-base text-center">{{ order.date | date: 'dd/MM/yyyy' }}</td>
+      <td class="p-3 p-2 text-center">
+        <div class="rounded-3xl bg-green-500 text-white py-1">
           {{ order.state }}
         </div>
       </td>
     </tr>
-    <tr *ngFor="let i of [].constructor(itemsPerPage - orders.length)"></tr>
-  </tbody>
-</table>
-<div>
-  <span>Mostrando {{ firstItem }}-{{ lastItem }} de {{ totalItems }} resultados</span>
-  <button (click)="getPrevPage()" [disabled]="!hasPrev()">prev</button>
-  <button (click)="getNextPage()" [disabled]="!hasNext()">next</button>
+    <tr *ngFor="let i of [].constructor(itemsPerPage - orders.length)" class="h-32"></tr>
+    </tbody>
+  </table>
+</div>
+<div class="px-3 py-5 mt-5">
+  <div class="flex justify-between items-center">
+    <span class="text-xs md:text-base text-gray-500">Mostrando {{ firstItem }}-{{ lastItem }} de {{ totalItems }}
+      resultados</span>
+    <div>
+      <button class="rounded-full bg-white border border-gray-500 h-7 w-7"
+              (click)="getPrevPage()"
+              [disabled]="!hasPrev()"
+      >
+        <
+      </button>
+      <button class="rounded-full bg-white border border-gray-500 h-7 w-7 ml-4"
+              (click)="getNextPage()"
+              [disabled]="!hasNext()"
+      >
+        >
+      </button>
+    </div>
+  </div>
 </div>
 
