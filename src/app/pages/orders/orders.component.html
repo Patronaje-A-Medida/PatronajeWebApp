@@ -1,7 +1,7 @@
 <div class="px-3 py-5">
   <h1 class="page-title">Pedidos</h1>
   <div class="flex justify-between my-10">
-    <div class="flex-1 input-border px-3 md:py-2">
+    <div class="flex-1 input-border px-3 py-1 md:py-2 bg-white">
       <div class="flex items-center">
         <input class="w-full input"
                type="text"
@@ -12,7 +12,7 @@
       </div>
     </div>
     <select
-      class="ml-5 select px-4 md:px-10 lg:px-20 md:py-2"
+      class="ml-5 select px-4 md:px-10 lg:px-20 py-1 md:py-2"
       [(ngModel)]="state"
       (ngModelChange)="onStateChange()">
       <option value="Atendido" class="bg-white text-left text-black">Atendidos</option>
@@ -50,7 +50,14 @@
         <app-state-chip [state]="order.state"></app-state-chip>
       </td>
     </tr>
-    <tr *ngFor="let i of [].constructor(itemsPerPage - orders.length)" class="h-32"></tr>
+    <tr *ngFor="let i of [].constructor(itemsPerPage - orders.length)" class="h-32">
+      <td class="bg-gray-100"></td>
+      <td class="bg-gray-100"></td>
+      <td class="bg-gray-100"></td>
+      <td class="bg-gray-100"></td>
+      <td class="bg-gray-100"></td>
+      <td class="bg-gray-100"></td>
+    </tr>
     </tbody>
   </table>
 </div>
