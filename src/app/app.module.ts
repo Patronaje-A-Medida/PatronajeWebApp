@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import { StateChipComponent } from './components/state-chip/state-chip.component';
 import { PaginationButtonComponent } from './components/pagination-button/pagination-button.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     StateChipComponent,
     PaginationButtonComponent,
     AppBarComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,
