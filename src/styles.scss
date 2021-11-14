@@ -18,6 +18,10 @@
   @apply rounded-3xl bg-yellow-500 text-white text-center outline-none text-xs md:text-base
 }
 
+.button {
+  @apply rounded-3xl bg-yellow-500 text-white text-center outline-none text-xs md:text-base
+}
+
 .table-border {
   @apply border-t border-b border-gray-400
 }

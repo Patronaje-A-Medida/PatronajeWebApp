@@ -37,7 +37,7 @@
     <tr *ngFor="let order of orders"
         class="table-border h-32 cursor-pointer hover:bg-gray-100"
         (click)="goToDetails(order)">
-      <td class="table-body-cell text-left">{{ order.garmentCode }}</td> <!-- p-3 text-xs md:text-sm lg:text-base -->
+      <td class="table-body-cell text-left">{{ order.garmentCode }}</td>
       <td class="p-3 text-left">
         <ul>
           <li class="text-sm md:text-lg lg:text-xl mb-1">{{ order.client.name }}</li>

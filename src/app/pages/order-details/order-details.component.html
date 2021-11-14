@@ -2,3 +2,56 @@
 <div class="px-3 py-5 border-b border-gray-400 bg-white">
   <app-order-data [order]="order"></app-order-data>
 </div>
+<div class="mb-5 border-gray-400 bg-white">
+  <div class="flex justify-between items-center px-3 pt-5">
+    <h3 class="font-bold mb-5">Datos del cliente</h3>
+    <button class="outline-none button p-1 px-3 cursor-pointer active:bg-yellow-600">Generar patrón</button>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 lg:py-5">
+    <div class="space-y-2 px-3">
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-400">Nombres del cliente</span>
+        <span class="text-lg">Silvana Camero</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-400">Correo de contacto</span>
+        <span class="text-lg">scamero@mail.com</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm text-gray-400">Teléfono de contacto</span>
+        <span class="text-lg">123456789</span>
+      </div>
+    </div>
+    <div class="my-10 lg:mt-0 flex justify-center relative">
+      <div class="bg-gray-400" style="width: 211px; height: 439px;">person</div>
+      <span class="absolute top-2 left-1 sm:left-10 md:left-20 lg:left-8 xl:left-20 text-lg">1.75 m</span>
+      <span class="absolute top-28 left-1 sm:left-10 md:left-20 lg:left-8 xl:left-20 text-lg">80 cm</span>
+      <span class="absolute top-36 left-1 sm:left-10 md:left-20 lg:left-8 xl:left-20 text-lg">70 cm</span>
+      <span class="absolute top-48 left-1 sm:left-10 md:left-20 lg:left-8 xl:left-20 text-lg">90 cm</span>
+    </div>
+    <div class="lg:h-52 overflow-y-auto lg:col-span-2 xl:col-span-1">
+      <table class="bg-white w-full">
+        <thead>
+        <tr class="table-border">
+          <th class="font-medium text-md py-2 text-gray-400">Medida</th>
+          <th class="font-medium text-md py-2 text-gray-400">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-border">
+          <td class="table-body-cell text-left">Contorno de cadera</td>
+          <td class="table-body-cell text-left">90 cm</td>
+        </tr>
+        <tr class="table-border">
+          <td class="table-body-cell text-left">Contorno de cintura</td>
+          <td class="table-body-cell text-left">85 cm</td>
+        </tr>
+        <tr class="table-border">
+          <td class="table-body-cell text-left">Contorno de muslo</td>
+          <td class="table-body-cell text-left">45 cm</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
