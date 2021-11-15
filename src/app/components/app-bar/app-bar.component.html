@@ -1,0 +1,12 @@
+<header class="h-16 border-b border-gray-400 flex items-center justify-between">
+  <div>
+    <i class="fas fa-bars fa-lg pl-3 md:hidden" (click)="menuClickHandler()"></i>
+  </div>
+  <div class="flex items-center h-full">
+    <div class="h-10 w-10 rounded-full flex items-center text-center justify-center font-bold text-xl bg-gray-300">
+      {{ username.charAt(0).toUpperCase() }}
+    </div>
+    <span class="font-semibold text-xl pl-7">{{ username }}</span>
+    <i class="fas fa-chevron-down pr-3 pl-7"></i>
+  </div>
+</header>

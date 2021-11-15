@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrderItem} from '../../models/order-item';
 import {OrderService} from '../../services/order.service';
 import {OrderState} from '../../models/order-state';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -22,7 +23,11 @@ export class OrdersComponent implements OnInit {
   lastItem = 0;
   totalItems = 0;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private router: Router) { }
+
+  goToDetails(order: OrderItem): void {
+    this.router.navigate([`/orders/${order.code}`]).then(() => {});
+  }
 
   ngOnInit(): void {
     this.getOrders();

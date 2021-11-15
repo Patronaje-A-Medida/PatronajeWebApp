@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  open = false;
+
   title = 'PatronajeWebApp';
+
+  menuClickHandler(): void {
+    this.open = true;
+  }
+
+  closeSideNavHandler(): void {
+    this.open = false;
+  }
+
 }
