@@ -1,3 +1,8 @@
-<div class="rounded-3xl bg-green-500 text-white py-1 text-center">
-  {{ state }}
+<div class="rounded-3xl text-white py-1 text-center"
+     [class.bg-green-500]="state === 'Attended'"
+     [class.bg-purple-500]="state === 'In Progress'"
+     [class.bg-red-500]="state === 'Unattended'">
+  <span *ngIf="state === 'Attended'">Atendido</span>
+  <span *ngIf="state === 'In Progress'">En Progreso</span>
+  <span *ngIf="state === 'Unattended'">Sin Atender</span>
 </div>

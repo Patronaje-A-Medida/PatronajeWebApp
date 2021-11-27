@@ -3,7 +3,7 @@ import { OrderState } from './order-state';
 export interface Order {
   code: string;
   eventType: string;
-  date: Date;
+  date: string;
   garmentCode: string;
   fabricType: string;
   attendedBy: string;
