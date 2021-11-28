@@ -13,7 +13,7 @@ export class OrderDetailsComponent implements OnInit {
   order: Order = {
     code: 'ORD0001',
     eventType: 'Oficina',
-    date: new Date(2021, 9, 10),
+    date: '09/10/2021',
     garmentCode: 'PR001',
     fabricType: 'Franela',
     attendedBy: 'Anahí Durand',

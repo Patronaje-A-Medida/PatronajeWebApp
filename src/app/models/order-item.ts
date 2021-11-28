@@ -1,11 +1,12 @@
-import { OrderClient } from './order-client';
-import { OrderState } from './order-state';
+import {OrderState} from './order-state';
+import {ClientDetails} from './client-details';
 
 export interface OrderItem {
   garmentCode: string;
-  client: OrderClient;
+  clientId: number;
+  client?: ClientDetails;
   code: string;
   price: string;
-  date: Date;
+  date: string;
   state: OrderState;
 }
