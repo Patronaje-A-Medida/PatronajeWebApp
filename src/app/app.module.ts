@@ -13,6 +13,7 @@ import {OrderDetailsComponent} from './pages/order-details/order-details.compone
 import {OrderDataComponent} from './components/order-data/order-data.component';
 import {ClientDetailsComponent} from './components/client-details/client-details.component';
 import {HttpClientModule} from '@angular/common/http';
+import { LoadingPulseComponent } from './components/loading-pulse/loading-pulse.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
     OrderDetailsComponent,
     OrderDataComponent,
     ClientDetailsComponent,
+    LoadingPulseComponent,
   ],
   imports: [
     BrowserModule,

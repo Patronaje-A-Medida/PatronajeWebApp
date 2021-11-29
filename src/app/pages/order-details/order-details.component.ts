@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Order} from '../../models/order';
-import {OrderState} from '../../models/order-state';
 import {ClientDetails} from '../../models/client-details';
+import {ActivatedRoute} from '@angular/router';
+import {OrderService} from '../../services/order.service';
+import {ClientService} from '../../services/client.service';
 
 @Component({
   selector: 'app-order-details',
@@ -10,29 +12,24 @@ import {ClientDetails} from '../../models/client-details';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  order: Order = {
-    code: 'ORD0001',
-    eventType: 'Oficina',
-    date: '09/10/2021',
-    garmentCode: 'PR001',
-    fabricType: 'Franela',
-    attendedBy: 'Anahí Durand',
-    garmentName: 'Saco Invierno 2021',
-    selectedColor: '#343351',
-    state: OrderState.Attended,
-    price: 'S/. 230.00',
-  };
+  order: Order;
+  client: ClientDetails;
 
-  client: ClientDetails = {
-    name: 'Silvana Camero',
-    email: 'scamero@mail.com',
-    phone: '123456789',
-  };
-
-  constructor() {
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private clientService: ClientService) {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const orderId = parseInt(params.get('id'), 10);
+      this.getOrder(orderId);
+    });
+  }
+
+  private getOrder(orderId: number): void {
+    this.orderService.getOrderById(orderId).subscribe(order => {
+      this.order = order;
+      this.clientService.getClientById(order.clientId).subscribe(client => this.client = client);
+    });
   }
 
 }

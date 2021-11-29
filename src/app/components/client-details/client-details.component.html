@@ -1,5 +1,5 @@
-<div class="flex justify-between items-center px-3 pt-5">
-  <h3 class="font-bold mb-5">Datos del cliente</h3>
+<div class="flex justify-between items-center px-3 pt-5 mb-5">
+  <h3 class="font-bold">Datos del cliente</h3>
   <button class="outline-none button p-1 px-3 cursor-pointer active:bg-yellow-600" (click)="generatePatternHandler()">
     Generar patrón
   </button>
@@ -8,15 +8,18 @@
   <div class="space-y-2 px-3">
     <div class="flex flex-col">
       <span class="text-sm text-gray-400">Nombres del cliente</span>
-      <span class="text-lg">{{ clientDetails.name }}</span>
+      <span class="text-lg" *ngIf="clientDetails">{{ clientDetails.name }}</span>
+      <span class="h-3 bg-gray-300 rounded w-1/2 animate-pulse mt-2" *ngIf="!clientDetails"></span>
     </div>
     <div class="flex flex-col">
       <span class="text-sm text-gray-400">Correo de contacto</span>
-      <span class="text-lg">{{ clientDetails.email }}</span>
+      <span class="text-lg" *ngIf="clientDetails">{{ clientDetails.email }}</span>
+      <span class="h-3 bg-gray-300 rounded w-1/2 animate-pulse mt-2" *ngIf="!clientDetails"></span>
     </div>
     <div class="flex flex-col">
       <span class="text-sm text-gray-400">Teléfono de contacto</span>
-      <span class="text-lg">{{ clientDetails.phone }}</span>
+      <span class="text-lg" *ngIf="clientDetails">{{ clientDetails.phone }}</span>
+      <span class="h-3 bg-gray-300 rounded w-1/2 animate-pulse mt-2" *ngIf="!clientDetails"></span>
     </div>
   </div>
   <div class="my-10 lg:mt-0 flex justify-center relative z-0">
