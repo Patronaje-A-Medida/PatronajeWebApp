@@ -1,6 +1,7 @@
 import {OrderState} from './order-state';
 import {Feature} from './feature';
 import {ClientDetails} from './client-details';
+import {Atelier} from './atelier';
 
 export interface Order {
   code: string;
@@ -14,5 +15,5 @@ export interface Order {
   price: string;
   features: Feature[];
   client?: ClientDetails;
-  attendedBy?: string;
+  attendedBy?: Atelier;
 }

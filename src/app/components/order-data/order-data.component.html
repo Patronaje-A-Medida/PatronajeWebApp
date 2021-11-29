@@ -15,7 +15,8 @@
     </div>
     <div class="flex flex-col">
       <span class="text-sm text-gray-400">Atendido por</span>
-      <span class="h-3 bg-gray-300 rounded w-4/5 animate-pulse mt-2" *ngIf="order.attendedBy === undefined"></span>
+      <span class="text-lg" *ngIf="order.attendedBy">{{ order.attendedBy.name }}</span>
+      <span class="h-3 bg-gray-300 rounded w-4/5 animate-pulse mt-2" *ngIf="!order.attendedBy"></span>
     </div>
     <div class="flex flex-col">
       <span class="text-sm text-gray-400">Nombre de prenda</span>

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Order} from '../../models/order';
-import {ClientDetails} from '../../models/client-details';
 import {ActivatedRoute} from '@angular/router';
 import {OrderService} from '../../services/order.service';
 import {ClientService} from '../../services/client.service';
+import {AtelierService} from '../../services/atelier.service';
 
 @Component({
   selector: 'app-order-details',
@@ -13,9 +13,9 @@ import {ClientService} from '../../services/client.service';
 export class OrderDetailsComponent implements OnInit {
 
   order: Order;
-  client: ClientDetails;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService, private clientService: ClientService) {
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private clientService: ClientService,
+              private atelierService: AtelierService) {
   }
 
   ngOnInit(): void {
@@ -28,7 +28,8 @@ export class OrderDetailsComponent implements OnInit {
   private getOrder(orderId: number): void {
     this.orderService.getOrderById(orderId).subscribe(order => {
       this.order = order;
-      this.clientService.getClientById(order.clientId).subscribe(client => this.client = client);
+      this.atelierService.getAtelierById(order.atelierId).subscribe(atelier => this.order.attendedBy = atelier);
+      this.clientService.getClientById(order.clientId).subscribe(client => this.order.client = client);
     });
   }
 
