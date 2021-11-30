@@ -29,7 +29,7 @@
       <thead>
       <tr class="table-border">
         <th class="table-header-cell text-left">Cód. Prenda</th>
-        <th class="table-header-cell text-left">Cliente</th>
+        <th class="table-header-cell text-left w-72">Cliente</th>
         <th class="table-header-cell text-left">Cód. Orden</th>
         <th class="table-header-cell text-left">Precio Estimado</th>
         <th class="table-header-cell text-center">Fecha Realizada</th>
@@ -41,17 +41,13 @@
           class="table-border h-32 cursor-pointer hover:bg-gray-100"
           (click)="goToDetails(order)">
         <td class="table-body-cell text-left">{{ order.garmentCode }}</td>
-        <td class="p-3 text-left">
+        <td class="p-3 text-left w-72">
           <ul *ngIf="order.client">
             <li class="text-sm md:text-lg lg:text-xl mb-1">{{ order.client.name }}</li>
             <li class="text-xs md:text-sm mb-1">{{ order.client.email }}</li>
             <li class="text-xs md:text-sm">{{ order.client.phone }}</li>
           </ul>
-          <ul *ngIf="!order.client" class="animate-pulse">
-            <li class="h-3 bg-gray-300 rounded w-40 mb-1"></li>
-            <li class="h-3 bg-gray-300 rounded w-44 mb-1"></li>
-            <li class="h-3 bg-gray-300 rounded w-32"></li>
-          </ul>
+          <app-loading-pulse [visible]="!order.client"></app-loading-pulse>
         </td>
         <td class="table-body-cell text-left">{{ order.code }}</td>
         <td class="table-body-cell text-right">{{ order.price }}</td>

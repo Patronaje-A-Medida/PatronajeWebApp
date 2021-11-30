@@ -34,7 +34,7 @@ export class OrdersComponent implements OnInit {
   constructor(private orderService: OrderService, private clientService: ClientService, private router: Router) { }
 
   goToDetails(order: OrderItem): void {
-    this.router.navigate([`/orders/${order.code}`]).then(() => {});
+    this.router.navigate([`/orders/${order.id}`]).then(() => {});
   }
 
   ngOnInit(): void {
