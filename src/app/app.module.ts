@@ -14,6 +14,7 @@ import {OrderDataComponent} from './components/order-data/order-data.component';
 import {ClientDetailsComponent} from './components/client-details/client-details.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoadingPulseComponent } from './components/loading-pulse/loading-pulse.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingPulseComponent } from './components/loading-pulse/loading-pulse.
     OrderDataComponent,
     ClientDetailsComponent,
     LoadingPulseComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,
