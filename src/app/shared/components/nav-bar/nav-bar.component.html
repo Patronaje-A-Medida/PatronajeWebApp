@@ -1,0 +1,43 @@
+<nav class="nav nav-container">
+        
+    <div class="nav-menu" id="nav-menu" [ngClass]="isOpen ? 'show-menu': 'hide-menu'">
+        <div class="nav-options">
+            <ul class="nav-list">
+                <li class="nav-list-item">
+                    <a href="#home" class="nav-link" (click)="hideMenu()">Inicio</a>
+                </li>
+                <li class="nav-list-item">
+                    <a href="#section1" class="nav-link" (click)="hideMenu()">Beneficios</a>
+                </li>
+                <li class="nav-list-item">
+                    <a href="#section2" class="nav-link" (click)="hideMenu()">Servicios</a>
+                </li>
+                <li class="nav-list-item">
+                    <a href="#section3" class="nav-link" (click)="hideMenu()">Contacto</a>
+                </li>
+            </ul>
+            
+            <div class="nav-divider"></div>
+
+            <div class="nav-actions" id="nav-actions">
+                <button class="btn-action">Iniciar Sesión</button>
+                <app-button-action [text]="'Regístrate'" (onClick)="navigateSignUp()"></app-button-action>
+            </div>
+        </div>
+
+        <div class="nav-close" id="nav-close" (click)="hideMenu()">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+    <div class="nav-logo">
+        <a href="#" class="nav-logo-img">
+            <img src="assets/images/dress.png" alt="logo">
+            <p class="font-montserrat font-light">Patronaje</p>
+        </a>
+    </div>
+
+    <div class="nav-toogle" id="nav-toogle">
+        <i class="fas fa-bars" (click)="showMenu()"></i>
+    </div>
+</nav>

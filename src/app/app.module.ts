@@ -14,7 +14,10 @@ import {OrderDataComponent} from './components/order-data/order-data.component';
 import {ClientDetailsComponent} from './components/client-details/client-details.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoadingPulseComponent } from './components/loading-pulse/loading-pulse.component';
-import { LandingComponent } from './pages/landing/landing.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LandingModule } from './modules/landing/landing.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+
 
 @NgModule({
   declarations: [
@@ -28,13 +31,15 @@ import { LandingComponent } from './pages/landing/landing.component';
     OrderDataComponent,
     ClientDetailsComponent,
     LoadingPulseComponent,
-    LandingComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    LandingModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
