@@ -1,11 +1,11 @@
 .nav {
-  @apply h-14 flex justify-between items-center 
-      md:gap-x-12 md:h-20;
+  @apply fixed top-0 left-0 right-0 bg-white h-16 flex justify-between items-center 
+      md:gap-x-12 z-10;
 }
 
 .nav-container {
-  @apply max-w-screen-lg-device mx-6 
-      sm-device:mx-4 lg-device:max-w-none;
+  @apply max-w-screen-lg-device px-6 
+      sm-device:px-4 lg-device:max-w-none;
 }
 
 .nav-menu {
