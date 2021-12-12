@@ -1,0 +1,47 @@
+.footer-container {
+  @apply flex flex-col relative gap-y-8 md:flex-row md:justify-between;
+}
+
+.footer-logo {
+  @apply flex items-center gap-x-1 text-skin-brown font-medium;
+}
+
+.footer-logo-img {
+  @apply w-8;
+}
+
+.footer-description {
+  @apply text-xs text-skin-brown;
+}
+
+.footer-logo,
+.footer-title {
+  @apply mb-4;
+}
+
+.footer-links,
+.footer-title {
+  @apply font-lato;
+}
+
+.footer-title {
+  @apply text-base font-semibold;
+}
+
+.footer-links {
+  @apply flex flex-col gap-y-3;
+}
+
+.footer-link {
+  @apply text-skin-dark-gray;
+  transition: 0.3s;
+}
+
+.footer-link:hover {
+  @apply text-gray-900;
+}
+
+.footer-copy {
+  margin: 3.5rem 0 1rem 0;
+  @apply block text-center text-xs text-skin-gray;
+}
