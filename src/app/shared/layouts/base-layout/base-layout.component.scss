@@ -1,4 +1,7 @@
-.header {
-  @apply w-full bg-white fixed top-0 left-0 z-50 pt-2 
-      md:pt-0;
+.shadow-on {
+  @apply shadow-md;
+}
+
+.shadow-off {
+  @apply shadow-none;
 }

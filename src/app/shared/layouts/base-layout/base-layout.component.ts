@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-base-layout',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseLayoutComponent implements OnInit {
 
+  public onScroll: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  @HostListener('window:scroll', ['$event'])
+  onWindowsScroll($event): void {
+    const scrollOffset = $event.srcElement.children[0].scrollTop;
+    if (scrollOffset > 50){
+      console.log("window scroll: ", scrollOffset);
+      this.onScroll = true;
+    } else{
+      this.onScroll = false;
+    }
+  }
 }

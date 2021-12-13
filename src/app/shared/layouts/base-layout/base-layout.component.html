@@ -1,9 +1,12 @@
-<header>
+<header class="header" [ngClass]="onScroll ? 'shadow-on':'shadow-off'" (window:scroll)="onWindowsScroll($event)">
     <app-nav-bar></app-nav-bar>
 </header>
-<main>
+<main class="main">
     <router-outlet></router-outlet>
 </main>
-<footer></footer>
+<footer class="footer section">
+    <app-footer></app-footer>
+</footer>
+
 
 
