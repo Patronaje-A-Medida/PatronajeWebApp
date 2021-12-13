@@ -3,24 +3,24 @@
         <div class="nav-options">
             <ul class="nav-list">
                 <li class="nav-list-item">
-                    <a href="#home" class="nav-link" (click)="hideMenu()">Inicio</a>
+                    <a class="nav-link" (click)="scrollTo('home')">Inicio</a>
                 </li>
                 <li class="nav-list-item">
-                    <a href="#section1" class="nav-link" (click)="hideMenu()">Beneficios</a>
+                    <a class="nav-link" (click)="scrollTo('section2')">Beneficios</a>
                 </li>
                 <li class="nav-list-item">
-                    <a href="#section2" class="nav-link" (click)="hideMenu()">Servicios</a>
+                    <a class="nav-link" (click)="scrollTo('section3')">Servicios</a>
                 </li>
                 <li class="nav-list-item">
-                    <a href="#section3" class="nav-link" (click)="hideMenu()">Contacto</a>
+                    <a class="nav-link" (click)="scrollTo('section4')">Contacto</a>
                 </li>
             </ul>
             
             <div class="nav-divider"></div>
 
             <div class="nav-actions" id="nav-actions">
-                <button class="btn-action">Iniciar Sesión</button>
-                <app-button-action [text]="'Regístrate'" (onClick)="navigateSignUp()"></app-button-action>
+                <app-button-action-outline [text]="'Iniciar Sesión'" (onClick)="hideAndMove('sign-up')"></app-button-action-outline>
+                <app-button-action [text]="'Regístrate'" (onClick)="hideAndMove('sign-up')"></app-button-action>
             </div>
         </div>
 

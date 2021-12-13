@@ -1,0 +1,6 @@
+.btn-action-outline {
+  transition: 0.4s;
+  border-width: 1.5px;
+  @apply w-28 shadow-md bg-white font-lato text-skin-green text-sm px-3 py-1 rounded-3xl border-solid border-skin-green
+    hover:border-skin-light-green hover:text-skin-light-green;
+}

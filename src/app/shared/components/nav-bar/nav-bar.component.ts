@@ -23,13 +23,18 @@ export class NavBarComponent implements OnInit {
     this.isOpen = false;
   }
 
-  navigateSignUp() {
-    const target = 'sign-up';
+  navigateTo(target: string, path: string = '../'): void {
+    this.router.navigate([path + target], {relativeTo: this.route});
+  }
+
+  hideAndMove(target: string) {
+    this.hideMenu();
     this.navigateTo(target);
   }
 
-  navigateTo(target: string, path: string = '../'): void {
-    this.router.navigate([path + target], {relativeTo: this.route});
+  scrollTo(target: string) {
+    this.hideMenu();
+    this.router.navigate(['/home'], { fragment: target });
   }
 
 }
