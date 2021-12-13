@@ -2,14 +2,16 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer base{
-  :root{
-    --color-light-orange: #FFF6EF;
-    --color-orange: #F49D4E;
-    --color-light-gray: #FAFAFA;
+@layer base {
+  :root {
+    --color-light-orange: #fff6ef;
+    --color-orange: #f49d4e;
+    --color-light-gray: #fafafa;
     --color-gray: #808080;
-    --color-green: #8FBC61;
-    --color-brown: #5D1D1D;
+    --color-dark-gray: #5c5c5c;
+    --color-green: #8fbc61;
+    --color-brown: #5d1d1d;
+    --color-light-green: #9fd16d;
   }
 }
 
@@ -38,11 +40,12 @@ button {
 
 .app-container {
   max-width: 968px;
-  @apply ml-6 mr-6;
+  @apply mx-6 sm-device:mx-4 lg:mx-auto;
 }
 
-.app-grid {
-  display: grid;
+.header {
+  @apply w-full bg-gray-100 fixed top-0 left-0 z-50 pt-1
+      md:pt-0;
 }
 
 .main {
@@ -53,9 +56,12 @@ button {
   padding: 4.5rem 0 1rem;
 }
 
+.footer {
+  @apply overflow-hidden bg-gray-100;
+}
+
 .section-title {
   @apply text-xl mb-10 text-center;
-
 }
 
 /*.subtitle-text {

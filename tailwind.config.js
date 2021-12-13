@@ -21,6 +21,8 @@ module.exports = {
           'orange': 'var(--color-orange)',
           'light-gray': 'var(--color-light-gray)',
           'gray': 'var(--color-gray)',
+          'dark-gray': 'var(--color-dark-gray)',
+          'light-green': 'var(--color-light-green)',
           'green': 'var(--color-green)',
           'brown': 'var(--color-brown)'
         }
@@ -29,6 +31,17 @@ module.exports = {
         skin: {
           'brown': 'var(--color-brown)',
           'orange': 'var(--color-orange)',
+          'light-green': 'var(--color-light-green)',
+          'green': 'var(--color-green)',
+          'light-gray': 'var(--color-light-gray)',
+          'gray': 'var(--color-gray)',
+          'dark-gray': 'var(--color-dark-gray)'
+        }
+      },
+      borderColor: {
+        skin: {
+          'light-green': 'var(--color-light-green)',
+          'green': 'var(--color-green)'
         }
       }
     }
