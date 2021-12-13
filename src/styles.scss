@@ -2,34 +2,100 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer base {
+  :root {
+    --color-light-orange: #fff6ef;
+    --color-orange: #f49d4e;
+    --color-light-gray: #fafafa;
+    --color-gray: #808080;
+    --color-dark-gray: #5c5c5c;
+    --color-green: #8fbc61;
+    --color-brown: #5d1d1d;
+    --color-light-green: #9fd16d;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.app-container {
+  max-width: 968px;
+  @apply mx-6 sm-device:mx-4 lg:mx-auto;
+}
+
+.header {
+  @apply w-full bg-gray-100 fixed top-0 left-0 z-50 pt-1
+      md:pt-0;
+}
+
+.main {
+  @apply overflow-hidden;
+}
+
+.section {
+  padding: 4.5rem 0 1rem;
+}
+
+.footer {
+  @apply overflow-hidden bg-gray-100;
+}
+
+.section-title {
+  @apply text-xl mb-10 text-center;
+}
+
+/*.subtitle-text {
+ @apply font-lato text-2xl text-skin-brown;
+}*/
+
 .page-title {
-  @apply text-xl md:text-2xl lg:text-3xl font-bold
+  @apply text-xl md:text-2xl lg:text-3xl font-bold;
 }
 
 .input-border {
-  @apply border-2 rounded-3xl border-yellow-500
+  @apply border-2 rounded-3xl border-yellow-500;
 }
 
 .input {
-  @apply outline-none text-xs md:text-base
+  @apply outline-none text-xs md:text-base;
 }
 
 .select {
-  @apply rounded-3xl bg-yellow-500 text-white text-center outline-none text-xs md:text-base
+  @apply rounded-3xl bg-yellow-500 text-white text-center outline-none text-xs md:text-base;
 }
 
 .button {
-  @apply rounded-3xl bg-yellow-500 text-white text-center outline-none text-xs md:text-base
+  @apply rounded-3xl bg-yellow-500 text-white text-center outline-none text-xs md:text-base;
 }
 
 .table-border {
-  @apply border-t border-b border-gray-400
+  @apply border-t border-b border-gray-400;
 }
 
 .table-header-cell {
-  @apply font-medium text-xs md:text-sm lg:text-lg p-3
+  @apply font-medium text-xs md:text-sm lg:text-lg p-3;
 }
 
 .table-body-cell {
-  @apply p-3 text-xs md:text-sm lg:text-base
+  @apply p-3 text-xs md:text-sm lg:text-base;
 }
