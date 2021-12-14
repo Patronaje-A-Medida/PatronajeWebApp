@@ -20,6 +20,9 @@ import { ButtonActionOutlineComponent } from './components/button-action-outline
   imports: [
     CommonModule,
     RouterModule
+  ],
+  exports: [
+    ButtonActionComponent
   ]
 })
 export class SharedModule { }
