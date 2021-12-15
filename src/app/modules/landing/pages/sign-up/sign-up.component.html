@@ -15,8 +15,8 @@
                 </div>
 
                 <div>
-                    <label class="form-label" for="lastNames">Apellidos</label>
-                    <input class="form-input" id="lastNames" type="text" formControlName="lastNames"/>
+                    <label class="form-label" for="last-names">Apellidos</label>
+                    <input class="form-input" id="last-names" type="text" formControlName="lastNames"/>
                 </div>
 
                 <div>
@@ -26,7 +26,7 @@
 
                 <div>
                     <label class="form-label" for="email">Correo</label>
-                    <input class="form-input" id="correo" type="email" formControlName="email"/>
+                    <input class="form-input" id="email" type="email" formControlName="email"/>
                 </div>
 
                 <div>
@@ -42,38 +42,41 @@
                 <app-button-action class="m-auto" [text]="'Continuar'" (onClick)="showNextForm()"></app-button-action>
             </form>
 
-            <form *ngIf="showFormAtelier" class="form">
+            <form *ngIf="showFormAtelier" class="form" [formGroup]="atelierForm">
                 <div>
                     <label class="form-label" for="atelier">Atelier</label>
-                    <input class="form-input" name="atelier" type="text"/>
+                    <input class="form-input" id="atelier" type="text" formControlName="atelier"/>
                 </div>
 
                 <div>
-                    <label class="form-label" for="descripcion">Descripción</label>
-                    <input class="form-input" name="descripcion" type="text"/>
+                    <label class="form-label" for="description">Descripción</label>
+                    <input class="form-input" id="description" type="text" formControlName="description"/>
                 </div>
 
                 <div>
                     <label class="form-label" for="ruc">RUC</label>
-                    <input class="form-input" name="ruc" type="text"/>
+                    <input class="form-input" id="ruc" type="text" formControlName="ruc"/>
                 </div>
 
                 <div>
-                    <label class="form-label" for="ciudad">Ciudad</label>
-                    <input class="form-input" name="ciudad" type="email"/>
+                    <label class="form-label" for="city">Ciudad</label>
+                    <input class="form-input" id="city" type="text" formControlName="city"/>
                 </div>
 
                 <div>
-                    <label class="form-label" for="distrito">Distrito</label>
-                    <input class="form-input" name="distrito" type="text"/>
+                    <label class="form-label" for="district">Distrito</label>
+                    <input class="form-input" id="district" type="text" formControlName="district"/>
                 </div>
 
                 <div>
-                    <label class="form-label" for="direccion">Dirección</label>
-                    <input class="form-input" name="direccion" type="text"/>
+                    <label class="form-label" for="address">Dirección</label>
+                    <input class="form-input" id="address" type="text" formControlName="address"/>
                 </div>
 
-                <app-button-action class="m-auto" [text]="'Registrarse'" (onClick)="signUpUser()"></app-button-action>
+                <div class="form-btn-group">
+                    <app-button-action-outline [text]="'Atrás'" (onClick)="showPrevForm()"></app-button-action-outline>
+                    <app-button-action [text]="'Registrarse'" (onClick)="signUpUser()"></app-button-action>
+                </div>
             </form>
         </div>
     </div>

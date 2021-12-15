@@ -1,5 +1,5 @@
 .signup-container {
-  height: 90vh;
+  min-height: 90vh;
   @apply flex flex-col gap-y-9 mt-16 
     md:flex-row md:gap-x-9;
 }
@@ -20,7 +20,7 @@
 
 .form-container-inputs {
   @apply w-full p-4 rounded-lg shadow-lg 
-    md:w-96;
+    sm:w-96;
 }
 
 .form {
@@ -47,12 +47,16 @@
 
 .form-input {
   border: solid 1px;
-  @apply w-full mt-1 p-2 font-lato text-base border-gray-300 rounded-lg shadow-sm;
+  @apply w-full mt-1 p-2 font-lato text-base text-skin-dark-gray border-gray-300 rounded-lg shadow-sm;
 }
 
 .form-input:focus {
   outline: none;
   @apply border-2 border-skin-orange;
+}
+
+.form-btn-group {
+  @apply m-auto flex gap-x-4;
 }
 
 .signup-img {
