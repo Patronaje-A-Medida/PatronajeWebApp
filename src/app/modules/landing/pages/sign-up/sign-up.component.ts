@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AtelierCreate } from 'src/app/core/models/atelier-create';
 import { UserOwnerCreate } from 'src/app/core/models/user-owner-create';
+import { AuthService } from 'src/app/core/services/auth.service';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +12,9 @@ import { UserOwnerCreate } from 'src/app/core/models/user-owner-create';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  public showFormAtelier: boolean = true;
+
+  public showFormAtelier: boolean = false;
+
   public userOwnerForm: FormGroup;
   public atelierForm: FormGroup;
 
@@ -20,7 +25,12 @@ export class SignUpComponent implements OnInit {
   // /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/  --> Abc12345
   // /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/  -->  abc12345
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.userOwnerForm = this.formBuilder.group({
@@ -70,23 +80,20 @@ export class SignUpComponent implements OnInit {
   }
 
   showNextForm(): void {
-    console.log(this.userOwnerForm);
-    console.log(this.userOwnerForm.valid);
+    if (!this.userOwnerForm.valid) return;
 
-    if (this.userOwnerForm.valid) {
-      const {names, lastNames, dni, email, password } = this.userOwnerForm.value;
+    const { names, lastNames, dni, email, password } = this.userOwnerForm.value;
 
-      this.userOnwer = {
-        nameUser: names,
-        lastNameUser: lastNames,
-        dni: dni,
-        email: email,
-        password: password,
-        atelier: null
-      }
+    this.userOnwer = {
+      nameUser: names,
+      lastNameUser: lastNames,
+      dni: dni,
+      email: email,
+      password: password,
+      atelier: null,
+    };
 
-      this.showFormAtelier = true;
-    }
+    this.showFormAtelier = true;
   }
 
   showPrevForm(): void {
@@ -94,24 +101,24 @@ export class SignUpComponent implements OnInit {
   }
 
   signUpUser(): void {
-    console.log(this.atelierForm);
-    console.log(this.atelierForm.valid);
+    if (!this.atelierForm.valid) return;
 
-    if (this.atelierForm.valid) {
-      const {atelier, description, ruc, city, district, address} = this.atelierForm.value;
+    const { atelier, description, ruc, city, district, address } = this.atelierForm.value;
 
-      this.atelier = {
-        nameAtelier: atelier,
-        descriptionAtelier: description,
-        rucAtelier: ruc,
-        city: city,
-        district: district,
-        address: address
-      }
+    this.atelier = {
+      nameAtelier: atelier,
+      descriptionAtelier: description,
+      rucAtelier: ruc,
+      city: city,
+      district: district,
+      address: address,
+    };
 
-      this.userOnwer.atelier = this.atelier;
-      console.log(this.userOnwer);
-      //this.showFormAtelier = false;
-    }
+    this.userOnwer.atelier = this.atelier;
+    this.authService.signUpOwner(this.userOnwer).subscribe((res) => {
+      console.log(res);
+      this.router.navigate(['/home'], { relativeTo: this.route });
+    });
+    //this.showFormAtelier = false;
   }
 }
