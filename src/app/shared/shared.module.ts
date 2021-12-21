@@ -6,6 +6,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ButtonActionComponent } from './components/button-action/button-action.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ButtonActionOutlineComponent } from './components/button-action-outline/button-action-outline.component';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 
 
@@ -15,7 +16,8 @@ import { ButtonActionOutlineComponent } from './components/button-action-outline
     NavBarComponent,
     ButtonActionComponent,
     FooterComponent,
-    ButtonActionOutlineComponent
+    ButtonActionOutlineComponent,
+    SnackBarComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ButtonActionOutlineComponent } from './components/button-action-outline
   ],
   exports: [
     ButtonActionComponent,
-    ButtonActionOutlineComponent
+    ButtonActionOutlineComponent,
+    SnackBarComponent,
   ]
 })
 export class SharedModule { }

@@ -13,10 +13,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class SignUpComponent implements OnInit {
 
-  public showFormAtelier: boolean = false;
+  showFormAtelier: boolean = false;
+  showAlert: boolean = false;
 
-  public userOwnerForm: FormGroup;
-  public atelierForm: FormGroup;
+  messageAlert: string = '';
+  typeAlert: string = '';
+
+  userOwnerForm: FormGroup;
+  atelierForm: FormGroup;
 
   private userOnwer: UserOwnerCreate;
   private atelier: AtelierCreate;
@@ -115,10 +119,19 @@ export class SignUpComponent implements OnInit {
     };
 
     this.userOnwer.atelier = this.atelier;
-    this.authService.signUpOwner(this.userOnwer).subscribe((res) => {
-      console.log(res);
-      this.router.navigate(['/home'], { relativeTo: this.route });
-    });
-    //this.showFormAtelier = false;
+    this.authService.signUpOwner(this.userOnwer).subscribe(
+      (_) => {
+        this.messageAlert = 'Registro exitoso';
+        this.typeAlert = 'success';
+        this.showAlert = true;
+        setTimeout((_) => this.router.navigate(['/home'], { relativeTo: this.route }),4000);
+      },
+      (err) => {
+        this.messageAlert = err.message;
+        this.typeAlert = 'error';
+        this.showAlert = true;
+      }
+    );
   }
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { UserDataService } from 'src/app/core/services/user-data.service';
 
 @Component({
@@ -8,12 +9,11 @@ import { UserDataService } from 'src/app/core/services/user-data.service';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private userDataService: UserDataService) { }
+  showAlert: boolean = false;
+
+  constructor() { }
 
   ngOnInit(): void {
-    console.log(this.userDataService.token);
-    console.log(this.userDataService.expiration);
-    console.log(this.userDataService.userEmail);
   }
 
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserAtelierToken } from '../models/user-atelier-token';
+import * as CryptoJS from 'crypto-js';  
+import { USER_DATA_KEY } from '../utils/keys';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +15,8 @@ export class UserDataService {
   private _role: string = '';
   private _userId: number = 0;
   private _atelierId: number = 0;
+
+  private SUPER_KEY: string = USER_DATA_KEY;
   
 
   constructor() {}
@@ -28,9 +32,26 @@ export class UserDataService {
     this.userId = id;
     this.role = role;
     this.atelierId = atelierId;
+
+    const encrypt = CryptoJS.AES.encrypt(JSON.stringify(userData), this.SUPER_KEY).toString();
+    sessionStorage.setItem('query', encrypt);
+  }
+
+  private getValues(): UserAtelierToken {
+    const query = sessionStorage.getItem('query');
+    if(query === null) return null;
+    const bytes = CryptoJS.AES.decrypt(query, this.SUPER_KEY);
+    const userData: UserAtelierToken = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    return userData;
   }
 
   get token(): string {
+    if(this._token === '') {
+      const userData = this.getValues();
+      if(userData === null) return this._token;
+      return userData.userToken.token;
+    }
+
     return this._token;
   }
 
@@ -39,7 +60,9 @@ export class UserDataService {
   }
 
   get expiration(): Date {
-    return this._expiration;
+    const userData = this.getValues();
+    if(userData === null) return this._expiration;
+    return userData.userToken.expiration;
   }
 
   set expiration(value: Date) {
@@ -47,6 +70,12 @@ export class UserDataService {
   }
 
   get userNames(): string {
+    if(this._userNames === '') {
+      const userData = this.getValues();
+      if(userData === null) return this._userNames;
+      return userData.userInfo.nameUser + userData.userInfo.lastNameUser;
+    }
+
     return this._userNames;
   }
 
@@ -55,6 +84,12 @@ export class UserDataService {
   }
 
   get userEmail(): string {
+    if(this._userEmail === '') {
+      const userData = this.getValues();
+      if(userData === null) return this._userEmail;
+      return userData.userInfo.email;
+    }
+
     return this._userEmail;
   }
 
@@ -63,6 +98,12 @@ export class UserDataService {
   }
 
   get role(): string {
+    if(this._role === '') {
+      const userData = this.getValues();
+      if(userData === null) return this._role;
+      return userData.userInfo.role;
+    }
+
     return this._role;
   }
   
@@ -71,6 +112,12 @@ export class UserDataService {
   }
 
   get userId(): number {
+    if(this._userId === 0) {
+      const userData = this.getValues();
+      if(userData === null) return this._userId;
+      return userData.userInfo.id;
+    }
+
     return this._userId;
   }
 
@@ -79,6 +126,12 @@ export class UserDataService {
   }
 
   get atelierId(): number {
+    if(this._atelierId === 0) {
+      const userData = this.getValues();
+      if(userData === null) return this._atelierId;
+      return userData.userInfo.atelierId;
+    }
+
     return this._atelierId;
   }
   

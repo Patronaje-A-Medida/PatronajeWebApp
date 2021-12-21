@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Router, Scroll } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,8 @@ import { LandingModule } from './modules/landing/landing.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { UserDataService } from './core/services/user-data.service';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     CoreModule,
   ],
-  providers: [],
+  providers: [
+    UserDataService,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

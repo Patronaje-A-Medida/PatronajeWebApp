@@ -1,0 +1,51 @@
+@keyframes move-up {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+  15% {
+    bottom: 4rem;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.snackbar {
+  @apply absolute bottom-16 w-64 px-4 py-3 bg-gray-600 text-xs text-white rounded-md shadow-md z-50 opacity-0
+    sm:text-sm sm:w-96 sm:text-center;
+  left: calc(50% - 192px);
+  animation: move-up 3.5s;
+}
+
+.snackbar-content {
+  @apply flex gap-x-2 items-center;
+  i {
+    @apply text-base sm:text-xl;
+  }
+  p {
+    @apply flex-grow;
+  }
+}
+
+.error-alert {
+  @apply text-red-500;
+}
+
+.success-alert {
+  @apply text-skin-light-green;
+}
+
+.warning-alert {
+  @apply text-skin-orange;
+}
+
+@media screen and (max-width: 640px) {
+  .snackbar {
+    left: calc(50% - 128px);
+  }
+}

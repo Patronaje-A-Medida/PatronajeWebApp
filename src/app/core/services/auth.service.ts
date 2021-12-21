@@ -29,4 +29,8 @@ export class AuthService {
       })
     );
   }
+
+  tirarError(): Observable<any> {
+    return this.http.get<any>(`${this.uri}/error-test`);
+  }
 }
