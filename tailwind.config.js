@@ -18,6 +18,7 @@ module.exports = {
       backgroundColor: {
         skin: {
           'light-orange': 'var(--color-light-orange)',
+          'medium-orange': 'var(--color-medium-orange)',
           'orange': 'var(--color-orange)',
           'light-gray': 'var(--color-light-gray)',
           'gray': 'var(--color-gray)',
@@ -30,6 +31,7 @@ module.exports = {
       textColor: {
         skin: {
           'light-orange': 'var(--color-light-orange)',
+          'medium-orange': 'var(--color-medium-orange)',
           'orange': 'var(--color-orange)',
           'light-gray': 'var(--color-light-gray)',
           'gray': 'var(--color-gray)',
@@ -42,6 +44,7 @@ module.exports = {
       borderColor: {
         skin: {
           'light-orange': 'var(--color-light-orange)',
+          'medium-orange': 'var(--color-medium-orange)',
           'orange': 'var(--color-orange)',
           'light-gray': 'var(--color-light-gray)',
           'gray': 'var(--color-gray)',
