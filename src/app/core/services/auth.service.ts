@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserAtelierToken } from '../models/user-atelier-token';
+import { UserLogin } from '../models/user-login';
 import { UserOwnerCreate } from '../models/user-owner-create';
-import { AUTH_API } from '../utils/apis';
+import { AUTH_API } from '../utils/apis.constants';
 import { UserDataService } from './user-data.service';
 
 
@@ -13,7 +14,8 @@ import { UserDataService } from './user-data.service';
 })
 export class AuthService {
 
-  private readonly uri: string = AUTH_API + 'sign-up';
+  private readonly uriSignUp: string = AUTH_API + '/sign-up';
+  private readonly uriSignIn: string = AUTH_API + '/sign-in';
 
   constructor(
     private http: HttpClient,
@@ -21,7 +23,7 @@ export class AuthService {
   ) {}
 
   signUpOwner(body: UserOwnerCreate): Observable<UserAtelierToken> {
-    return this.http.post<UserAtelierToken>(`${this.uri}/test-sign-up`, body).pipe(
+    return this.http.post<UserAtelierToken>(`${this.uriSignUp}/users-owner`, body).pipe(
       map((res) => {
         const userData = res;
         this.userDataService.setValues(userData);
@@ -30,7 +32,13 @@ export class AuthService {
     );
   }
 
-  tirarError(): Observable<any> {
-    return this.http.get<any>(`${this.uri}/error-test`);
+  signInUser(body: UserLogin): Observable<UserAtelierToken> {
+    return this.http.post<UserAtelierToken>(`${this.uriSignIn}/users-atelier`, body).pipe(
+      map((res) => {
+        const userData = res;
+        this.userDataService.setValues(userData);
+        return res;
+      })
+    );
   }
 }

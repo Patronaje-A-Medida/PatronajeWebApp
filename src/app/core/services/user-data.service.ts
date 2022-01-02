@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserAtelierToken } from '../models/user-atelier-token';
 import * as CryptoJS from 'crypto-js';  
-import { USER_DATA_KEY } from '../utils/keys';
+import { USER_DATA_KEY } from '../utils/keys.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,7 @@ export class UserDataService {
 
   private getValues(): UserAtelierToken {
     const query = sessionStorage.getItem('query');
-    if(query === null) return null;
+    if(query === null || query === undefined) return null;
     const bytes = CryptoJS.AES.decrypt(query, this.SUPER_KEY);
     const userData: UserAtelierToken = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return userData;
@@ -50,6 +50,7 @@ export class UserDataService {
       const userData = this.getValues();
       if(userData === null) return this._token;
       return userData.userToken.token;
+      // return userData?.userToken.token ?? this._token;
     }
 
     return this._token;

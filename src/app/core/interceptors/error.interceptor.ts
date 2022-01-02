@@ -26,14 +26,14 @@ export class ErrorInterceptor implements HttpInterceptor {
             errorCode: 400,
             message: 'No se pudo realizar la acción, intente nuevamente'
           }
+        } else if (err.error instanceof ProgressEvent) {
+          errorDetail = {
+            statusCode: 500, 
+            errorCode: 500, 
+            message: 'Ocurrió un error al registrarse'
+          };
         } else {
-          errorDetail = err.error === null 
-            ? err.error 
-            : {
-              statusCode: 500, 
-              errorCode: 500, 
-              message: 'Servidor no disponible'
-            };
+          errorDetail = err.error;
         }
 
         return throwError(errorDetail);
