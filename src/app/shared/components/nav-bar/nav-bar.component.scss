@@ -51,7 +51,7 @@
 }
 
 .nav-link {
-  @apply font-lato text-skin-brown font-semibold;
+  @apply font-lato text-skin-brown font-semibold cursor-pointer;
   transition: 0.3s;
 }
 

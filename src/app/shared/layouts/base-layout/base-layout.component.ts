@@ -18,7 +18,6 @@ export class BaseLayoutComponent implements OnInit {
   onWindowsScroll($event): void {
     const scrollOffset = $event.srcElement.children[0].scrollTop;
     if (scrollOffset > 50){
-      console.log("window scroll: ", scrollOffset);
       this.onScroll = true;
     } else{
       this.onScroll = false;

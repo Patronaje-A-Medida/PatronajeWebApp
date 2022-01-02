@@ -9,6 +9,7 @@ export class ButtonActionOutlineComponent implements OnInit {
 
   @Input('text') public text: string;
   @Output('onClick') public clickAction = new EventEmitter<void>();
+  @Input('disabled') public isDisabled: boolean;
 
   constructor() { }
 

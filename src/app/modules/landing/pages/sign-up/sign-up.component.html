@@ -1,11 +1,118 @@
 <div class="signup-container">
     <div class="form-container">
-        <div class="mt-4">
-            <h2 class="text-center">Crea tu cuenta y Registra tu Atelier</h2>
-            <p class="text-center">
-                Estas registrado? 
-                <a>Inicia sesión</a>
+        <div class="form-container-title">
+            <h2 class="form-title">Crea tu cuenta y registra tu Atelier</h2>
+            <p class="form-subtitle">
+                Estás registrado? 
+                <a class="form-subtitle-link" (click)="navigateTo()">Inicia sesión</a>
             </p>
+        </div>
+        <div class="form-container-inputs">
+            <form *ngIf="!showFormAtelier" class="form" [formGroup]="userOwnerForm">
+                <div>
+                    <label class="form-label" for="names">Nombres</label>
+                    <input class="form-input" id="names" type="text" formControlName="names"
+                    [ngClass]="{'is-invalid': isInvalid('names')}"/>
+                    <p *ngIf="hasError('names', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="last-names">Apellidos</label>
+                    <input class="form-input" id="last-names" type="text" formControlName="lastNames"
+                    [ngClass]="{'is-invalid': isInvalid('lastNames')}"/>
+                    <p *ngIf="hasError('lastNames', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="dni">DNI</label>
+                    <input class="form-input" id="dni" type="text" formControlName="dni" 
+                    [ngClass]="{'is-invalid': isInvalid('dni')}"/>
+                    <p *ngIf="hasError('dni', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                    <p *ngIf="hasError('dni', 'minlength') || hasError('dni','maxlength')" class="invalid-feedback">
+                        El DNI debe ser de 8 caracteres.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="email">Correo</label>
+                    <input class="form-input" id="email" type="email" formControlName="email"
+                    [ngClass]="{'is-invalid': isInvalid('email')}"/>
+                    <p *ngIf="hasError('email', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                    <p *ngIf="hasError('email', 'email')" class="invalid-feedback">El formato de correo es incorrecto.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input class="form-input" id="password" type="password" formControlName="password"
+                    [ngClass]="{'is-invalid': isInvalid('password')}"/>
+                    <p *ngIf="hasError('password', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                    <p *ngIf="hasError('password', 'pattern')" class="invalid-feedback">
+                        La contraseña debe de ser de mínimo 8 caracteres y contener letras, números y un caracter especial.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="confirm-contrasenya">Confirmar Contraseña</label>
+                    <input class="form-input" id="confirm-contrasenya" type="password" formControlName="confirmPassword"
+                    [ngClass]="{'is-invalid': isInvalid('confirmPassword')}"/>
+                    <p *ngIf="hasError('confirmPassword', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                    <p *ngIf="hasError('confirmPassword', 'notMatch')" class="invalid-feedback">Las contraseñas deben coincidir</p>
+                </div>
+
+                <app-button-action class="m-auto" [text]="'Continuar'" [disabled]="!userOwnerForm.valid" (onClick)="showNextForm()"></app-button-action>
+            </form>
+
+            <form *ngIf="showFormAtelier" class="form" [formGroup]="atelierForm">
+                <div>
+                    <label class="form-label" for="atelier">Atelier</label>
+                    <input class="form-input" id="atelier" type="text" formControlName="atelier"
+                    [ngClass]="{'is-invalid': isInvalid('atelier')}"/>
+                    <p *ngIf="hasError('atelier', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="description">Descripción</label>
+                    <input class="form-input" id="description" type="text" formControlName="description"
+                    [ngClass]="{'is-invalid': isInvalid('description')}"/>
+                    <p *ngIf="hasError('description', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="ruc">RUC</label>
+                    <input class="form-input" id="ruc" type="text" formControlName="ruc"
+                    [ngClass]="{'is-invalid': isInvalid('ruc')}"/>
+                    <p *ngIf="hasError('ruc', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                    <p *ngIf="hasError('ruc', 'minlength') || hasError('ruc','maxlength')" class="invalid-feedback">
+                        El RUC debe ser de 11 caracteres.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="city">Ciudad</label>
+                    <input class="form-input" id="city" type="text" formControlName="city"
+                    [ngClass]="{'is-invalid': isInvalid('city')}"/>
+                    <p *ngIf="hasError('city', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="district">Distrito</label>
+                    <input class="form-input" id="district" type="text" formControlName="district"
+                    [ngClass]="{'is-invalid': isInvalid('district')}"/>
+                    <p *ngIf="hasError('district', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div>
+                    <label class="form-label" for="address">Dirección</label>
+                    <input class="form-input" id="address" type="text" formControlName="address"
+                    [ngClass]="{'is-invalid': isInvalid('address')}"/>
+                    <p *ngIf="hasError('address', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                </div>
+
+                <div class="form-btn-group">
+                    <app-button-action-outline [text]="'Atrás'" [disabled]="isLoading" (onClick)="showPrevForm()"></app-button-action-outline>
+                    <app-button-action [text]="'Registrarse'" [disabled]="isLoading || !atelierForm.valid" (onClick)="signUpUser()"></app-button-action>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -13,9 +120,5 @@
         <img class="signup-img" src="assets/images/tailors.svg" alt="tailoring">
     </div>
 </div>
-<div class="h-96">
-</div>
-<div class="h-96">
-</div>
-<div class="h-96">
-</div>
+
+<app-snack-bar [(showSnack)]="showAlert" [message]="messageAlert" [type]="typeAlert"></app-snack-bar>

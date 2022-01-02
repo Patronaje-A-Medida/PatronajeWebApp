@@ -1,0 +1,8 @@
+<div class="snackbar" *ngIf="showSnack">
+    <div class="snackbar-content">
+        <i *ngIf="type === 'error'" class="fas fa-times error-alert"></i>
+        <i *ngIf="type === 'success'" class="fas fa-check success-alert"></i>
+        <i *ngIf="type === 'warning'" class="fas fa-exclamation warning-alert"></i>
+        <p>{{message}}</p>
+    </div>
+</div>
