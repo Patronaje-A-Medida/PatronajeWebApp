@@ -19,7 +19,7 @@
 }
 
 .form-container-inputs {
-  @apply w-full p-4 rounded-lg shadow-lg 
+  @apply w-full p-4 rounded-lg shadow-lg
     sm:w-96;
 }
 
@@ -38,7 +38,11 @@
 }
 
 .form-subtitle-link {
-  @apply font-montserrat font-medium text-skin-orange;
+  @apply font-montserrat font-medium text-skin-orange
+}
+
+.form-subtitle-link:hover {
+  @apply cursor-pointer text-skin-medium-orange;
 }
 
 .form-label {
@@ -46,13 +50,14 @@
 }
 
 .form-input {
-  border: solid 1px;
+  border: solid 1.5px;
   @apply w-full mt-1 p-2 font-lato text-base text-skin-dark-gray border-gray-300 rounded-lg shadow-sm;
 }
 
 .form-input:focus {
   outline: none;
-  @apply border-2 border-skin-orange;
+  border: solid 1.5px;
+  @apply border-skin-orange;
 }
 
 .form-btn-group {
@@ -71,4 +76,12 @@
   .signup-img {
     max-height: 300px;
   }
+}
+
+.is-invalid {
+  @apply border-red-500;
+}
+
+.invalid-feedback {
+  @apply text-red-500 text-xs;
 }
