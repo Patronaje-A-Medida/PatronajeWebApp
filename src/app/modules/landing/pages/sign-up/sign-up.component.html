@@ -11,14 +11,14 @@
             <form *ngIf="!showFormAtelier" class="form" [formGroup]="userOwnerForm">
                 <div>
                     <label class="form-label" for="names">Nombres</label>
-                    <input class="form-input" id="names" type="text" formControlName="names"
+                    <input class="form-input" id="names" type="text" formControlName="names" maxlength="30"
                     [ngClass]="{'is-invalid': isInvalid('names')}"/>
                     <p *ngIf="hasError('names', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>
 
                 <div>
                     <label class="form-label" for="last-names">Apellidos</label>
-                    <input class="form-input" id="last-names" type="text" formControlName="lastNames"
+                    <input class="form-input" id="last-names" type="text" formControlName="lastNames" maxlength="30"
                     [ngClass]="{'is-invalid': isInvalid('lastNames')}"/>
                     <p *ngIf="hasError('lastNames', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>
@@ -47,7 +47,7 @@
                     [ngClass]="{'is-invalid': isInvalid('password')}"/>
                     <p *ngIf="hasError('password', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                     <p *ngIf="hasError('password', 'pattern')" class="invalid-feedback">
-                        La contraseña debe de ser de mínimo 8 caracteres y contener letras, números y un caracter especial.
+                        La contraseña debe ser de entre 8 y 20 caracteres, contener letras, números y un caracter especial.
                     </p>
                 </div>
 
@@ -65,15 +65,15 @@
             <form *ngIf="showFormAtelier" class="form" [formGroup]="atelierForm">
                 <div>
                     <label class="form-label" for="atelier">Atelier</label>
-                    <input class="form-input" id="atelier" type="text" formControlName="atelier"
+                    <input class="form-input" id="atelier" type="text" formControlName="atelier" maxlength="30"
                     [ngClass]="{'is-invalid': isInvalid('atelier')}"/>
                     <p *ngIf="hasError('atelier', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>
 
                 <div>
                     <label class="form-label" for="description">Descripción</label>
-                    <input class="form-input" id="description" type="text" formControlName="description"
-                    [ngClass]="{'is-invalid': isInvalid('description')}"/>
+                    <textarea class="form-input" id="description" type="text" formControlName="description" rows="3" maxlength="200"
+                    [ngClass]="{'is-invalid': isInvalid('description')}"></textarea>
                     <p *ngIf="hasError('description', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>
 
@@ -89,21 +89,21 @@
 
                 <div>
                     <label class="form-label" for="city">Ciudad</label>
-                    <input class="form-input" id="city" type="text" formControlName="city"
+                    <input class="form-input" id="city" type="text" formControlName="city" maxlength="50"
                     [ngClass]="{'is-invalid': isInvalid('city')}"/>
                     <p *ngIf="hasError('city', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>
 
                 <div>
                     <label class="form-label" for="district">Distrito</label>
-                    <input class="form-input" id="district" type="text" formControlName="district"
+                    <input class="form-input" id="district" type="text" formControlName="district" maxlength="50"
                     [ngClass]="{'is-invalid': isInvalid('district')}"/>
                     <p *ngIf="hasError('district', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>
 
                 <div>
                     <label class="form-label" for="address">Dirección</label>
-                    <input class="form-input" id="address" type="text" formControlName="address"
+                    <input class="form-input" id="address" type="text" formControlName="address" maxlength="100"
                     [ngClass]="{'is-invalid': isInvalid('address')}"/>
                     <p *ngIf="hasError('address', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                 </div>

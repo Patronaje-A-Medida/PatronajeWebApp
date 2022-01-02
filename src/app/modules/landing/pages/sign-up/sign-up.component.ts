@@ -5,7 +5,7 @@ import { AtelierCreate } from 'src/app/core/models/atelier-create';
 import { UserOwnerCreate } from 'src/app/core/models/user-owner-create';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CunstomValidators } from 'src/app/core/utils/custom.validator';
-import { RGXP_STRONG_PASSWORD } from 'src/app/core/utils/regex.constants';
+import { RGXP_MID_PASSWORD_2 } from 'src/app/core/utils/regex.constants';
 
 
 @Component({
@@ -59,7 +59,7 @@ export class SignUpComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(RGXP_STRONG_PASSWORD),
+          Validators.pattern(RGXP_MID_PASSWORD_2),
         ],
       ],
       confirmPassword: ['', [Validators.required, CunstomValidators.ComparePassword('password')]],
