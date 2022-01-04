@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
     this.authService.signInUser(this.userLogin).subscribe(
       (_) => {
         this.isLoading = false;
-        this.router.navigate(['/home'], { relativeTo: this.route });
+        this.navigateTo('dashboard');
       },
       (err) => {
         this.messageAlert = err.message;
@@ -73,8 +73,8 @@ export class SignInComponent implements OnInit {
     );
   }
 
-  navigateTo(): void {
-    this.router.navigate(['/sign-up'], { relativeTo: this.route });
+  navigateTo(target: string, path: string = '../'): void {
+    this.router.navigate([path + target], {relativeTo: this.route});
   }
 
 }
