@@ -41,4 +41,9 @@ export class AuthService {
       })
     );
   }
+
+  get isLogged(): boolean {
+    return this.userDataService.isLogged;
+  }
+
 }
