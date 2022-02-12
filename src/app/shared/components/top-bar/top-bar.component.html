@@ -1,0 +1,11 @@
+<header class="topbar">
+    <div class="topbar-container">
+        <img src="assets/images/profile.png" alt="profile" class="topbar-img" />
+
+        <a [routerLink]="['/dashboard']" class="topbar-logo">Patronaje</a>
+
+        <div class="topbar-toogle">
+            <i class="fas" [ngClass]="closeIcon ? 'fa-times' : 'fa-bars'" (click)="onClick()"></i>
+        </div>
+    </div>
+</header>

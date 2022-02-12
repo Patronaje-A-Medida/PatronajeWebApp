@@ -4,11 +4,11 @@
             <h2 class="form-title">Inicia Sesión</h2>
             <p class="form-subtitle">
                 No tienes una cuenta?
-                <a class="form-subtitle-link" (click)="navigateTo()">Regístrate</a>
+                <a class="form-subtitle-link" (click)="navigateTo('sign-up')">Regístrate</a>
             </p>
         </div>
         <div class="form-container-inputs">
-            <form class="form" [formGroup]="loginForm">
+            <form class="form" [formGroup]="loginForm" (keydown.enter)="signInUser()">
                 <div>
                     <label class="form-label" for="email">Correo</label>
                     <input class="form-input" id="email" type="text" formControlName="email"
@@ -24,10 +24,12 @@
                     <p *ngIf="hasError('password', 'required')" class="invalid-feedback">Debe ingresar su contraseña.</p>
                 </div>
 
-                <a class="form-label-link">¿Olvidaste tu contraseña?</a>
+                <a class="form-label-link" (click)="navigateTo('home')" >¿Olvidaste tu contraseña?</a>
 
                 <app-button-action class="m-auto" [text]="'Iniciar sesión'" [disabled]="isLoading" (onClick)="signInUser()"></app-button-action>
             </form>
         </div>
     </div>
 </div>
+
+<app-snack-bar [(showSnack)]="showAlert" [message]="messageAlert" [type]="typeAlert"></app-snack-bar>

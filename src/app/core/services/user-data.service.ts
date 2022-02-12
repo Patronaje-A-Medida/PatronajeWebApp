@@ -24,15 +24,16 @@ export class UserDataService {
   setValues(userData: UserAtelierToken): void {
     const { token, expiration } = userData.userToken;
     const { nameUser, lastNameUser, email, role, id, atelierId } = userData.userInfo;
-    
     this.token = token;
-    this.expiration = expiration;
+    this.expiration = new Date(expiration);
     this.userNames = nameUser + lastNameUser;
     this.userEmail = email;
     this.userId = id;
     this.role = role;
     this.atelierId = atelierId;
-
+    console.log(userData);
+    console.log(userData.userToken.expiration);
+    console.log(this._expiration);
     const encrypt = CryptoJS.AES.encrypt(JSON.stringify(userData), this.SUPER_KEY).toString();
     sessionStorage.setItem('query', encrypt);
   }
@@ -63,7 +64,7 @@ export class UserDataService {
   get expiration(): Date {
     const userData = this.getValues();
     if(userData === null) return this._expiration;
-    return userData.userToken.expiration;
+    return new Date(userData.userToken.expiration);
   }
 
   set expiration(value: Date) {
@@ -139,4 +140,11 @@ export class UserDataService {
   set atelierId(value: number) {
     this._atelierId = value;
   }
+
+  get isLogged(): boolean {
+    const currentTime = Date.now();
+    if (this.expiration.getTime() > currentTime) return true;
+    return false;
+  }
+
 }

@@ -1,0 +1,9 @@
+<div (window:resize)="onWindowsResize($event)">
+    <app-top-bar [closeIcon]="isOpen" (handleSideBar)="showOrHideSideBar()"></app-top-bar>
+    
+    <app-side-nav-bar [isOpen]="isOpen" ></app-side-nav-bar>
+
+    <main class="main">
+        <router-outlet></router-outlet>
+    </main>
+</div>
