@@ -7,6 +7,9 @@ import { ButtonActionComponent } from './components/button-action/button-action.
 import { FooterComponent } from './components/footer/footer.component';
 import { ButtonActionOutlineComponent } from './components/button-action-outline/button-action-outline.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
 
 
 
@@ -17,7 +20,10 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
     ButtonActionComponent,
     FooterComponent,
     ButtonActionOutlineComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    DashboardLayoutComponent,
+    TopBarComponent,
+    SideNavBarComponent
   ],
   imports: [
     CommonModule,
