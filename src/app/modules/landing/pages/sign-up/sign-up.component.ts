@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AtelierCreate } from 'src/app/core/models/atelier-create';
-import { UserOwnerCreate } from 'src/app/core/models/user-owner-create';
+import { AtelierCreate } from 'src/app/core/models/ateliers/atelier-create';
+import { UserOwnerCreate } from 'src/app/core/models/users/user-owner-create';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CunstomValidators } from 'src/app/core/utils/custom.validator';
 import { RGXP_MID_PASSWORD_2 } from 'src/app/core/utils/regex.constants';

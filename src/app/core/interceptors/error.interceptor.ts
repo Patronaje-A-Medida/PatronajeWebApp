@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorDetail } from '../models/error-detail';
+import { ErrorDetail } from '../models/generics/error-detail';
 
 
 @Injectable()
