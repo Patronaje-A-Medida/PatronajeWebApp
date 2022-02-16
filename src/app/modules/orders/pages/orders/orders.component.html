@@ -1,0 +1,78 @@
+<div class="my-6 text-3xl font-lato font-bold sm:ml-6 lg:ml-8">
+    Pedidos
+</div>    
+<div class="table-container">
+    <div class="table-rounded">
+        <div class="overflow-x-auto">
+            <table class="table-base">
+                <thead class="table-base-head">
+                    <tr>
+                        <th scope="col" class="table-base-th">Código</th>
+                        <th scope="col" class="table-base-th">Cliente</th>
+                        <th scope="col" class="table-base-th">Fecha</th>
+                        <th scope="col" class="table-base-th">Precio Total</th>
+                        <th scope="col" class="table-base-th">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="table-base-body">
+                    <ng-container *ngIf="orders" >
+                        <ng-container *ngFor="let ord of orders.items">
+                            <tr class="table-base-tr" (click)="showDetails(ord)">
+                                <td>{{ord.codeOrder}}</td>
+                                <td>
+                                    <div>{{ord.clientId}}</div>
+                                    <div class="text-subinfo">{{ord.codeOrder}}</div>
+                                </td>
+                                <td>{{ord.orderDate | date:'MMM d, y'}}</td>
+                                <td>{{ord.price | currency:'PEN':'S/ ':'.2-2'}}</td>
+                                <td>
+                                    <span class="text-status">{{ord.orderStatus}}</span>
+                                </td>
+                            </tr>
+                            <ng-container>
+                                <tr [ngClass]="ord.showDetails ? 'subtable-active' : 'subtable-inactive'">
+                                    <td colspan="5" class="td-subtable-content">
+                                        <div class="subtable-container">
+                                            <div [ngClass]="ord.showDetails ? 'table-rounded' : 'overflow-hidden'">
+                                                <table class="subtable-base">
+                                                    <thead class="subtable-base-head">
+                                                        <tr>
+                                                            <th scope="col" class="subtable-base-th">Código de Prenda</th>
+                                                            <th scope="col" class="subtable-base-th">Color</th>
+                                                            <th scope="col" class="subtable-base-th">Cantidad</th>
+                                                            <th scope="col" class="subtable-base-th">Precio Unitario</th>
+                                                            <th scope="col" class="subtable-base-th">Estado de la Prenda</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="subtable-base-body">
+                                                        <tr class="subtable-base-tr" *ngFor="let detail of ord.details">
+                                                            <td><div>{{detail.codeGarment}}</div></td>
+                                                            <td>
+                                                                <div class="circle" [style]="garmentColor(detail.color)"></div>
+                                                            </td>
+                                                            <td><div>{{detail.quantity}}</div></td>
+                                                            <td><div>{{detail.price | currency:'PEN':'S/ ':'.2-2'}}</div></td>
+                                                            <td><div><span class="text-status">{{detail.orderDetailStatus}}</span></div></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table> 
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!--<tr class="subtable-base-tr" [ngClass]="{'subtable-active': ord.showDetails === true}" *ngFor="let detail of ord.details">
+                                    <td><div>{{detail.codeGarment}}</div></td>
+                                    <td><div>{{detail.color}}</div></td>
+                                    <td><div>{{detail.quantity}}</div></td>
+                                    <td><div>{{detail.price | currency:'PEN':'S/ ':'.2-2'}}</div></td>
+                                    <td><div>{{detail.orderDetailStatus}}</div></td>
+                                </tr>-->
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
