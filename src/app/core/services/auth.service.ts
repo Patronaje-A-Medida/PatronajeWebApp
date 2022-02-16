@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserAtelierToken } from '../models/user-atelier-token';
-import { UserLogin } from '../models/user-login';
-import { UserOwnerCreate } from '../models/user-owner-create';
+import { UserAtelierToken } from '../models/auth/user-atelier-token';
+import { UserLogin } from '../models/auth/user-login';
+import { UserOwnerCreate } from '../models/users/user-owner-create';
 import { AUTH_API } from '../utils/apis.constants';
 import { UserDataService } from './user-data.service';
 

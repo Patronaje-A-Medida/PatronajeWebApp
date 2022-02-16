@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserAtelierToken } from '../models/user-atelier-token';
+import { UserAtelierToken } from '../models/auth/user-atelier-token';
 import * as CryptoJS from 'crypto-js';  
 import { USER_DATA_KEY } from '../utils/keys.constants';
 
