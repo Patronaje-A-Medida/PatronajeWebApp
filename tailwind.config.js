@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 const app_colors = {
   'primary-base': 'var(--color-primary-800)',
@@ -79,12 +80,28 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    /*colors: {
+      black: colors.black,
+      blue: colors.blue,
+      current: colors.current,
+      gray: colors.gray,
+      lime: colors.lime,
+      red: colors.red,
+      transparent: colors.transparent,
+      white: colors.white,
+      yellow: colors.yellow,
+    },*/
     screens: {
       'lg-device': '968px',
       'sm-device': {'max': '320px'},
       ...defaultTheme.screens
     },
     extend: {
+      colors: {
+        lime: colors.lime,
+        sky: colors.sky,
+        cyan: colors.cyan,
+      },
       fontFamily: {
         montserrat: "'Montserrat', sans-serif",
         lato: "'Lato', sans-serif",

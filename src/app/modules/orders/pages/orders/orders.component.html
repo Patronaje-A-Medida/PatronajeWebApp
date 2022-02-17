@@ -11,7 +11,11 @@
                         <th scope="col" class="table-base-th">Cliente</th>
                         <th scope="col" class="table-base-th">Fecha</th>
                         <th scope="col" class="table-base-th">Precio Total</th>
+                        <th scope="col" class="table-base-th">Atentido por</th>
                         <th scope="col" class="table-base-th">Estado</th>
+                        <th scope="col" class="relative px-6 py-3">
+                            <span class="sr-only">Edit</span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="table-base-body">
@@ -20,18 +24,23 @@
                             <tr class="table-base-tr" (click)="showDetails(ord)">
                                 <td>{{ord.codeOrder}}</td>
                                 <td>
-                                    <div>{{ord.clientId}}</div>
-                                    <div class="text-subinfo">{{ord.codeOrder}}</div>
+                                    <p>{{ord.client.nameClient}}</p>
+                                    <p class="text-subinfo">{{ord.client.email}}</p>
+                                    <p class="text-subinfo">{{ord.client.phone}}</p>
                                 </td>
                                 <td>{{ord.orderDate | date:'MMM d, y'}}</td>
                                 <td>{{ord.price | currency:'PEN':'S/ ':'.2-2'}}</td>
                                 <td>
-                                    <span class="text-status">{{ord.orderStatus}}</span>
+                                    <span [ngClass]="{'px-12': !ord.attendedBy}">{{ord.attendedBy || '-'}}</span>
                                 </td>
+                                <td>
+                                    <app-badge-status [status]="ord.orderStatus" [size]="'sm'"></app-badge-status>
+                                </td>
+                                <td>Edit</td>
                             </tr>
                             <ng-container>
                                 <tr [ngClass]="ord.showDetails ? 'subtable-active' : 'subtable-inactive'">
-                                    <td colspan="5" class="td-subtable-content">
+                                    <td colspan="6" class="td-subtable-content">
                                         <div class="subtable-container">
                                             <div [ngClass]="ord.showDetails ? 'table-rounded' : 'overflow-hidden'">
                                                 <table class="subtable-base">
@@ -42,6 +51,7 @@
                                                             <th scope="col" class="subtable-base-th">Cantidad</th>
                                                             <th scope="col" class="subtable-base-th">Precio Unitario</th>
                                                             <th scope="col" class="subtable-base-th">Estado de la Prenda</th>
+                                                            <th scope="col"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="subtable-base-body">
@@ -52,7 +62,14 @@
                                                             </td>
                                                             <td><div>{{detail.quantity}}</div></td>
                                                             <td><div>{{detail.price | currency:'PEN':'S/ ':'.2-2'}}</div></td>
-                                                            <td><div><span class="text-status">{{detail.orderDetailStatus}}</span></div></td>
+                                                            <td>
+                                                                <div>
+                                                                    <app-badge-status [status]="detail.orderDetailStatus" [size]="'xs'"></app-badge-status>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <i class="fas fa-eye view-icon"></i>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table> 
@@ -60,14 +77,6 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                <!--<tr class="subtable-base-tr" [ngClass]="{'subtable-active': ord.showDetails === true}" *ngFor="let detail of ord.details">
-                                    <td><div>{{detail.codeGarment}}</div></td>
-                                    <td><div>{{detail.color}}</div></td>
-                                    <td><div>{{detail.quantity}}</div></td>
-                                    <td><div>{{detail.price | currency:'PEN':'S/ ':'.2-2'}}</div></td>
-                                    <td><div>{{detail.orderDetailStatus}}</div></td>
-                                </tr>-->
                             </ng-container>
                         </ng-container>
                     </ng-container>

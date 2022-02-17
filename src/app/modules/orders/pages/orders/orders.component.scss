@@ -1,42 +1,41 @@
-
 .table-container {
-    @apply py-2 align-middle min-w-full sm:px-6 lg:px-8;
+  @apply py-2 align-middle min-w-full sm:px-6 lg:px-8;
 }
 
 .subtable-container {
-    @apply p-3 bg-skin-primary-50;
+  @apply p-3 bg-skin-primary-50;
 }
 
 .table-rounded {
-    @apply shadow overflow-hidden border-b border-gray-200 sm:rounded-lg;
+  @apply shadow overflow-hidden border-b border-gray-200 sm:rounded-lg;
 }
 
 .table-base,
 .subtable-base {
-    @apply divide-y divide-gray-200 min-w-full;
+  @apply divide-y divide-gray-200 min-w-full;
 }
 
 .table-base-head,
 .subtable-base-head {
-    @apply bg-gray-50;
+  @apply bg-gray-50;
 }
 
 .table-base-body,
 .subtable-base-body {
-    @apply bg-white divide-y divide-gray-200; 
+  @apply bg-white divide-y divide-gray-200;
 }
 
 .table-base-th,
 .subtable-base-th {
-    @apply px-5 py-3 text-left font-lato font-semibold text-gray-500 uppercase tracking-wider;
+  @apply px-5 py-3 text-left font-lato font-semibold text-gray-500 uppercase tracking-wider;
 }
 
 .table-base-th {
-    @apply text-sm;
+  @apply text-sm;
 }
 
 .subtable-base-th {
-    @apply text-xs;
+  @apply text-xs;
 }
 
 /*.th-relative {
@@ -44,105 +43,81 @@
 }*/
 
 .table-base-tr {
-    @apply cursor-pointer text-sm text-gray-900;
-    td {
-        @apply px-5 py-3 whitespace-nowrap;
-    }
+  @apply cursor-pointer text-sm text-gray-900;
+  td {
+    @apply px-5 py-3 whitespace-nowrap;
+  }
 }
 
 .subtable-base-tr {
-    @apply text-xs text-gray-900;
-    td {
-        //@apply px-5 py-3 whitespace-nowrap;
-    }
+  @apply text-xs text-gray-900;
 }
-
-/*.subtable-base-tr {
-        
-    td div {
-        max-height: 0px;
-        overflow: hidden;
-        transition: max-height 0.7s;
-    }
-    
-    td {
-        //background-color: red;
-        transition: 0.3s;
-    }
-    transition: 0.3s;
-    background-color: white;
-}
-
-.subtable-active {
-    @apply bg-skin-light-orange;
-    td {
-        @apply border-t border-gray-200;
-    }
-
-    td div {
-        max-height: 100px;
-        transition: max-height 1.4s;
-    }
-}*/
 
 .td-subtable-content {
-    padding: 0;
+  padding: 0;
 }
 
 .subtable-inactive {
+  padding: 0;
+  border-top-width: 0px !important;
+
+  .subtable-base-tr {
+    td {
+      @apply px-5 py-3 whitespace-nowrap;
+    }
+  }
+
+  div {
+    max-height: 0px;
     padding: 0;
-    border-top-width: 0px !important;
-
-    .subtable-base-tr {
-        td {
-            @apply px-5 py-3 whitespace-nowrap;
-        }
-    }
-
-    div {
-        max-height: 0px;
-        padding: 0;
-        transition: all 0.5s;
-    }
-
     transition: all 0.5s;
+  }
+
+  transition: all 0.5s;
 }
 
 .subtable-active {
-    border-top-width: 1px !important;
+  border-top-width: 1px !important;
 
-    div {
-        max-height: 500px;
-        transition: all 0.5s;
-    }
-
-    .subtable-container {
-        padding: 0.75rem;
-    }
-
-    .subtable-base-tr {
-        td {
-            @apply px-5 py-3 whitespace-nowrap;
-        }
-    }
-
+  div {
+    max-height: 500px;
     transition: all 0.5s;
+  }
+
+  .subtable-container {
+    padding: 0.75rem;
+  }
+
+  .subtable-base-tr {
+    td {
+      @apply px-5 py-3 whitespace-nowrap;
+    }
+  }
+
+  transition: all 0.5s;
 }
 
-
 .text-subinfo {
-    @apply text-gray-500;
+  @apply text-gray-500;
 }
 
 .text-status {
-    @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-skin-very-light-green text-skin-green-2;
+  @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-skin-very-light-green text-skin-green-2;
 }
 
 .circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
+
+.view-icon {
+  @apply cursor-pointer text-yellow-900 text-base hover:text-skin-primary-base;
+}
+
+/*.view-icon:hover {
+    @a
+}*/
 
 /*@function garment-color($color) {
     @return background-color: $color;
@@ -153,8 +128,6 @@
 .hide {
     display: none;
 }*/
-
-
 
 /*.test {
     max-height: 0px;
@@ -167,4 +140,3 @@
     max-height: 100px;
     transition: max-height 1.5s;
 }*/
-

@@ -1,3 +1,4 @@
+import { UserClientMin } from "../users/user-client-min";
 import { OrderDetailMin } from "./order-detail-min";
 
 export interface OrderRead {
@@ -5,8 +6,9 @@ export interface OrderRead {
   codeOrder: string;
   price: number;
   orderDate: Date;
-  clientId: number;
   orderStatus: string;
+  attendedBy: string;
   details: OrderDetailMin[];
+  client: UserClientMin;
   showDetails: boolean;
 }

@@ -10,6 +10,7 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
+import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
 
 
 
@@ -23,7 +24,8 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
     SnackBarComponent,
     DashboardLayoutComponent,
     TopBarComponent,
-    SideNavBarComponent
+    SideNavBarComponent,
+    BadgeStatusComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
     ButtonActionComponent,
     ButtonActionOutlineComponent,
     SnackBarComponent,
+    BadgeStatusComponent
   ]
 })
 export class SharedModule { }
