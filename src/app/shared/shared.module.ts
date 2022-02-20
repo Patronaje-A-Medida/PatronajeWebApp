@@ -11,6 +11,8 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
 import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
+import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.component';
+import { TittlePageComponent } from './components/tittle-page/tittle-page.component';
 
 
 
@@ -25,7 +27,9 @@ import { BadgeStatusComponent } from './components/badge-status/badge-status.com
     DashboardLayoutComponent,
     TopBarComponent,
     SideNavBarComponent,
-    BadgeStatusComponent
+    BadgeStatusComponent,
+    TooltipIconComponent,
+    TittlePageComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { BadgeStatusComponent } from './components/badge-status/badge-status.com
     ButtonActionComponent,
     ButtonActionOutlineComponent,
     SnackBarComponent,
-    BadgeStatusComponent
+    BadgeStatusComponent,
+    TooltipIconComponent,
+    TittlePageComponent,
   ]
 })
 export class SharedModule { }
