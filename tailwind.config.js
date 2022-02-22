@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
 const app_colors = {
-  'primary-base': 'var(--color-primary-800)',
+  'primary-base': 'var(--color-primary-700)',
   'secondary-base': 'var(--color-secondary-400)',
   'primary-50': 'var(--color-primary-50)',
   'primary-100': 'var(--color-primary-100)',
