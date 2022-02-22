@@ -13,6 +13,7 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
 import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
 import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.component';
 import { TittlePageComponent } from './components/tittle-page/tittle-page.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 
@@ -29,7 +30,8 @@ import { TittlePageComponent } from './components/tittle-page/tittle-page.compon
     SideNavBarComponent,
     BadgeStatusComponent,
     TooltipIconComponent,
-    TittlePageComponent
+    TittlePageComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { TittlePageComponent } from './components/tittle-page/tittle-page.compon
     BadgeStatusComponent,
     TooltipIconComponent,
     TittlePageComponent,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }
