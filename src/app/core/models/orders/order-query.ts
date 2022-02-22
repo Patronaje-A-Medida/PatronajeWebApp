@@ -1,7 +1,7 @@
 export interface OrderQuery {
   atelierId: number;
   orderStatus?: string;
-  codeGarment?: string;
+  filterString?: string;
   pageNumber?: number;
   pageSize?: number;
 }
