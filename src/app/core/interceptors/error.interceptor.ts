@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorDetail } from '../models/error-detail';
+import { ErrorDetail } from '../models/generics/error-detail';
 
 
 @Injectable()
@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           errorDetail = {
             statusCode: 500, 
             errorCode: 500, 
-            message: 'Ocurrió un error al registrarse'
+            message: 'Servicios no disponibles, vuelva a intentar más tarde'
           };
         } else {
           errorDetail = err.error;

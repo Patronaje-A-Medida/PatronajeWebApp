@@ -1,0 +1,15 @@
+.badge-status {
+  @apply px-2 inline-flex leading-5 font-semibold rounded-full;
+}
+
+.unattended-status {
+  @apply bg-yellow-100 text-yellow-700;
+}
+
+.in-progress-status {
+  @apply bg-green-100 text-green-700;
+}
+
+.attended-status {
+  @apply bg-cyan-100 text-cyan-700;
+}

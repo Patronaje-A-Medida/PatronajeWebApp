@@ -1,0 +1,125 @@
+<app-tittle-page [tittle]="'Pedidos'"></app-tittle-page>
+
+<div class="query-container">
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input class="search-input" type="text" placeholder="Buscar por cliente, código de prenda u orden" 
+            #inputSearchBy [(ngModel)]="searchBy" name="searchBy" [disabled]="firstLoad"/>
+    </div>
+    <div class="filter-container" #containerFilterStatus>
+        <button class="filter-btn" (click)="handleFilterOptions()" [disabled]="firstLoad">
+            <span class="font-semibold">{{optionSelected.key}}</span>
+            <i class="fas fa-chevron-down" [ngClass]="showOptions ? 'rotate-up' : 'rotate-down'"></i>
+        </button>
+        <div *ngIf="showOptions" class="filter-options" [ngClass]="showOptions ? 'opacity-100' : 'opacity-0'">
+            <a class="status-option" *ngFor="let opt of options" (click)="selectFilterStatus(opt)">{{opt.key}}</a>
+        </div>
+    </div>
+</div>
+
+<div class="table-container">
+    <div class="table-rounded">
+        <div class="responsive-table">
+            <table class="table-base">
+                <thead class="table-base-head">
+                    <tr>
+                        <th scope="col" class="table-base-th">Código</th>
+                        <th scope="col" class="table-base-th">Cliente</th>
+                        <th scope="col" class="table-base-th">Fecha</th>
+                        <th scope="col" class="table-base-th">Precio Total</th>
+                        <th scope="col" class="table-base-th">Atentido por</th>
+                        <th scope="col" class="table-base-th">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="table-base-body">
+                    <ng-container *ngIf="orders && !isLoading" >
+                        <ng-container *ngFor="let ord of orders.items">
+                            <tr class="table-base-tr" (click)="showDetails(ord)">
+                                <td>{{ord.codeOrder}}</td>
+                                <td>
+                                    <p>{{ord.client.nameClient}}</p>
+                                    <p class="text-subinfo">{{ord.client.email}}</p>
+                                    <p class="text-subinfo">{{ord.client.phone}}</p>
+                                </td>
+                                <td>{{ord.orderDate | date:'MMM d, y'}}</td>
+                                <td>{{ord.price | currency:'PEN':'S/ ':'.2-2'}}</td>
+                                <td>
+                                    <span [ngClass]="{'px-12': !ord.attendedBy}">{{ord.attendedBy || '-'}}</span>
+                                </td>
+                                <td>
+                                    <app-badge-status [status]="ord.orderStatus" [size]="'sm'"></app-badge-status>
+                                </td>
+                            </tr>
+                            
+                            <tr [ngClass]="ord.showDetails ? 'subtable-active' : 'subtable-inactive'">
+                                <td colspan="6" class="td-subtable-content">
+                                    <div class="subtable-container">
+                                        <div [ngClass]="ord.showDetails ? 'table-rounded' : 'overflow-hidden'">
+                                            <table class="subtable-base">
+                                                <thead class="subtable-base-head">
+                                                    <tr>
+                                                        <th scope="col" class="subtable-base-th">Código de Prenda</th>
+                                                        <th scope="col" class="subtable-base-th">Color</th>
+                                                        <th scope="col" class="subtable-base-th">Cantidad</th>
+                                                        <th scope="col" class="subtable-base-th">Precio Unitario</th>
+                                                        <th scope="col" class="subtable-base-th">Estado de la Prenda</th>
+                                                        <th scope="col" class="th-relative">
+                                                            <span class="sr-only">View</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="subtable-base-body">
+                                                    <tr class="subtable-base-tr" *ngFor="let detail of ord.details; let i = index">
+                                                        <td><div>{{detail.codeGarment}}</div></td>
+                                                        <td>
+                                                            <div class="circle" [style]="garmentColor(detail.color)"></div>
+                                                        </td>
+                                                        <td><div>{{detail.quantity}}</div></td>
+                                                        <td><div>{{detail.price | currency:'PEN':'S/ ':'.2-2'}}</div></td>
+                                                        <td>
+                                                            <div>
+                                                                <app-badge-status [status]="detail.orderDetailStatus" [size]="'xs'"></app-badge-status>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <app-tooltip-icon [icon]="'fas fa-eye'" [description]="'Ver detalles'" 
+                                                            [position]="i === (ord.details.length - 1) ? 'left' : 'bottom'"
+                                                            (onClick)="navigateToDetails(ord, detail)"
+                                                            >
+                                                            </app-tooltip-icon>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table> 
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="paginator-container" *ngIf="orders && !isLoading">
+    <span class="text-gray-600">Mostrando {{fromItem}} - {{toItem}} de {{orders.total}} órdenes</span>
+    <div class="paginator-btn-container">
+        <button class="paginator-btn" (click)="previousPage()">
+            <i class="fas fa-angle-left"></i>
+        </button>
+
+        <button class="paginator-btn" (click)="nextPage()">
+            <i class="fas fa-angle-right"></i>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="isLoading"  class="h-96">
+    <app-spinner  [diameter]="'48px'"></app-spinner>
+</div>
+
+<app-snack-bar [(showSnack)]="showAlert" [message]="messageAlert" [type]="typeAlert"></app-snack-bar>
+<!--</div>-->

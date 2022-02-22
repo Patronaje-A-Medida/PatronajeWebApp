@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, Scroll } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
@@ -8,12 +8,10 @@ import { filter } from 'rxjs/operators';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrdersComponent } from './pages/orders/orders.component';
 import { StateChipComponent } from './components/state-chip/state-chip.component';
 import { PaginationButtonComponent } from './components/pagination-button/pagination-button.component';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { OrderDataComponent } from './components/order-data/order-data.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { LoadingPulseComponent } from './components/loading-pulse/loading-pulse.component';
@@ -24,16 +22,15 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { UserDataService } from './core/services/user-data.service';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrdersComponent,
     StateChipComponent,
     PaginationButtonComponent,
     AppBarComponent,
     SideNavComponent,
-    OrderDetailsComponent,
     OrderDataComponent,
     ClientDetailsComponent,
     LoadingPulseComponent,
@@ -51,7 +48,9 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
   ],
   providers: [
     UserDataService,
+    //{ provide: APP_INITIALIZER, useFactory: appInilize, multi: true, deps: [UserDataService]} -> averiguar mejor
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

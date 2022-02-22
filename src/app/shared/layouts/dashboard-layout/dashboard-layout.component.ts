@@ -19,7 +19,7 @@ export class DashboardLayoutComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onWindowsResize($event): void {
+  onWindowsResize($event: any): void {
     const windowWidth: number = $event.target.innerWidth;
     if(windowWidth >= 768) {
       this.isOpen = true;

@@ -1,4 +1,4 @@
-import { AtelierCreate } from "./atelier-create";
+import { AtelierCreate } from "../ateliers/atelier-create";
 
 export interface UserOwnerCreate {
   nameUser: string;

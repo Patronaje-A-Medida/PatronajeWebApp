@@ -11,15 +11,99 @@
     --color-light-gray: #fafafa;
     --color-gray: #808080;
     --color-dark-gray: #5c5c5c;
+    --color-very-light-green: #c7e4aa;
     --color-light-green: #9fd16d;
     --color-green: #8fbc61;
+    --color-green-2: #429E51;
     --color-brown: #5d1d1d;
+
+    --color-primary-50: #fdf2ec;
+    --color-primary-100: #fbe6da;
+    --color-primary-200: #f9dac8;
+    --color-primary-300: #f7ceb5;
+    --color-primary-400: #f6c2a3;
+    --color-primary-500: #f4b691;
+    --color-primary-600: #f2aa7e;
+    --color-primary-700: #f09e6c;
+    --color-primary-800: #ee925a;
+    --color-primary-900: #ed8748;
+
+    --color-secondary-50: #ffe6cf;
+    --color-secondary-100: #eec6b0;
+    --color-secondary-200: #d1a48c;
+    --color-secondary-300: #b28367;
+    --color-secondary-400: #9c694b;
+    --color-secondary-500: #855030;
+    --color-secondary-600: #7a472a;
+    --color-secondary-700: #6a3a21;
+    --color-secondary-800: #5c2d1a;
+    --color-secondary-900: #4c2011;
+
+    --color-accent-50: #e3f6fd;
+    --color-accent-100: #b9e6fa;
+    --color-accent-200: #8dd6f7; 
+    --color-accent-300: #67c6f3; 
+    --color-accent-400: #52baf0; 
+    --color-accent-500: #48aeed; 
+    --color-accent-600: #43a0de; 
+    --color-accent-700: #3c8dca; 
+    --color-accent-800: #377cb6; 
+    --color-accent-900: #2e5c92; 
+
+    --color-analogous-A-50: #feeaef;
+    --color-analogous-A-100: #fccbd5;
+    --color-analogous-A-200: #ec969f;
+    --color-analogous-A-300: #e26d7a;
+    --color-analogous-A-400: #ed485b;
+    --color-analogous-A-500: #f33044;
+    --color-analogous-A-600: #e42642;
+    --color-analogous-A-700: #d21a3b;
+    --color-analogous-A-800: #c51034;
+    --color-analogous-A-900: #b60028;
+
+    --color-analogous-B-50: #fdfae4;
+    --color-analogous-B-100: #f9f1be;
+    --color-analogous-B-200: #f4e893;
+    --color-analogous-B-300: #f0df68;
+    --color-analogous-B-400: #edda48;
+    --color-analogous-B-500: #ead425;
+    --color-analogous-B-600: #e8c220;
+    --color-analogous-B-700: #e6ab1a;
+    --color-analogous-B-800: #e39412;
+    --color-analogous-B-900: #de6b02;
+
+    --color-triadic-A-50: #f3fde7;
+    --color-triadic-A-100: #e3f9c1;
+    --color-triadic-A-200: #cff698;
+    --color-triadic-A-300: #bcf16d;
+    --color-triadic-A-400: #aeed48;
+    --color-triadic-A-500: #a1e918;
+    --color-triadic-A-600: #98d708;
+    --color-triadic-A-700: #8bc000;
+    --color-triadic-A-800: #7ea800;
+    --color-triadic-A-900: #6b8100;
+
+    --color-triadic-B-50: #e4fceb;
+    --color-triadic-B-100: #bef7cd;
+    --color-triadic-B-200: #8ef2ac;
+    --color-triadic-B-300: #48ed87;
+    --color-triadic-B-400: #00e668;
+    --color-triadic-B-500: #00de50;
+    --color-triadic-B-600: #00cd45;
+    --color-triadic-B-700: #00b938;
+    --color-triadic-B-800: #00a72c;
+    --color-triadic-B-900: #008515;
   }
 
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 ul {
