@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           errorDetail = {
             statusCode: 500, 
             errorCode: 500, 
-            message: 'Ocurrió un error al registrarse'
+            message: 'Servicios no disponibles, vuelva a intentar más tarde'
           };
         } else {
           errorDetail = err.error;
