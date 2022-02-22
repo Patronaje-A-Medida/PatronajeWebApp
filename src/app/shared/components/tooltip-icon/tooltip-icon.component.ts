@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tooltip-icon',
@@ -10,6 +10,7 @@ export class TooltipIconComponent implements OnInit {
   @Input('icon') icon: string;
   @Input('description') description: string = '';
   @Input('position') position: string = 'bottom';
+  @Output('onClick') clickAction = new EventEmitter<void>();
 
   constructor() { }
 
@@ -22,6 +23,10 @@ export class TooltipIconComponent implements OnInit {
 
   get tooltipPosition(): string {
     return `tooltip-content tooltip-${this.position}`;
+  }
+
+  onClick(): void {
+    this.clickAction.emit();
   }
 
 }
