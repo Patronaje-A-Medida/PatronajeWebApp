@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { PagedResponse } from '../models/generics/paged-response';
 import { OrderQuery } from '../models/orders/order-query';
 import { OrderRead } from '../models/orders/order-read';
-import { GESTION_API } from '../utils/apis.constants';
 import { UserDataService } from './user-data.service';
 
 @Injectable({
@@ -13,7 +13,8 @@ import { UserDataService } from './user-data.service';
 })
 export class OrdersService {
 
-  private readonly uriOrders: string = GESTION_API + '/orders';
+  private readonly GESTION_API = environment.apiGestionUrl;
+  private readonly uriOrders: string = this.GESTION_API + '/orders';
 
   constructor(
     private http: HttpClient,
@@ -23,17 +24,18 @@ export class OrdersService {
   getAllByQuery(
     pageNumber: number = 1, 
     pageSize: number = 10,
-    codeGarment?: string, 
-    orderStatus?: string, 
+    filterString?: string,
+    orderStatus?: string,
   ): Observable<PagedResponse<OrderRead>> {
     const query: OrderQuery = {
-      atelierId: 1, //this.userDataService.atelierId,
-      codeGarment: codeGarment,
+      atelierId: 1,
+      //atelierId: this.userDataService.atelierId,
       orderStatus: orderStatus,
+      filterString: filterString,
       pageNumber: pageNumber,
       pageSize: pageSize
     };
-
+    
     return this.http.post<PagedResponse<OrderRead>>(`${this.uriOrders}/by-query`, query).pipe(
       map((res) => {
         res.items.forEach(o => o.showDetails = false);

@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { UserAtelierToken } from '../models/auth/user-atelier-token';
 import { UserLogin } from '../models/auth/user-login';
 import { UserOwnerCreate } from '../models/users/user-owner-create';
-import { AUTH_API } from '../utils/apis.constants';
 import { UserDataService } from './user-data.service';
 
 
@@ -14,8 +14,9 @@ import { UserDataService } from './user-data.service';
 })
 export class AuthService {
 
-  private readonly uriSignUp: string = AUTH_API + '/sign-up';
-  private readonly uriSignIn: string = AUTH_API + '/sign-in';
+  private readonly AUTH_API: string = environment.apiAuthUrl
+  private readonly uriSignUp: string = this.AUTH_API + '/sign-up';
+  private readonly uriSignIn: string = this.AUTH_API + '/sign-in';
 
   constructor(
     private http: HttpClient,
