@@ -1,0 +1,129 @@
+.details-container {
+  @apply px-2 sm:px-6 lg:px-8 font-montserrat;
+}
+
+.details-card {
+  @apply flex flex-col gap-y-8 
+    text-base py-6 px-4 divide-y-2
+  bg-white rounded-lg shadow-md;
+}
+
+.details-section-card {
+  @apply flex gap-y-8 flex-col xl:flex-row;
+}
+
+.subtitle-garment {
+  @apply font-semibold mb-2;
+}
+
+.subtitle-client {
+  @apply font-semibold mt-4 mb-2;
+}
+
+.details-garment {
+  @apply xl:w-1/2 flex justify-between;
+}
+
+.details-images {
+  @apply flex justify-evenly xl:w-1/2 md:flex-row;
+}
+
+.detail-label {
+  @apply text-gray-500 text-sm;
+}
+
+.fixed-image {
+  transition: 0.4s;
+  max-width: 280px;
+  max-height: 280px;
+}
+
+@media screen and (max-width: 640px) {
+  .details-images {
+    transition: 0.4s;
+    @apply flex-col justify-center items-center gap-y-8;
+  }
+}
+
+.container-body-params {
+  @apply flex flex-col-reverse items-center gap-y-8 xl:w-4/5 md:flex-row;
+}
+
+.container-table {
+  @apply flex justify-center flex-1;
+}
+
+.details-body-params {
+  min-height: min-content;
+  @apply flex;
+}
+
+.image-body {
+  height: 438px;
+  width: 217px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.table-rounded {
+  @apply shadow overflow-hidden border-b
+    border-gray-200 sm:rounded-lg;
+}
+
+.responsive-table {
+  max-height: 438px;
+  @apply overflow-y-auto overflow-x-hidden;
+}
+
+.responsive-table::-webkit-scrollbar {
+  width: 8px;
+}
+
+.responsive-table::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  @apply bg-gray-300;
+  //background: #ccc;
+}
+
+.responsive-table::-webkit-scrollbar-thumb:hover {
+  //background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  @apply bg-gray-400;
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.responsive-table::-webkit-scrollbar-thumb:active {
+  //background-color: #999999;
+  @apply bg-gray-500;
+}
+
+.body-params-table {
+  @apply divide-y divide-gray-200 min-w-full;
+
+  thead {
+    @apply bg-gray-50;
+    position: sticky;
+    top: 0;
+  }
+
+  th {
+    @apply p-3 text-left font-lato font-semibold 
+    text-gray-500 text-sm uppercase tracking-wider;
+  }
+
+  tbody {
+    @apply bg-white divide-y divide-gray-200;
+  }
+
+  tr {
+    @apply cursor-pointer font-lato text-sm text-gray-900;
+  }
+
+  td {
+    @apply p-3 whitespace-nowrap;
+  }
+}
