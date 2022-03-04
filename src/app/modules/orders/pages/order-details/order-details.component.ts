@@ -11,6 +11,11 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 })
 export class OrderDetailsComponent implements OnInit, OnDestroy {
 
+  isLoading: boolean = false;
+  showAlert: boolean;
+  messageAlert: string;
+  typeAlert: string;
+
   codeOrder: string;
   codeGarment: string;
 
@@ -37,7 +42,13 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
 
   private getOrderDetail(): void {
     this._orderDetail$ = this.ordersService.getDetail(this.codeOrder, this.codeGarment).subscribe(
-      res => this.orderDetail = res
+      res => this.orderDetail = res,
+      err => {
+        this.isLoading = true;
+        this.messageAlert = err.message;
+        this.typeAlert = 'error';
+        this.showAlert = true;
+      }
     );
   }
 

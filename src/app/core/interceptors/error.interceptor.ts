@@ -19,7 +19,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         let errorDetail: ErrorDetail;
-        console.log(err);
         if (err instanceof ErrorEvent) {
           errorDetail = {
             statusCode: 400,
