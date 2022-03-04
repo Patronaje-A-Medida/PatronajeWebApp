@@ -146,7 +146,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   private computeItems() {
     this.fromItem = (this.orders.itemsPerPage * this.orders.pageNumber) - (this.orders.itemsPerPage - 1);
-    this.toItem = this.orders.itemsPerPage * this.orders.pageNumber;
+    this.toItem = this.fromItem + this.orders.items.length - 1;
   }
 
   ngOnDestroy(): void {

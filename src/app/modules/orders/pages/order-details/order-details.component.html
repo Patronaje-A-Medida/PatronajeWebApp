@@ -187,3 +187,12 @@
         
     </div>
 </div>
+
+<div *ngIf="isLoading"  class="h-96 text-center">
+    <app-spinner  [diameter]="'48px'"></app-spinner>
+
+    <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
+    </app-button-primary-outlined>
+</div>
+
+<app-snack-bar [message]="messageAlert" [type]="typeAlert" [(showSnack)]="showAlert"></app-snack-bar>
