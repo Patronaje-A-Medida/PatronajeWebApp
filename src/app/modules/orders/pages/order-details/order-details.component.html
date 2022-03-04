@@ -3,68 +3,77 @@
 <div class="details-container">
     <div class="details-card" *ngIf="orderDetail">
         <div>
-            <p class="subtitle-garment">Datos de la prenda</p>
+            <div class="flex justify-between mb-3">
+                <p class="subtitle-garment">Datos de la prenda</p>
+
+                <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
+                </app-button-primary-outlined>
+            </div>
         
             <div class="details-section-card">
                 <div class="details-garment">
-                    <div>
-                        <p class="detail-label">Código de orden</p>
-                        <p>{{orderDetail.codeOrder}}</p>
+                    <div class="detail-group">
+                        <div>
+                            <p class="detail-label">Código de orden</p>
+                            <p>{{orderDetail.codeOrder}}</p>
+                        </div>
         
-                        <br/>
+                        <div>
+                            <p class="detail-label">Código de prenda</p>
+                            <p>{{orderDetail.garment.codeGarment}}</p>
+                        </div>
         
-                        <p class="detail-label">Código de prenda</p>
-                        <p>{{orderDetail.garment.codeGarment}}</p>
-        
-                        <br/>
-        
-                        <p class="detail-label">Nombre de prenda</p>
-                        <p>{{orderDetail.garment.nameGarment}}</p>
-        
-                        <br/>
-        
-                        <p class="detail-label">Precio estimado</p>
-                        <p>{{orderDetail.garment.estimatedPrice | currency:'PEN':'S/ ':'.2-2'}}</p>
+                        <div>
+                            <p class="detail-label">Nombre de prenda</p>
+                            <p>{{orderDetail.garment.nameGarment}}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="detail-label">Precio estimado</p>
+                            <p>{{orderDetail.garment.estimatedPrice | currency:'PEN':'S/ ':'.2-2'}}</p>
+                        </div>
                     </div>
                     
-                    <div>
-                        <p class="detail-label">Ocasión / eventos</p>
-                        <ng-container *ngFor="let ocs of orderDetail.garment.occasions; let i = index">
-                            <span>{{ocs}}</span>
-                            <span *ngIf="i != (orderDetail.garment.occasions.length - 1)">, </span>
-                        </ng-container>
+                    <div class="detail-group">
+                        <div>
+                            <p class="detail-label">Ocasión / eventos</p>
+                            <ng-container *ngFor="let ocs of orderDetail.garment.occasions; let i = index">
+                                <span>{{ocs}}</span>
+                                <span *ngIf="i != (orderDetail.garment.occasions.length - 1)">, </span>
+                            </ng-container>
+                        </div>
         
-                        <br/><br/>
-        
-                        <p class="detail-label">Telas</p>
-                        <ng-container *ngFor="let fbs of orderDetail.garment.fabrics; let j = index">
-                            <span>{{fbs}}</span>
-                            <span *ngIf="j != (orderDetail.garment.fabrics.length - 1)">, </span>
-                        </ng-container>
+                        <div>
+                            <p class="detail-label">Telas</p>
+                            <ng-container *ngFor="let fbs of orderDetail.garment.fabrics; let j = index">
+                                <span>{{fbs}}</span>
+                                <span *ngIf="j != (orderDetail.garment.fabrics.length - 1)">, </span>
+                            </ng-container>
+                        </div>
                         
-                        <br/><br/>
-        
-                        <p class="detail-label">Color seleccionado</p>
-                        <div class="circle" [style]="garmentColor(orderDetail.garment.color)"></div>
+                        <div>
+                            <p class="detail-label">Color seleccionado</p>
+                            <div class="circle" [style]="garmentColor(orderDetail.garment.color)"></div>
+                        </div>
                     </div>
         
-                    <div>
-                        <p class="detail-label">Fecha del pedido</p>
-                        <p>{{orderDetail.orderDate | date:'MMM d, y'}}</p>
+                    <div class="detail-group">
+                        <div>
+                            <p class="detail-label">Fecha del pedido</p>
+                            <p>{{orderDetail.orderDate | date:'MMM d, y'}}</p>
+                        </div>
                         
-                        <br/>
-        
-                        <p class="detail-label">Atendido por</p>
-                        <p>{{orderDetail.attendedBy || '-'}}</p>
+                        <div>
+                            <p class="detail-label">Atendido por</p>
+                            <p>{{orderDetail.attendedBy || '-'}}</p>
+                        </div>
                         
-                        <br/>
-        
-                        <p class="detail-label">Estado</p>
-                        <app-badge-status [status]="orderDetail.orderDetailStatus" [size]="'sm'">
-                        </app-badge-status>
+                        <div>
+                            <p class="detail-label">Estado</p>
+                            <app-badge-status [status]="orderDetail.orderDetailStatus" [size]="'sm'">
+                            </app-badge-status>
+                        </div>
                     </div>
-        
-                    
                 </div>
         
                 <div class="details-images">
@@ -76,38 +85,34 @@
         </div>
 
         <div>
-            <div class="flex justify-between">
+            <div class="flex justify-between mt-4 mb-3">
                 <p class="subtitle-client">Datos del cliente</p>
 
-                <button>Generar patrón</button>
+                <app-button-primary-filled [text]="'Generar patrón'" [icon]="'fas fa-pencil-ruler'">
+                </app-button-primary-filled>
             </div>
 
             <div class="details-section-card gap-x-12">
-                <div class="xl:w-1/5">
-                    <p class="detail-label">Nombres del cliente</p>
-                    <p>{{orderDetail.client.nameClient}}</p>
+                <div class="detail-group-2 xl:w-1/5">
+                    <div>
+                        <p class="detail-label">Nombres del cliente</p>
+                        <p>{{orderDetail.client.nameClient}}</p>
+                    </div>
 
-                    <br/>
+                    <div>
+                        <p class="detail-label">Correo de contacto</p>
+                        <p>{{orderDetail.client.email}}</p>
+                    </div>
 
-                    <p class="detail-label">Correo de contacto</p>
-                    <p>{{orderDetail.client.email}}</p>
-
-                    <br/>
-
-                    <p class="detail-label">Teléfono de contacto</p>
-                    <p>{{orderDetail.client.phone}}</p>
+                    <div>
+                        <p class="detail-label">Teléfono de contacto</p>
+                        <p>{{orderDetail.client.phone}}</p>
+                    </div>
                 </div>
 
-                <!--<div class="container-body-params">
-                    <div class="details-body-params">
-                        <div>
-                            <p style="position: relative; top: 8px;">175 cm</p>
-                            <p style="position: relative; top: 96px;">80 cm</p>
-                            <p style="position: relative; top: 106px;">70 cm</p>
-                            <p style="position: relative; top: 116px;">75 cm</p>
-                        </div>
-                        <img src="assets/images/basic-body.png" class="image-body">
-                    </div>
+                <div class="container-body-params">
+                    <app-basic-body-params [basicDimensions]="basicDimensions">
+                    </app-basic-body-params>
 
                     <div class="container-table">
                         <div class="table-rounded">
@@ -176,7 +181,7 @@
                             </div>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
         </div>
         

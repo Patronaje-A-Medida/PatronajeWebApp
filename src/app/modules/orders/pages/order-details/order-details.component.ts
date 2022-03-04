@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { OrderDetailRead } from 'src/app/core/models/orders/order-detail-read';
 import { OrdersService } from 'src/app/core/services/orders.service';
@@ -20,6 +20,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private ordersService: OrdersService
   ) { }
   
@@ -42,6 +43,14 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
 
   garmentColor(color: string): string {
     return `background-color: ${color};`;
+  }
+
+  get basicDimensions(): number[] {
+    return [175, 80, 70, 75];
+  }
+
+  navigateToBack() {
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 
   ngOnDestroy(): void {
