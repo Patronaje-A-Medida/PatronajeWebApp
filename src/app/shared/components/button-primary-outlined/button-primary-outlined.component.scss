@@ -1,0 +1,9 @@
+.btn-primary-outlined {
+  min-width: 5rem;
+  max-width: 10rem;
+  transition: 0.4s;
+  border-width: 1.5px;
+  @apply border-skin-primary-base font-lato text-skin-primary-base
+      px-3 py-1 border-solid rounded shadow text-sm md:text-base break-all
+      hover:bg-skin-primary-50 hover:shadow-lg;
+}

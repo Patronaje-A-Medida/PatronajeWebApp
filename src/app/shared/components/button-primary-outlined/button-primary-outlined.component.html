@@ -1,0 +1,6 @@
+<button class="btn-primary-outlined" (click)="onClick()" [disabled]="isDisabled">
+    <ng-container *ngIf="iconBtn">
+        <i [class]="iconBtn"></i>
+    </ng-container>
+    &nbsp;{{textBtn}}
+</button>

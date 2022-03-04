@@ -113,11 +113,16 @@
   border-radius: 50%;
 }
 
-@media screen and (max-width: 768px) {
+
+.responsive-table {
+  @apply overflow-x-auto overflow-y-auto;
+}
+
+/*@media screen and (max-width: 768px) {
   .responsive-table {
     @apply overflow-x-auto;
   }
-}
+}*/
 
 .query-container {
   @apply flex flex-row justify-between gap-x-2 md:gap-x-8 xl:gap-x-16

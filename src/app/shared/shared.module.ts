@@ -14,6 +14,8 @@ import { BadgeStatusComponent } from './components/badge-status/badge-status.com
 import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.component';
 import { TittlePageComponent } from './components/tittle-page/tittle-page.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ButtonPrimaryFilledComponent } from './components/button-primary-filled/button-primary-filled.component';
+import { ButtonPrimaryOutlinedComponent } from './components/button-primary-outlined/button-primary-outlined.component';
 
 
 
@@ -32,6 +34,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     TooltipIconComponent,
     TittlePageComponent,
     SpinnerComponent,
+    ButtonPrimaryFilledComponent,
+    ButtonPrimaryOutlinedComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +49,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     TooltipIconComponent,
     TittlePageComponent,
     SpinnerComponent,
+    ButtonPrimaryFilledComponent,
+    ButtonPrimaryOutlinedComponent,
   ]
 })
 export class SharedModule { }
