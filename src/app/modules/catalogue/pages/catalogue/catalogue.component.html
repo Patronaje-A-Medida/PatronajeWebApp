@@ -1,3 +1,70 @@
-<div class="pt-96 bg-gray-300">
-    <p>catalogue works! que fue kaumzaaaaaaa</p>
+<app-tittle-page [tittle]="'Catálogo de Prendas'"></app-tittle-page>
+
+<div class="basic-container">
+    <div class="query-container">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input class="search-input" type="text" placeholder="Buscar por código o nombre de la prenda" 
+                #inputSearchBy [(ngModel)]="searchBy" name="searchBy" [disabled]="firstLoad"/>
+        </div>
+        <div class="filter-container" #containerFilterCategory>
+            <button class="filter-btn" (click)="handleFilterOptions()" [disabled]="firstLoad">
+                <span class="font-semibold">{{optionSelected.key}}</span>
+                <i class="fas fa-chevron-down" [ngClass]="showOptions ? 'rotate-up' : 'rotate-down'"></i>
+            </button>
+            <div *ngIf="showOptions" class="filter-options" [ngClass]="showOptions ? 'opacity-100' : 'opacity-0'">
+                <!--<a class="status-option" *ngFor="let opt of options" (click)="selectFilterStatus(opt)">{{opt.key}}</a>-->
+                <a class="status-option" *ngFor="let opt of opts" >{{opt | titlecase}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="garments-container">
+
+        <div *ngFor="let gmt of garments" class="garment-card">
+            <div style="height: 20rem;">
+                <img [src]="gmt.imageUrl" alt="">
+            </div>
+            <div class="garment-card-info">
+                <div class="flex justify-between items-center">
+                    <p class="main-info">{{gmt.nameGarment}}</p>
+                    <!--<span>{{gmt.available}}</span>-->
+                    <div class="circle-available" [ngClass]="gmt.available ? 'glowing-available' : 'glowing-unavailable'"></div>
+                </div>
+                <p class="sub-info">{{gmt.codeGarment}}</p>
+                <p class="sub-info">{{gmt.averagePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
+            </div>
+        </div>
+
+        <div class="garment-card">
+            <div style="height: 20rem;">
+                <img src="https://i.linio.com/p/8308a8dc27f610d2be03b4c20a65be03-product.jpg" alt="">
+            </div>
+            <div style="height: 6rem; border-top: solid 1px purple;">
+
+            </div>
+        </div>
+        
+
+        <div class="garment-card">
+            <div style="height: 20rem;">
+                <img src="https://d1fufvy4xao6k9.cloudfront.net/feed/img/man_trenchcoat/152805/front.png" alt="">
+            </div>
+            <div style="height: 6rem; border-top: solid 1px purple;">
+
+            </div>
+        </div>
+
+        <div class="garment-card">
+            <div style="height: 20rem;">
+                <img src="https://barracamalvin.com.uy/addons/default/themes/sl/img/image-not-found.png" alt="">
+            </div>
+            <div style="height: 6rem; border-top: solid 1px purple;">
+
+            </div>
+        </div>
+
+        
+
+    </div>
 </div>

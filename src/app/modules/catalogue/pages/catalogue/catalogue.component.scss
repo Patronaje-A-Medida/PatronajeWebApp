@@ -1,0 +1,136 @@
+.query-container {
+  @apply flex flex-row justify-between gap-x-2 md:gap-x-8 xl:gap-x-16
+      py-2 h-14;
+}
+
+.search-container {
+  width: 82.5%;
+  @apply flex flex-row relative;
+}
+
+.search-input {
+  border: solid 1.5px;
+  @apply w-full py-2 pl-10 pr-2 
+      font-montserrat text-xs md:text-base text-skin-dark-gray 
+    border-gray-300 rounded-lg shadow-sm;
+}
+
+.search-input:focus {
+  outline: none;
+  border: solid 1.5px;
+  @apply border-skin-primary-base;
+}
+
+.search-input:disabled {
+  @apply shadow-none bg-gray-100;
+}
+
+.search-icon {
+  top: 20%;
+  @apply absolute left-4 text-base text-gray-400;
+}
+
+.filter-container {
+  z-index: 1;
+  @apply flex-1 pt-0 pl-0 md:pl-12 xl:pl-20 
+      font-lato text-sm;
+}
+
+.filter-btn {
+  min-width: 128px;
+  border-width: 1.5px;
+  transition: 0.4s;
+  @apply flex flex-row gap-x-1 justify-between items-center text-skin-primary-base
+      px-4 h-full w-full border-skin-primary-base border-solid
+      rounded shadow bg-white hover:bg-skin-primary-50;
+}
+
+.filter-btn:disabled {
+  border-width: 1.5px;
+  @apply bg-gray-100 border-gray-300 shadow-none text-gray-400;
+}
+
+.filter-options {
+  transition: 0.3s;
+  border-width: 1.5px;
+  @apply flex flex-col gap-y-1 rounded bg-white
+      border-skin-primary-base border-solid mt-4 py-3 relative;
+}
+
+.filter-options::after {
+  content: "";
+  border-radius: 2px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+  top: -1.25px;
+  @apply absolute right-2 bg-white
+    w-4 h-4 border-skin-primary-base border-solid;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rotate-up {
+  transition: 0.5s;
+  transform: rotate(180deg);
+}
+
+.rotate-down {
+  transition: 0.5s;
+}
+
+.status-option {
+  transition: 0.3s;
+  @apply cursor-pointer px-2 py-1 hover:bg-skin-primary-50;
+}
+
+.garments-container {
+  @apply py-2 grid gap-x-4 gap-y-8 justify-items-center items-center;
+  grid-auto-flow: dense;
+  grid-auto-rows: 26rem;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+}
+
+.garment-card {
+  height: 26rem;
+  width: 18rem;
+  @apply bg-white rounded-md shadow;
+  //border: solid 1px limegreen;
+
+  img {
+    @apply rounded-t-md bg-white;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.garment-card-info {
+  height: 6rem;
+  //border-top: solid 1px #cbd5e1;
+  @apply p-2 border-gray-300 border-t border-solid flex flex-col gap-y-1;
+}
+
+.main-info {
+  @apply font-montserrat font-semibold;
+}
+
+.sub-info {
+  @apply font-lato text-sm;
+}
+
+/*----*/
+
+.circle-available {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.glowing-available {
+  background-color: var(--color-triadic-B-300);
+  box-shadow: 0 0 7px 1px var(--color-triadic-B-300);
+}
+
+.glowing-unavailable {
+  background-color: var(--color-analogous-A-400);
+  box-shadow: 0 0 7px 1px var(--color-analogous-A-400);
+}
