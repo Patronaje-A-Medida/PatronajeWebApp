@@ -80,6 +80,8 @@
 
 .responsive-table {
   max-height: 438px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
   @apply overflow-y-auto overflow-x-hidden;
 }
 
@@ -103,6 +105,10 @@
 .responsive-table::-webkit-scrollbar-thumb:active {
   //background-color: #999999;
   @apply bg-gray-500;
+}
+
+.responsive-table::-webkit-scrollbar-track-piece {
+  @apply bg-gray-50;
 }
 
 .body-params-table {
