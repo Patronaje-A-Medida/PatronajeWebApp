@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { TypeRead } from 'src/app/core/models/configuration-types/type-read';
 import { GarmentMin } from 'src/app/core/models/garments/garment-min';
 import { StatusOption } from 'src/app/core/models/generics/status-option';
 import { ConfigurationTypesService } from 'src/app/core/services/configuration-types.service';
@@ -30,10 +31,10 @@ export class CatalogueComponent implements OnInit, OnDestroy {
   searchBy: string;
   showOptions: boolean = false;
 
-  optionSelected: StatusOption = {key: 'Todos', value: null};
-  options: StatusOption[] =  DictStatus;
+  optionSelected: TypeRead;
+  //options: StatusOption[] =  DictStatus;
   //optionSelected: 'Todos'
-  opts: string[];
+  options: TypeRead[];
 
   garments: GarmentMin[];
 
@@ -47,8 +48,8 @@ export class CatalogueComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.opts = this.configurationTypesService.categoryTypes;
-    this.opts.push('mamarre mamarre');
+    this.options = this.configurationTypesService.categoryTypes;
+    this.optionSelected = this.options[this.options.length - 1];
     this.getAllGarments(true);
     this.debounceSearch();
 
@@ -57,17 +58,12 @@ export class CatalogueComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getAllGarments(firstLoad?: boolean, searchBy?: string): void {
+  private getAllGarments(firstLoad?: boolean): void {
     this.firstLoad = firstLoad ?? false;
     this.isLoading = true;
+    const cleanSearchBy = this.searchBy?.trim().toLowerCase();
 
-    //let cleanSearchBy: string;
-    let cleanFilterCategory: string;
-
-    //if(this.searchBy != null) cleanSearchBy = this.searchBy.trim().toLowerCase();
-    if(this.optionSelected.value != null) cleanFilterCategory = this.optionSelected.value.toString();
-
-    this._garmentsSub = this.garmentService.getAllByQuery(searchBy, cleanFilterCategory).subscribe(
+    this._garmentsSub = this.garmentService.getAllByQuery(cleanSearchBy, this.optionSelected.value).subscribe(
       (res) => {
         this.garments = res;
         this.firstLoad = false;
@@ -91,8 +87,9 @@ export class CatalogueComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(800))
       .subscribe(
         () => {
-          const cleanString = this.searchBy.trim().toLowerCase();
-          this.getAllGarments(false, cleanString);
+          let cleanString: string = null;
+          if(this.searchBy != null) cleanString = this.searchBy.trim().toLowerCase();
+          this.getAllGarments(false);
         }
       );
   }
@@ -101,10 +98,10 @@ export class CatalogueComponent implements OnInit, OnDestroy {
     this.showOptions = !this.showOptions;
   }
 
-  selectFilterStatus(status: StatusOption): void {
+  selectFilterStatus(categorie: TypeRead): void {
     this.showOptions = false;
-    this.optionSelected = status;
-    //this.getAllOrders();
+    this.optionSelected = categorie;
+    this.getAllGarments(false);
   }
 
   ngOnDestroy(): void {
