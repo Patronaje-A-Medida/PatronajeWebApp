@@ -186,3 +186,101 @@ button {
 .table-body-cell {
   @apply p-3 text-xs md:text-sm lg:text-base;
 }
+
+/* ------------------ predefined styles ------------------ */
+
+/* base */
+.basic-container {
+  @apply px-2 sm:px-6 lg:px-8 font-montserrat;
+}
+
+.circle-color-garment {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+/* query filter */
+.query-container {
+  @apply flex flex-row justify-between gap-x-2 md:gap-x-8 xl:gap-x-16
+      py-2 h-14;
+}
+
+.search-container {
+  width: 82.5%;
+  @apply flex flex-row relative;
+}
+
+.search-input {
+  border: solid 1.5px;
+  @apply w-full py-2 pl-10 pr-2 
+      font-montserrat text-xs md:text-base text-skin-dark-gray 
+    border-gray-300 rounded-lg shadow-sm;
+}
+
+.search-input:focus {
+  outline: none;
+  border: solid 1.5px;
+  @apply border-skin-primary-base;
+}
+
+.search-input:disabled {
+  @apply shadow-none bg-gray-100;
+}
+
+.search-icon {
+  top: 20%;
+  @apply absolute left-4 text-base text-gray-400;
+}
+
+.filter-container {
+  z-index: 1;
+  @apply flex-1 pt-0 pl-0 md:pl-12 xl:pl-20 
+      font-lato text-sm;
+}
+
+.filter-btn {
+  min-width: 128px;
+  border-width: 1.5px;
+  transition: 0.4s;
+  @apply flex flex-row gap-x-1 justify-between items-center text-skin-primary-base
+      px-4 h-full w-full border-skin-primary-base border-solid
+      rounded shadow bg-white hover:bg-skin-primary-50;
+}
+
+.filter-btn:disabled {
+  border-width: 1.5px;
+  @apply bg-gray-100 border-gray-300 shadow-none text-gray-400;
+}
+
+.filter-options {
+  transition: 0.3s;
+  border-width: 1.5px;
+  @apply flex flex-col gap-y-1 rounded bg-white
+      border-skin-primary-base border-solid mt-4 py-3 relative;
+}
+
+.filter-options::after {
+  content: "";
+  border-radius: 2px;
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+  top: -1.25px;
+  @apply absolute right-2 bg-white
+    w-4 h-4 border-skin-primary-base border-solid;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rotate-up {
+  transition: 0.5s;
+  transform: rotate(180deg);
+}
+
+.rotate-down {
+  transition: 0.5s;
+}
+
+.status-option {
+  transition: 0.3s;
+  @apply cursor-pointer px-2 py-1 hover:bg-skin-primary-50;
+}

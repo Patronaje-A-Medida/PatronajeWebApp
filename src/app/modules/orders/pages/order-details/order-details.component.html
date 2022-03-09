@@ -1,6 +1,6 @@
 <app-tittle-page [tittle]="'Detalles del Pedido'"></app-tittle-page>
 
-<div class="details-container">
+<div class="basic-container">
     <div class="details-card" *ngIf="orderDetail">
         <div>
             <div class="flex justify-between mb-3">
@@ -53,7 +53,7 @@
                         
                         <div>
                             <p class="detail-label">Color seleccionado</p>
-                            <div class="circle" [style]="garmentColor(orderDetail.garment.color)"></div>
+                            <div class="circle-color-garment" [style]="garmentColor(orderDetail.garment.color)"></div>
                         </div>
                     </div>
         
