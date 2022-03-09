@@ -22,7 +22,7 @@ export class GarmentsService {
     private userDataService: UserDataService,
   ) { }
 
-  getAllByQuery(filterString?: string, category?: string): Observable<GarmentMin[]>{
+  getAllByQuery(filterString?: string, category?: number): Observable<GarmentMin[]>{
     const query: GarmentQuery = {
       //atelierId: this.userDataService.atelierId,
       atelierId: 1,
