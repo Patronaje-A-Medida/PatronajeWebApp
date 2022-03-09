@@ -1,6 +1,6 @@
 export interface OrderQuery {
   atelierId: number;
-  orderStatus?: string;
+  orderStatus?: number;
   filterString?: string;
   pageNumber?: number;
   pageSize?: number;
