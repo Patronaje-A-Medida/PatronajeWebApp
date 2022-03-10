@@ -5,46 +5,6 @@
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 }
 
-.garment-card {
-  height: 26rem;
-  width: 18rem;
-  @apply bg-white rounded-md shadow;
-
-  img {
-    @apply rounded-t-md bg-white;
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-  }
-}
-
-.garment-card-info {
-  height: 6rem;
-  @apply p-2 border-gray-300 border-t border-solid flex flex-col gap-y-1;
-}
-
-.main-info {
-  @apply font-montserrat font-semibold;
-}
-
-.sub-info {
-  @apply font-lato text-sm;
-}
-
-/*----*/
-
-.circle-available {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.glowing-available {
-  background-color: var(--color-triadic-B-300);
-  box-shadow: 0 0 7px 1px var(--color-triadic-B-300);
-}
-
-.glowing-unavailable {
-  background-color: var(--color-analogous-A-400);
-  box-shadow: 0 0 7px 1px var(--color-analogous-A-400);
+.min-h-90 {
+  min-height: 90vh;
 }

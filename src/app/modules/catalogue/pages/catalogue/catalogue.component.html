@@ -1,6 +1,6 @@
 <app-tittle-page [tittle]="'Catálogo de Prendas'"></app-tittle-page>
 
-<div class="basic-container">
+<div class="basic-container" [ngClass]="firstLoad ? 'min-h-0' : 'min-h-90'">
     <div class="query-container">
         <div class="search-container">
             <i class="fas fa-search search-icon"></i>
@@ -18,21 +18,11 @@
         </div>
     </div>
 
-    <div class="garments-container">
+    <div class="garments-container" #garmentsCard *ngIf="!firstLoad">
 
-        <div *ngFor="let gmt of garments" class="garment-card">
-            <div style="height: 20rem;">
-                <img [src]="gmt.imageUrl" alt="">
-            </div>
-            <div class="garment-card-info">
-                <div class="flex justify-between items-center">
-                    <p class="main-info">{{gmt.nameGarment}}</p>
-                    <div class="circle-available" [ngClass]="gmt.available ? 'glowing-available' : 'glowing-unavailable'"></div>
-                </div>
-                <p class="sub-info">{{gmt.codeGarment}}</p>
-                <p class="sub-info">{{gmt.averagePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
-            </div>
-        </div>
+        <ng-container *ngFor="let gmt of garments">
+            <app-garment-card [garment]="gmt"></app-garment-card>
+        </ng-container>
 
         <!--<div class="garment-card">
             <div style="height: 20rem;">
@@ -61,16 +51,15 @@
 
             </div>
         </div>-->
-
-        
-
     </div>
 
-
+    <div *ngIf="isLoadingMore" class="h-28">
+        <app-spinner  [diameter]="'48px'"></app-spinner>
+    </div>
     
 </div>
 
-<div *ngIf="isLoading"  class="h-96">
+<div *ngIf="isLoading && firstLoad"  class="h-96">
     <app-spinner  [diameter]="'48px'"></app-spinner>
 </div>
 
