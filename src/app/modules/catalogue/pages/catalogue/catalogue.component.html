@@ -1,3 +1,66 @@
-<div class="pt-96 bg-gray-300">
-    <p>catalogue works! que fue kaumzaaaaaaa</p>
+<app-tittle-page [tittle]="'Catálogo de Prendas'"></app-tittle-page>
+
+<div class="basic-container" [ngClass]="firstLoad ? 'min-h-0' : 'min-h-90'">
+    <div class="query-container">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input class="search-input" type="text" placeholder="Buscar por código o nombre de la prenda" 
+                #inputSearchBy [(ngModel)]="searchBy" name="searchBy" [disabled]="firstLoad"/>
+        </div>
+        <div class="filter-container" #containerFilterCategory>
+            <button class="filter-btn" (click)="handleFilterOptions()" [disabled]="firstLoad">
+                <span class="font-semibold">{{optionSelected.description}}</span>
+                <i class="fas fa-chevron-down" [ngClass]="showOptions ? 'rotate-up' : 'rotate-down'"></i>
+            </button>
+            <div *ngIf="showOptions" class="filter-options" [ngClass]="showOptions ? 'opacity-100' : 'opacity-0'">
+                <a class="status-option" *ngFor="let opt of options" (click)="selectFilterStatus(opt)">{{opt.description | titlecase}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="garments-container" #garmentsCard *ngIf="!firstLoad">
+
+        <ng-container *ngFor="let gmt of garments">
+            <app-garment-card [garment]="gmt"></app-garment-card>
+        </ng-container>
+
+        <!--<div class="garment-card">
+            <div style="height: 20rem;">
+                <img src="https://i.linio.com/p/8308a8dc27f610d2be03b4c20a65be03-product.jpg" alt="">
+            </div>
+            <div style="height: 6rem; border-top: solid 1px purple;">
+
+            </div>
+        </div>
+        
+
+        <div class="garment-card">
+            <div style="height: 20rem;">
+                <img src="https://d1fufvy4xao6k9.cloudfront.net/feed/img/man_trenchcoat/152805/front.png" alt="">
+            </div>
+            <div style="height: 6rem; border-top: solid 1px purple;">
+
+            </div>
+        </div>
+
+        <div class="garment-card">
+            <div style="height: 20rem;">
+                <img src="https://barracamalvin.com.uy/addons/default/themes/sl/img/image-not-found.png" alt="">
+            </div>
+            <div style="height: 6rem; border-top: solid 1px purple;">
+
+            </div>
+        </div>-->
+    </div>
+
+    <div *ngIf="isLoadingMore" class="h-28">
+        <app-spinner  [diameter]="'48px'"></app-spinner>
+    </div>
+    
 </div>
+
+<div *ngIf="isLoading && firstLoad"  class="h-96">
+    <app-spinner  [diameter]="'48px'"></app-spinner>
+</div>
+
+<app-snack-bar [(showSnack)]="showAlert" [message]="messageAlert" [type]="typeAlert"></app-snack-bar>

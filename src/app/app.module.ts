@@ -23,6 +23,7 @@ import { CoreModule } from './core/core.module';
 import { UserDataService } from './core/services/user-data.service';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
+import { ConfigurationTypesService } from './core/services/configuration-types.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,12 @@ import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
   providers: [
     UserDataService,
     //{ provide: APP_INITIALIZER, useFactory: appInilize, multi: true, deps: [UserDataService]} -> averiguar mejor
+    { 
+      provide: APP_INITIALIZER, 
+      useFactory: (cts: ConfigurationTypesService) => () => cts.getAll(), 
+      deps: [ConfigurationTypesService], 
+      multi: true 
+    },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true },
   ],

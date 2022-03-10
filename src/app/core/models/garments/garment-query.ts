@@ -1,7 +1,7 @@
-export interface OrderQuery {
+export interface GarmentQuery {
   atelierId: number;
-  orderStatus?: number;
   filterString?: string;
+  category?: number;
   pageNumber?: number;
   pageSize?: number;
 }

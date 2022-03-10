@@ -1,0 +1,10 @@
+.garments-container {
+  @apply py-2 grid gap-x-4 gap-y-8 justify-items-center items-center;
+  grid-auto-flow: dense;
+  grid-auto-rows: 26rem;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+}
+
+.min-h-90 {
+  min-height: 90vh;
+}

@@ -26,7 +26,7 @@ export class OrdersService {
     pageNumber: number = 1, 
     pageSize: number = 10,
     filterString?: string,
-    orderStatus?: string,
+    orderStatus?: number,
   ): Observable<PagedResponse<OrderRead>> {
     const query: OrderQuery = {
       atelierId: 1,

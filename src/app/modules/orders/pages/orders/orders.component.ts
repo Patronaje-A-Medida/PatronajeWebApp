@@ -1,13 +1,14 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { TypeRead } from 'src/app/core/models/configuration-types/type-read';
 import { PagedResponse } from 'src/app/core/models/generics/paged-response';
 import { StatusOption } from 'src/app/core/models/generics/status-option';
 import { OrderDetailMin } from 'src/app/core/models/orders/order-detail-min';
 import { OrderRead } from 'src/app/core/models/orders/order-read';
+import { ConfigurationTypesService } from 'src/app/core/services/configuration-types.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
-import { DictStatus } from 'src/app/core/utils/status.dictionary';
 import { DocumentEventsService } from 'src/app/shared/services/document-events.service';
 
 @Component({
@@ -31,8 +32,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   searchBy: string;
   showOptions: boolean = false;
-  optionSelected: StatusOption = {key: 'Todos', value: null};
-  options: StatusOption[] =  DictStatus;
+  optionSelected: TypeRead;
+  options: TypeRead[];
 
   orders: PagedResponse<OrderRead>;
   pageNumber: number = 1;
@@ -46,12 +47,15 @@ export class OrdersComponent implements OnInit, OnDestroy {
   constructor(
     private orderService: OrdersService,
     private docEventsService: DocumentEventsService,
+    private configurationTypesService: ConfigurationTypesService,
     private route: ActivatedRoute,
     private router: Router,
   ) { 
   }
   
   ngOnInit(): void {
+    this.options = this.configurationTypesService.orderStatusTypes;
+    this.optionSelected = this.options[this.options.length - 1];
     this.getAllOrders(true);
     this.debounceSearch();
 
@@ -64,14 +68,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
   private getAllOrders(firstLoad?: boolean): void {
     this.firstLoad = firstLoad ?? false;
     this.isLoading = true;
-
-    let cleanSearchBy: string;
-    let cleanFilterStatus: string;
-
-    if(this.searchBy != null) cleanSearchBy = this.searchBy.trim().toLowerCase();
-    if(this.optionSelected.value != null) cleanFilterStatus = this.optionSelected.value.toString();
+    const cleanSearchBy = this.searchBy?.trim().toLowerCase();
     
-    this._ordersSub = this.orderService.getAllByQuery(this.pageNumber, this.pageSize, cleanSearchBy, cleanFilterStatus).subscribe(
+    this._ordersSub = this.orderService.getAllByQuery(this.pageNumber, this.pageSize, cleanSearchBy, this.optionSelected.value).subscribe(
       (res) => {
         this.orders = res;
         this.firstLoad = false;
@@ -110,7 +109,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     );
   }
 
-  selectFilterStatus(status: StatusOption): void {
+  selectFilterStatus(status: TypeRead): void {
     this.showOptions = false;
     this.optionSelected = status;
     this.getAllOrders();
