@@ -16,6 +16,8 @@ import { TittlePageComponent } from './components/tittle-page/tittle-page.compon
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { ButtonPrimaryFilledComponent } from './components/button-primary-filled/button-primary-filled.component';
 import { ButtonPrimaryOutlinedComponent } from './components/button-primary-outlined/button-primary-outlined.component';
+import { ModalBaseComponent } from './components/modal-base/modal-base.component';
+import { ButtonLoadingComponent } from './components/button-loading/button-loading.component';
 
 
 
@@ -36,6 +38,8 @@ import { ButtonPrimaryOutlinedComponent } from './components/button-primary-outl
     SpinnerComponent,
     ButtonPrimaryFilledComponent,
     ButtonPrimaryOutlinedComponent,
+    ModalBaseComponent,
+    ButtonLoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,8 @@ import { ButtonPrimaryOutlinedComponent } from './components/button-primary-outl
     SpinnerComponent,
     ButtonPrimaryFilledComponent,
     ButtonPrimaryOutlinedComponent,
+    ModalBaseComponent,
+    ButtonLoadingComponent,
   ]
 })
 export class SharedModule { }
