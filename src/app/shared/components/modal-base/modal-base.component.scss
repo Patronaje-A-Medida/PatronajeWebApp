@@ -1,0 +1,46 @@
+.modal-base {
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.4);
+    visibility: hidden;
+    @apply fixed top-0 left-0 h-screen w-screen
+      flex items-center justify-center content-center opacity-0;
+    transition: opacity ease 0.4s;
+  }
+  
+  .modal-container {
+    @apply flex flex-col bg-white py-8 px-8 rounded-md max-w-lg
+      gap-8;
+  }
+  
+  .modal-body {
+    @apply flex gap-6 items-center;
+  
+    i {
+      font-size: 32px;
+    }
+    p {
+        @apply font-lato text-justify;
+    }
+  }
+  
+  .modal-actions {
+    @apply flex justify-evenly;
+  }
+  
+  .show-modal {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .error-modal {
+    @apply text-red-500;
+  }
+  
+  .success-modal {
+    @apply text-skin-light-green;
+  }
+  
+  .warning-modal {
+    @apply text-yellow-400;
+  }
+  
