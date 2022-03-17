@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { GarmentMin } from '../models/garments/garment-min';
 import { GarmentQuery } from '../models/garments/garment-query';
+import { GarmentWrite } from '../models/garments/garment-write';
 import { PagedResponse } from '../models/generics/paged-response';
 import { IMAGE_NOT_FOUND } from '../utils/assets.constants';
 import { UserDataService } from './user-data.service';
@@ -43,5 +44,13 @@ export class GarmentsService {
         return res;
       })
     );
+  }
+
+  save(body: GarmentWrite): Observable<boolean> {
+    //body.atelierId = this.userDataService.atelierId,
+    body.atelierId = 1
+    console.log('service');
+    console.log(body);
+    return this.http.post<boolean>(`${this.URI_GARMENTS}/save`, body);
   }
 }
