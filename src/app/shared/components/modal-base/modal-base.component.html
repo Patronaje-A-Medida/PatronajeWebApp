@@ -1,0 +1,23 @@
+<div class="modal-base" [ngClass]="{'show-modal': showModal}">
+    <div class="modal-container">
+        <div class="modal-body">
+            <i *ngIf="type === 'error'" class="fas fa-times-circle error-modal"></i>
+            <i *ngIf="type === 'success'" class="fas fa-check-circle success-modal"></i>
+            <i *ngIf="type === 'warning'" class="fas fa-exclamation-circle warning-modal"></i>
+            <div>
+                <ng-container *ngIf="additionalMessage">
+                    <p>{{additionalMessage}}</p>
+                    <br>
+                </ng-container>
+                <p>{{message}}</p>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <app-button-primary-filled [text]="'Aceptar'" (onClick)="acceptModal()">
+            </app-button-primary-filled>
+
+            <app-button-primary-outlined [text]="'Cancelar'" (onClick)="cancelModal()">
+            </app-button-primary-outlined>
+        </div>
+    </div>
+</div>

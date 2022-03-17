@@ -1,6 +1,6 @@
-<app-tittle-page [tittle]="'Catálogo de Prendas'"></app-tittle-page>
+<div class="basic-container" [ngClass]="firstLoad ? 'min-h-0' : 'min-h-95'">
+    <app-tittle-page [tittle]="'Catálogo de Prendas'"></app-tittle-page>
 
-<div class="basic-container" [ngClass]="firstLoad ? 'min-h-0' : 'min-h-90'">
     <div class="query-container">
         <div class="search-container">
             <i class="fas fa-search search-icon"></i>
@@ -16,6 +16,9 @@
                 <a class="status-option" *ngFor="let opt of options" (click)="selectFilterStatus(opt)">{{opt.description | titlecase}}</a>
             </div>
         </div>
+        <!--<div class="flex flex-1 items-stretch">
+            <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-plus'" ></app-button-primary-outlined>
+        </div>-->
     </div>
 
     <div class="garments-container" #garmentsCard *ngIf="!firstLoad">
@@ -53,11 +56,15 @@
         </div>-->
     </div>
 
-    <div *ngIf="isLoadingMore" class="h-28">
+    <div *ngIf="isLoadingMore" class="h-36">
         <app-spinner  [diameter]="'48px'"></app-spinner>
     </div>
-    
 </div>
+
+<!-- hacerlo componente -->
+<button class="floating-btn" (click)="navigateToCreate()">
+    <i class="fas fa-plus"></i>
+</button>
 
 <div *ngIf="isLoading && firstLoad"  class="h-96">
     <app-spinner  [diameter]="'48px'"></app-spinner>

@@ -191,7 +191,7 @@ button {
 
 /* base */
 .basic-container {
-  @apply px-2 sm:px-6 lg:px-8 font-montserrat;
+  @apply px-2 sm:px-6 lg:px-8 pb-2 font-montserrat;
 }
 
 .circle-color-garment {
@@ -282,5 +282,34 @@ button {
 
 .status-option {
   transition: 0.3s;
-  @apply cursor-pointer px-2 py-1 hover:bg-skin-primary-50;
+  @apply cursor-pointer px-2 py-1 hover:bg-skin-primary-100;
+}
+
+/* form inputs */
+.form-label {
+  @apply block font-montserrat text-sm font-medium text-gray-500;
+}
+
+.form-input {
+  border: solid 1.5px;
+  @apply w-full mt-1 p-2 font-lato text-base text-gray-700 border-gray-300 rounded-lg shadow-sm;
+}
+
+.form-input:focus {
+  outline: none;
+  border: solid 1.5px;
+  @apply border-skin-primary-base;
+}
+
+.is-invalid {
+  @apply border-red-500;
+}
+
+.invalid-feedback {
+  @apply text-red-500 text-xs font-sans;
+}
+
+/* cards */
+.basic-card {
+  @apply bg-white rounded-lg shadow-md text-base py-6 px-4;
 }

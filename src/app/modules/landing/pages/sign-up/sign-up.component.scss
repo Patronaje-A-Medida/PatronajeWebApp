@@ -49,17 +49,6 @@
   @apply block font-montserrat text-sm font-medium text-skin-brown;
 }
 
-.form-input {
-  border: solid 1.5px;
-  @apply w-full mt-1 p-2 font-lato text-base text-skin-dark-gray border-gray-300 rounded-lg shadow-sm;
-}
-
-.form-input:focus {
-  outline: none;
-  border: solid 1.5px;
-  @apply border-skin-orange;
-}
-
 .form-btn-group {
   @apply m-auto flex gap-x-4;
 }
@@ -76,12 +65,4 @@
   .signup-img {
     max-height: 300px;
   }
-}
-
-.is-invalid {
-  @apply border-red-500;
-}
-
-.invalid-feedback {
-  @apply text-red-500 text-xs;
 }

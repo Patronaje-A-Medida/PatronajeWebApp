@@ -52,4 +52,12 @@ export class ConfigurationTypesService {
     orderStatus.push({key: 'todos', value: null, description: 'Todos'});
     return orderStatus;
   }
+
+  get fabricTypes(): TypeRead[] {
+    return this._configurationTypes.fabrics;
+  }
+
+  get occasionTypes(): TypeRead[] {
+    return this._configurationTypes.occasions;
+  }
 }

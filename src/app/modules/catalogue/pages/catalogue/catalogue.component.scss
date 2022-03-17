@@ -5,6 +5,28 @@
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 }
 
-.min-h-90 {
-  min-height: 90vh;
+/*.search-container {
+  width: 75%;
+}
+
+.filter-container {
+  @apply pl-0;// md:pl-8 xl:pl-16
+}*/
+
+.floating-btn {
+  width: 48px;
+  height: 48px;
+  transition: 0.4s;
+  @apply fixed right-2 sm:right-6 lg:right-8 bottom-6 sm:bottom-12
+    text-white text-2xl bg-skin-primary-base rounded-full
+      shadow-md; //ml-2 sm:ml-6 lg:ml-8;
+}
+
+.floating-btn:hover {
+  height: 54px;
+  width: 54px;
+}
+
+.min-h-95 {
+  min-height: 95vh;
 }
