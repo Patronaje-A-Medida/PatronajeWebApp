@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { TypeRead } from 'src/app/core/models/configuration-types/type-read';
 import { GarmentMin } from 'src/app/core/models/garments/garment-min';
-import { PagedResponse } from 'src/app/core/models/generics/paged-response';
 import { ConfigurationTypesService } from 'src/app/core/services/configuration-types.service';
 import { GarmentsService } from 'src/app/core/services/garments.service';
 import { DocumentEventsService } from 'src/app/shared/services/document-events.service';
@@ -51,20 +51,22 @@ export class CatalogueComponent implements OnInit, OnDestroy {
     private garmentService: GarmentsService,
     private docEventsService: DocumentEventsService,
     private configurationTypesService: ConfigurationTypesService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.garments = [];
     this.options = this.configurationTypesService.categoryTypes;
     this.optionSelected = this.options[this.options.length - 1];
+
     this.getAllGarments(true);
     this.debounceSearch();
+    this.loadGarmentsOnScroll();
 
     this._toogleFilterSub = this.docEventsService.documentClickedTarget.subscribe(
       target => this.documentClickListener(target)
     );
-
-    this.testScroll();
   }
 
   private getAllGarments(firstLoad?: boolean): void {
@@ -104,17 +106,7 @@ export class CatalogueComponent implements OnInit, OnDestroy {
       );
   }
 
-  handleFilterOptions(): void {
-    this.showOptions = !this.showOptions;
-  }
-
-  selectFilterStatus(categorie: TypeRead): void {
-    this.showOptions = false;
-    this.optionSelected = categorie;
-    this.getAllGarments(false);
-  }
-
-  testScroll() {
+  private loadGarmentsOnScroll() {
     this._scrollSub = fromEvent(document, 'scroll')
       .pipe(
         map((e) => {
@@ -139,6 +131,20 @@ export class CatalogueComponent implements OnInit, OnDestroy {
           } 
         }
       );
+  }
+
+  handleFilterOptions(): void {
+    this.showOptions = !this.showOptions;
+  }
+
+  selectFilterStatus(categorie: TypeRead): void {
+    this.showOptions = false;
+    this.optionSelected = categorie;
+    this.getAllGarments(false);
+  }
+
+  navigateToCreate(): void {
+    this.router.navigate(['/catalogue/create'], {relativeTo: this.route});
   }
 
   ngOnDestroy(): void {
