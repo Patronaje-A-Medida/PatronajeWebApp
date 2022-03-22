@@ -4,6 +4,7 @@ import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { TypeRead } from 'src/app/core/models/configuration-types/type-read';
 import { GarmentMin } from 'src/app/core/models/garments/garment-min';
+import { OptionCheck } from 'src/app/core/models/generics/option-check';
 import { ConfigurationTypesService } from 'src/app/core/services/configuration-types.service';
 import { GarmentsService } from 'src/app/core/services/garments.service';
 import { DocumentEventsService } from 'src/app/shared/services/document-events.service';
@@ -34,6 +35,12 @@ export class CatalogueComponent implements OnInit, OnDestroy {
 
   optionSelected: TypeRead;
   options: TypeRead[];
+  categoriesSelected: number[];
+  occasionsSelected: number[];
+  availabilitiesSelected: boolean[];
+
+  categories: OptionCheck[];
+  occasions: OptionCheck[];
 
   garments: GarmentMin[]
   pageNumber: number = 1;
@@ -57,8 +64,21 @@ export class CatalogueComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.garments = [];
-    this.options = this.configurationTypesService.categoryTypes;
+    this.options = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
+    this.options.push({key: 'todos', value: null, description: 'Todos'});
+
+    //this.categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
+    //this.categories.push({key: 'todos', value: null, description: 'Todos'});
+
+    //this.occasions = Array.from<TypeRead>(this.configurationTypesService.occasionTypes);
+    //this.categories.push({key: 'todos', value: null, description: 'Todos'});
+
+    this.buildOptions();
+
     this.optionSelected = this.options[this.options.length - 1];
+
+    this.categoriesSelected = [];
+    this.occasionsSelected = [];
 
     this.getAllGarments(true);
     this.debounceSearch();
@@ -69,15 +89,44 @@ export class CatalogueComponent implements OnInit, OnDestroy {
     );
   }
 
+  private buildOptions() {
+    const categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
+    this.categories = categories.map(e => {
+      return {
+        ...e,
+        checked: false,
+      } as OptionCheck
+    });
+
+    const occasions = Array.from<TypeRead>(this.configurationTypesService.occasionTypes);
+    this.occasions = occasions.map(e => {
+      return {
+        ...e,
+        checked: false,
+      } as OptionCheck
+    });
+  }
+
   private getAllGarments(firstLoad?: boolean): void {
     this.firstLoad = firstLoad ?? false;
     this.isLoading = true;
     const cleanSearchBy = this.searchBy?.trim().toLowerCase();
 
-    this._garmentsSub = this.garmentService.getAllByQuery(this.pageNumber, this.pageSize, cleanSearchBy, this.optionSelected.value).subscribe(
+    this._garmentsSub = this.garmentService.getAllByQuery(
+      this.pageNumber, 
+      this.pageSize, 
+      this.categoriesSelected,
+      this.occasionsSelected,
+      cleanSearchBy, 
+      this.optionSelected.value
+      ).subscribe(
       (res) => {
         this.maxPage = res.maxPage;
-        this.garments.push(...res.items)
+        //this.garments.push(...res.items)
+        if(this.pageNumber == 1)
+          this.garments = res.items;
+        else
+          this.garments.push(...res.items);
         this.firstLoad = false;
         this.isLoading = false;
         this.canLoadMore = true;
@@ -145,6 +194,22 @@ export class CatalogueComponent implements OnInit, OnDestroy {
 
   navigateToCreate(): void {
     this.router.navigate(['/catalogue/create'], {relativeTo: this.route});
+  }
+
+  applyFilters(): void {
+    this.categoriesSelected = this.categories.filter(e => e.checked).map(e => e.value);
+    this.occasionsSelected = this.occasions.filter(e => e.checked).map(e => e.value);
+    this.pageNumber = 1;
+    this.getAllGarments(false);
+  }
+
+  clearFilters(): void {
+    this.categoriesSelected = [];
+    this.occasionsSelected = [];
+    this.categories.forEach(e => e.checked = false);
+    this.occasions.forEach(e => e.checked = false);
+    this.pageNumber = 1;
+    this.getAllGarments(false);
   }
 
   ngOnDestroy(): void {

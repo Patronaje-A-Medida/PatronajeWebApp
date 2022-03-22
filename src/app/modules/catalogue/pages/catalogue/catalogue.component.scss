@@ -5,27 +5,38 @@
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 }
 
-/*.search-container {
-  width: 75%;
+.filter-options {
+  min-width: 300px;
+  @apply absolute right-0 px-2 gap-y-4 max-w-xl;
 }
 
-.filter-container {
-  @apply pl-0;// md:pl-8 xl:pl-16
-}*/
+.title-filter {
+  @apply font-semibold text-base;
+}
+
+.group-options {
+  @apply flex mt-2 flex-wrap;
+}
+
+.option-checkbox {
+  @apply flex gap-x-1 items-center mr-4 mb-2;
+}
+
+.group-btn {
+  @apply flex items-center gap-x-4 justify-center;
+}
 
 .floating-btn {
-  width: 48px;
-  height: 48px;
   transition: 0.4s;
-  @apply fixed right-2 sm:right-6 lg:right-8 bottom-6 sm:bottom-12
-    text-white text-2xl bg-skin-primary-base rounded-full
+  @apply fixed right-2 w-12 h-12 md:w-14 md:h-14 sm:right-6 lg:right-8 bottom-6 sm:bottom-12
+    text-white text-2xl bg-skin-triadic-A-600 rounded-full
       shadow-md; //ml-2 sm:ml-6 lg:ml-8;
 }
 
 .floating-btn:hover {
-  height: 54px;
-  width: 54px;
+  @apply w-14 h-14 md:w-16 md:h-16;
 }
+
 
 .min-h-95 {
   min-height: 95vh;

@@ -54,7 +54,8 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
-    this.options = this.configurationTypesService.orderStatusTypes;
+    this.options = Array.from<TypeRead>(this.configurationTypesService.orderStatusTypes);
+    this.options.push({key: 'todos', value: null, description: 'Todos'});
     this.optionSelected = this.options[this.options.length - 1];
     this.getAllOrders(true);
     this.debounceSearch();
@@ -144,8 +145,14 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   private computeItems() {
-    this.fromItem = (this.orders.itemsPerPage * this.orders.pageNumber) - (this.orders.itemsPerPage - 1);
-    this.toItem = this.fromItem + this.orders.items.length - 1;
+    if(this.orders.items.length == 0) {
+      this.fromItem = 0;
+      this.toItem = 0;
+    }
+    else {
+      this.fromItem = (this.orders.itemsPerPage * this.orders.pageNumber) - (this.orders.itemsPerPage - 1);
+      this.toItem = this.fromItem + this.orders.items.length - 1;
+    }
   }
 
   ngOnDestroy(): void {
