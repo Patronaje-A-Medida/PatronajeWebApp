@@ -144,7 +144,7 @@ input[type="color"] {
   img {
     height: 100%;
     width: 100%;
-    @apply rounded-md hover:opacity-75;
+    @apply rounded-md hover:opacity-75 object-contain;
   }
 }
 

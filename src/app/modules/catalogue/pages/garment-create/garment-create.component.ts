@@ -47,6 +47,7 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
   garmentForm: FormGroup;
   newGarment: GarmentWrite;
   isSaving: boolean = false;
+  canSave: boolean;
   
   showModal:boolean = false;;
   typeModal: string;
@@ -70,10 +71,9 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.categories = this.configurationTypesService.categoryTypes;
-    this.categories.pop();
-    this.fabrics = this.configurationTypesService.fabricTypes;
-    this.occasions = this.configurationTypesService.occasionTypes;
+    this.categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
+    this.fabrics = Array.from<TypeRead>(this.configurationTypesService.fabricTypes);
+    this.occasions = Array.from<TypeRead>(this.configurationTypesService.occasionTypes);
 
     this.buildGarmentForm();
 
@@ -114,8 +114,7 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
     this.uploadImageFiles = [];
     this.uploadPatterns = [];
     this.uploadPatternFiles = [];
-    this.categories = this.configurationTypesService.categoryTypes;
-    this.categories.pop();
+    this.categories = this.categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
   }
 
   selectItem(item: TypeRead, feature: number): void {
@@ -330,41 +329,62 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
     });
     
 
-    this.newGarment.features.push(...fabricFeatures, ...occasionFeatures, ...colorFeatures);
+    this.newGarment.features.push(
+      ...fabricFeatures, 
+      ...occasionFeatures, 
+      ...colorFeatures
+    );
     this.newGarment.images = this.uploadImageFiles;
     this.newGarment.patterns = this.uploadPatternFiles;
     
     
 
-    this.typeModal = 'warning',
-    this.additionalMessageModal = this.buildAdditionalInfoModal();
-    this.messageModal = '¿Estás seguro de agregar esta prenda al catálogo?'
+    //this.typeModal = 'warning',
+    //this.additionalMessageModal = this.buildAdditionalInfoModal();
+    //this.messageModal = '¿Estás seguro de agregar esta prenda al catálogo?'
+    this.buildInfoModal();
     this.showModal = true;
+    
   }
 
-  private buildAdditionalInfoModal(): string {
+  private buildInfoModal(): void {
     const numImg = this.newGarment.images.length;
     const numPttrn = this.newGarment.patterns.length;
 
     if(numImg == 0 && numPttrn == 0) {
-      return 'La prenda a agregar no cuenta con imágenes para el catálogo y patrones de confección para el escalado a medida del cliente.';
+      this.typeModal = 'error';
+      this.messageModal = 'La prenda a agregar no cuenta con imágenes para el catálogo y patrones de confección para el escalado a medida del cliente.';
+      this.canSave = false;
+      return;
     }
 
     if(numImg == 0) {
-      return 'La prenda a agregar no cuenta con imágenes para el catálogo.';
+      this.typeModal = 'error';
+      this.messageModal = 'La prenda a agregar no cuenta con imágenes para el catálogo.';
+      this.canSave = false;
+      return;
     }
 
     if(numPttrn == 0) {
-      return 'La prenda a agregar no cuenta con patrones de confección para el escalado a medida del cliente.';
+      this.typeModal = 'error';
+      this.messageModal = 'La prenda a agregar no cuenta con patrones de confección para el escalado a medida del cliente.';
+      this.canSave = false;
+      return;
     }
 
+    this.messageModal = '¿Estás seguro de agregar esta prenda al catálogo?';
+    this.typeModal = 'warning'
+    this.canSave = true;
+    return;
   }
 
   onAcceptModal(): void {
+    if(!this.canSave) return;
+    
     this.isSaving = true;
     this.garmentService.save(this.newGarment).subscribe(
       res => {
-        this.messageAlert = 'Predan agregada al catálogo con éxito';
+        this.messageAlert = 'Prenda agregada al catálogo con éxito';
         this.typeAlert = 'success';
         this.showAlert = true;
         this.isSaving = false;
