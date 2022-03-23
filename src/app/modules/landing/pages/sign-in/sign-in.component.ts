@@ -62,7 +62,7 @@ export class SignInComponent implements OnInit {
     this.authService.signInUser(this.userLogin).subscribe(
       (_) => {
         this.isLoading = false;
-        this.navigateTo('dashboard');
+        this.navigateTo('orders');
       },
       (err) => {
         this.messageAlert = err.message;
