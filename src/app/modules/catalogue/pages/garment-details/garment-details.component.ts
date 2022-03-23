@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GarmentRead } from 'src/app/core/models/garments/garment-read';
@@ -9,25 +10,27 @@ import { GarmentsService } from 'src/app/core/services/garments.service';
   templateUrl: './garment-details.component.html',
   styleUrls: ['./garment-details.component.scss']
 })
-export class GarmentDetailsComponent implements OnInit {
+export class GarmentDetailsComponent implements OnInit, OnDestroy {
 
   isLoading: boolean = false;
+  showZoomImage: boolean = false;
+
   showAlert: boolean;
   messageAlert: string;
   typeAlert: string;
 
-
+  selectedImageToZoom: string;
   codeGarment: string
   garmentDetail: GarmentRead;
 
   private _selectedImage: string;
-
   private _garmentDetial$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private garmentService: GarmentsService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +79,24 @@ export class GarmentDetailsComponent implements OnInit {
   borderImagePreview(image: string): boolean {
     if(image === this._selectedImage) return true;
     return false;
+  }
+
+  zoomSelectedImage(img: string) {
+    this.showZoomImage = true;
+    this.selectedImageToZoom = img;
+  }
+
+  closeZoom() {
+    this.showZoomImage = false;
+    this.selectedImageToZoom = '';
+  }
+
+  navigateToBack(): void {
+    this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this._garmentDetial$.unsubscribe();
   }
 
 }
