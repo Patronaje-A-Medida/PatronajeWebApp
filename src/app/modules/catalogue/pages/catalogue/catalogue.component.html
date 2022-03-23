@@ -9,51 +9,57 @@
         </div>
         <div class="filter-container" #containerFilterCategory>
             <button class="filter-btn" (click)="handleFilterOptions()" [disabled]="firstLoad">
-                <span class="font-semibold">{{optionSelected.description}}</span>
+                <!--<span class="font-semibold">{{optionSelected.description}}</span>-->
+                <span>
+                    <i class="fas fa-filter"></i>
+                    Filtros
+                </span>
                 <i class="fas fa-chevron-down" [ngClass]="showOptions ? 'rotate-up' : 'rotate-down'"></i>
             </button>
             <div *ngIf="showOptions" class="filter-options" [ngClass]="showOptions ? 'opacity-100' : 'opacity-0'">
-                <a class="status-option" *ngFor="let opt of options" (click)="selectFilterStatus(opt)">{{opt.description | titlecase}}</a>
+                <!--<a class="status-option" *ngFor="let opt of options" (click)="selectFilterStatus(opt)">{{opt.description | titlecase}}</a>-->
+                <div>
+                    <p class="title-filter">Categorías</p>
+                    <div class="group-options">
+                        <div *ngFor="let ctg of categories" class="option-checkbox">
+                            <input type="checkbox" [name]="ctg.key" [id]="ctg.key" [value]="ctg.value" [(ngModel)]="ctg.checked" />
+                            <label style="white-space: nowrap;" [for]="ctg.key">{{ctg.description}}</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <p class="title-filter">Ocasión/Eventos</p>
+                    <div class="group-options">
+                        <div *ngFor="let ocs of occasions" class="option-checkbox">
+                            <input type="checkbox" [name]="ocs.key" [id]="ocs.key" [value]="ocs.value" [(ngModel)]="ocs.checked" />
+                            <label style="white-space: nowrap;" [for]="ocs.key">{{ocs.description}}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="title-filter">Disponibilidad</p>
+                    <div class="group-options">
+                        <div *ngFor="let av of availabilities" class="option-checkbox">
+                            <input type="checkbox" [name]="av.key" [id]="av.key" [value]="av.value" [(ngModel)]="av.checked" />
+                            <label style="white-space: nowrap;" [for]="av.key">{{av.description}}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-btn">
+                    <app-button-primary-filled [text]="'Aplica filtros'" (onClick)="applyFilters()"></app-button-primary-filled>
+                    <app-button-primary-outlined [text]="'Limpiar filtros'" (onClick)="clearFilters()"></app-button-primary-outlined>
+                </div>
             </div>
         </div>
-        <!--<div class="flex flex-1 items-stretch">
-            <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-plus'" ></app-button-primary-outlined>
-        </div>-->
     </div>
 
     <div class="garments-container" #garmentsCard *ngIf="!firstLoad">
-
         <ng-container *ngFor="let gmt of garments">
             <app-garment-card [garment]="gmt"></app-garment-card>
         </ng-container>
-
-        <!--<div class="garment-card">
-            <div style="height: 20rem;">
-                <img src="https://i.linio.com/p/8308a8dc27f610d2be03b4c20a65be03-product.jpg" alt="">
-            </div>
-            <div style="height: 6rem; border-top: solid 1px purple;">
-
-            </div>
-        </div>
-        
-
-        <div class="garment-card">
-            <div style="height: 20rem;">
-                <img src="https://d1fufvy4xao6k9.cloudfront.net/feed/img/man_trenchcoat/152805/front.png" alt="">
-            </div>
-            <div style="height: 6rem; border-top: solid 1px purple;">
-
-            </div>
-        </div>
-
-        <div class="garment-card">
-            <div style="height: 20rem;">
-                <img src="https://barracamalvin.com.uy/addons/default/themes/sl/img/image-not-found.png" alt="">
-            </div>
-            <div style="height: 6rem; border-top: solid 1px purple;">
-
-            </div>
-        </div>-->
     </div>
 
     <div *ngIf="isLoadingMore" class="h-36">

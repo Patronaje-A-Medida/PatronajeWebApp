@@ -1,1 +1,146 @@
-<p>garment-details works!</p>
+<div class="basic-container">
+    <app-tittle-page [tittle]="'Detalles de la Prenda'"></app-tittle-page>
+
+    <div class="basic-card flex-container-col" *ngIf="garmentDetail">
+        
+
+        <div>
+            <div class="flex-title">
+                <p class="font-semibold">Datos de la prenda</p>
+    
+                <div class="flex gap-x-2 justify-center">
+                    <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
+                    </app-button-primary-outlined>
+                    
+                    <app-button-primary-filled [text]="'Editar'" [icon]="'fas fa-edit'">
+                    </app-button-primary-filled>
+                </div>
+            </div>
+
+            <div class="flex-container-row">
+                <div class="flex-responsive-1 flex-1">
+                    <div class="flex-container-col">
+                        <div>
+                            <p class="detail-label">Código de prenda</p>
+                            <p>{{garmentDetail.codeGarment}}</p>
+                        </div>
+        
+                        <div>
+                            <p class="detail-label">Nombre de prenda</p>
+                            <p>{{garmentDetail.nameGarment}}</p>
+                        </div>
+        
+                        <div>
+                            <p class="detail-label">Costo</p>
+                            <div class="flex gap-x-8">
+                                <div>
+                                    <p class="detail-label">Rango inicial</p>
+                                    <p>{{garmentDetail.firstRangePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
+                                </div>
+            
+                                <div>
+                                    <p class="detail-label">Rango final</p>
+                                    <p>{{garmentDetail.secondRangePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div>
+                            <p class="detail-label">Descripción</p>
+                            <p>{{garmentDetail.description || '-'}}</p>
+                        </div>
+                    </div>
+    
+                    <div class="flex-container-col">
+                        <div>
+                            <p class="detail-label">Categoría</p>
+                            <p>{{garmentDetail.category}}</p>
+                        </div>
+    
+                        <div>
+                            <p class="detail-label">Telas</p>
+                            <ng-container *ngFor="let fbc of garmentDetail.fabrics; let i = index">
+                                <span>{{fbc}}</span>
+                                <span *ngIf="i != (garmentDetail.fabrics.length - 1)">, </span>
+                            </ng-container>
+                        </div>
+    
+                        <div>
+                            <p class="detail-label">Ocasión / eventos</p>
+                            <ng-container *ngFor="let ocs of garmentDetail.occasions; let j = index">
+                                <span>{{ocs}}</span>
+                                <span *ngIf="j != (garmentDetail.occasions.length - 1)">, </span>
+                            </ng-container>
+                        </div>
+        
+                        
+                        <div>
+                            <p class="detail-label">Colores</p>
+                            <div class="flex gap-x-2">
+                                <ng-container *ngFor="let color of garmentDetail.colors; let k = index">
+                                    <div class="circle-color-garment" [style]="colorGarment(color)"></div>
+                                </ng-container>
+                            </div>
+                        </div>
+    
+                        <div>
+                            <p class="detail-label">Disponibilidad</p>
+                            <div class="flex gap-x-2">
+                                <div class="circle-color-garment" [style]="colorAvailable(garmentDetail.available)"></div>
+                                {{garmentDetail.available ? 'Disponible' : 'No disponible'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="image-view">
+                    <div class="basic-card">
+                        <img [src]="selectedImage" alt="" (click)="zoomSelectedImage(selectedImage)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <p class="font-semibold mb-3">Imágenes y Patrones</p>
+
+            <div class="flex-container-col">
+                <div>
+                    <p class="detail-label mb-3">Imágenes de catálogo</p>
+                    <div class="flex-container-preview-imgs" >
+                        <ng-container *ngIf="garmentDetail.images.length > 0; else noimages">
+                            <div class="preview-img" *ngFor="let img of garmentDetail.images" 
+                            [ngClass]="{'border-selected-img': borderImagePreview(img)}"
+                            >
+                                <img [src]="img" (click)="selectImageToView(img)">
+                            </div>
+                        </ng-container>
+                        <ng-template #noimages>
+                            <p class="no-images-text">No posee imágenes de catálogo añadidos</p>
+                        </ng-template>
+                    </div>
+                </div>
+    
+                <div>
+                    <p class="detail-label mb-3">Patrónes de confección</p>
+                    <div class="flex-container-preview-imgs">
+                        <ng-container *ngIf="garmentDetail.patterns.length > 0; else nopatterns">
+                            <div class="preview-img"*ngFor="let pttrn of garmentDetail.patterns" 
+                            [ngClass]="{'border-selected-img': borderImagePreview(pttrn)}"
+                            >
+                                <img [src]="pttrn" (click)="selectImageToView(pttrn)">
+                            </div>
+                        </ng-container>
+                        <ng-template #nopatterns>
+                            <p class="no-images-text">No posee patrones de confección añadidos</p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zoom-img" [ngClass]="{'show-zoom': showZoomImage}" (click)="closeZoom()">
+        <img [src]="selectedImageToZoom" alt="">
+    </div>
+</div>

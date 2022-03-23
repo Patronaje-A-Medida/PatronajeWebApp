@@ -42,15 +42,12 @@ export class ConfigurationTypesService {
   }
 
   get categoryTypes(): TypeRead[] {
-    const categories = this._configurationTypes.categories;
-    categories.push({key: 'todos', value: null, description: 'Todos'});
-    return categories;
+    return this._configurationTypes.categories;
+    
   }
 
   get orderStatusTypes(): TypeRead[] {
-    const orderStatus = this._configurationTypes.orderStatus;
-    orderStatus.push({key: 'todos', value: null, description: 'Todos'});
-    return orderStatus;
+    return this._configurationTypes.orderStatus;
   }
 
   get fabricTypes(): TypeRead[] {

@@ -200,6 +200,19 @@ button {
   border-radius: 50%;
 }
 
+.detail-label {
+  @apply block text-gray-500 text-sm font-montserrat;
+}
+
+.flex-container-col {
+  @apply flex flex-col gap-y-4 gap-x-8;
+}
+
+.flex-container-row {
+  @apply flex flex-row gap-y-8 gap-x-4;
+}
+
+
 /* query filter */
 .query-container {
   @apply flex flex-row justify-between gap-x-2 md:gap-x-8 xl:gap-x-16
@@ -235,7 +248,7 @@ button {
 
 .filter-container {
   z-index: 1;
-  @apply flex-1 pt-0 pl-0 md:pl-12 xl:pl-20 
+  @apply relative flex-1 pt-0 pl-0 md:pl-12 xl:pl-20 
       font-lato text-sm;
 }
 
@@ -285,6 +298,7 @@ button {
   @apply cursor-pointer px-2 py-1 hover:bg-skin-primary-100;
 }
 
+
 /* form inputs */
 .form-label {
   @apply block font-montserrat text-sm font-medium text-gray-500;
@@ -308,6 +322,7 @@ button {
 .invalid-feedback {
   @apply text-red-500 text-xs font-sans;
 }
+
 
 /* cards */
 .basic-card {

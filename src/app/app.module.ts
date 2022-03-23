@@ -8,13 +8,6 @@ import { filter } from 'rxjs/operators';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StateChipComponent } from './components/state-chip/state-chip.component';
-import { PaginationButtonComponent } from './components/pagination-button/pagination-button.component';
-import { AppBarComponent } from './components/app-bar/app-bar.component';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { OrderDataComponent } from './components/order-data/order-data.component';
-import { ClientDetailsComponent } from './components/client-details/client-details.component';
-import { LoadingPulseComponent } from './components/loading-pulse/loading-pulse.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingModule } from './modules/landing/landing.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
@@ -28,13 +21,6 @@ import { ConfigurationTypesService } from './core/services/configuration-types.s
 @NgModule({
   declarations: [
     AppComponent,
-    StateChipComponent,
-    PaginationButtonComponent,
-    AppBarComponent,
-    SideNavComponent,
-    OrderDataComponent,
-    ClientDetailsComponent,
-    LoadingPulseComponent,
   ],
   imports: [
     BrowserModule,

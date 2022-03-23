@@ -16,7 +16,7 @@
             <app-button-primary-filled [text]="'Aceptar'" (onClick)="acceptModal()">
             </app-button-primary-filled>
 
-            <app-button-primary-outlined [text]="'Cancelar'" (onClick)="cancelModal()">
+            <app-button-primary-outlined *ngIf="type !=='error'" [text]="'Cancelar'" (onClick)="cancelModal()">
             </app-button-primary-outlined>
         </div>
     </div>
