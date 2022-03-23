@@ -183,10 +183,9 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
   }
 
   fileSelected($event: any, feature: number): void {
+    
     let files: File[] = [];
     files.push(...$event.target.files);
-    
-    
 
     if(files.filter(e => !e.type.match('image/*')).length > 0) {
       this.messageAlert = 'Los archivos que no son imágenes serán descartados';
@@ -240,6 +239,8 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
         });
         break;
     }
+
+    $event.target.value = '';
   }
 
   removeImage(idx: number, feature: number) {
@@ -336,12 +337,7 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
     );
     this.newGarment.images = this.uploadImageFiles;
     this.newGarment.patterns = this.uploadPatternFiles;
-    
-    
 
-    //this.typeModal = 'warning',
-    //this.additionalMessageModal = this.buildAdditionalInfoModal();
-    //this.messageModal = '¿Estás seguro de agregar esta prenda al catálogo?'
     this.buildInfoModal();
     this.showModal = true;
     

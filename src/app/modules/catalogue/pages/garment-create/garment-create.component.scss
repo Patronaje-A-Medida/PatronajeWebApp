@@ -166,7 +166,7 @@ input[type="color"] {
   transition: opacity ease 0.4s;
 
   img {
-    @apply	w-1/2 h-auto;
+    @apply w-3/4 md:w-1/2 h-auto;
     object-fit: cover;
   }
 }
