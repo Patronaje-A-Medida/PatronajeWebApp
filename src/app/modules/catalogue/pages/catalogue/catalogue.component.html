@@ -41,14 +41,9 @@
                 <div>
                     <p class="title-filter">Disponibilidad</p>
                     <div class="group-options">
-                        <div class="option-checkbox">
-                            <input type="checkbox" name="available-t" id="available-t" [value]="true"/>
-                            <label style="white-space: nowrap;" for="available-t">Disponible</label>
-                        </div>
-
-                        <div class="option-checkbox">
-                            <input type="checkbox" name="available-f" id="available-f" [value]="false"/>
-                            <label style="white-space: nowrap;" for="available-f">No disponible</label>
+                        <div *ngFor="let av of availabilities" class="option-checkbox">
+                            <input type="checkbox" [name]="av.key" [id]="av.key" [value]="av.value" [(ngModel)]="av.checked" />
+                            <label style="white-space: nowrap;" [for]="av.key">{{av.description}}</label>
                         </div>
                     </div>
                 </div>

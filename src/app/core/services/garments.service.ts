@@ -30,16 +30,16 @@ export class GarmentsService {
     pageSize: number = 10,
     categories: number[],
     occasions: number[],
-    filterString?: string,
-    category?: number,
+    availabilities: boolean[],
+    filterString?: string
     ): Observable<PagedResponse<GarmentMin>>{
     const query: GarmentQuery = {
       //atelierId: this.userDataService.atelierId,
       atelierId: 1,
       filterString: filterString,
-      category: category,
       categories: categories,
       occasions: occasions,
+      availabilities: availabilities,
       pageNumber: pageNumber,
       pageSize: pageSize
     };

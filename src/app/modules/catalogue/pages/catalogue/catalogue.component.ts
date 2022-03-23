@@ -35,12 +35,14 @@ export class CatalogueComponent implements OnInit, OnDestroy {
 
   optionSelected: TypeRead;
   options: TypeRead[];
+
   categoriesSelected: number[];
   occasionsSelected: number[];
   availabilitiesSelected: boolean[];
 
   categories: OptionCheck[];
   occasions: OptionCheck[];
+  availabilities: OptionCheck[];
 
   garments: GarmentMin[]
   pageNumber: number = 1;
@@ -64,22 +66,15 @@ export class CatalogueComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.garments = [];
-    this.options = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
-    this.options.push({key: 'todos', value: null, description: 'Todos'});
-
-    //this.categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
-    //this.categories.push({key: 'todos', value: null, description: 'Todos'});
-
-    //this.occasions = Array.from<TypeRead>(this.configurationTypesService.occasionTypes);
-    //this.categories.push({key: 'todos', value: null, description: 'Todos'});
-
-    this.buildOptions();
-
-    this.optionSelected = this.options[this.options.length - 1];
-
     this.categoriesSelected = [];
     this.occasionsSelected = [];
+    this.availabilitiesSelected = [];
 
+    this.options = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
+    this.options.push({key: 'todos', value: null, description: 'Todos'});
+    this.optionSelected = this.options[this.options.length - 1];
+
+    this.buildOptions();
     this.getAllGarments(true);
     this.debounceSearch();
     this.loadGarmentsOnScroll();
@@ -105,6 +100,21 @@ export class CatalogueComponent implements OnInit, OnDestroy {
         checked: false,
       } as OptionCheck
     });
+
+    this.availabilities = [
+      {
+        key: 'disponible', 
+        description: 'Disponible', 
+        value: 1, 
+        checked: false
+      }, 
+      {
+        key: 'no_disponible',
+        description: 'No disponible',
+        value: 0,
+        checked: false
+      }
+    ];
   }
 
   private getAllGarments(firstLoad?: boolean): void {
@@ -117,12 +127,11 @@ export class CatalogueComponent implements OnInit, OnDestroy {
       this.pageSize, 
       this.categoriesSelected,
       this.occasionsSelected,
+      this.availabilitiesSelected,
       cleanSearchBy, 
-      this.optionSelected.value
       ).subscribe(
       (res) => {
         this.maxPage = res.maxPage;
-        //this.garments.push(...res.items)
         if(this.pageNumber == 1)
           this.garments = res.items;
         else
@@ -199,6 +208,7 @@ export class CatalogueComponent implements OnInit, OnDestroy {
   applyFilters(): void {
     this.categoriesSelected = this.categories.filter(e => e.checked).map(e => e.value);
     this.occasionsSelected = this.occasions.filter(e => e.checked).map(e => e.value);
+    this.availabilitiesSelected = this.availabilities.filter(e => e.checked).map(e => Boolean(e.value));
     this.pageNumber = 1;
     this.getAllGarments(false);
   }
@@ -206,8 +216,10 @@ export class CatalogueComponent implements OnInit, OnDestroy {
   clearFilters(): void {
     this.categoriesSelected = [];
     this.occasionsSelected = [];
+    this.availabilitiesSelected = [];
     this.categories.forEach(e => e.checked = false);
     this.occasions.forEach(e => e.checked = false);
+    this.availabilities.forEach(e => e.checked = false);
     this.pageNumber = 1;
     this.getAllGarments(false);
   }
