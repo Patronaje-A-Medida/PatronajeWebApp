@@ -34,8 +34,7 @@ export class GarmentsService {
     filterString?: string
     ): Observable<PagedResponse<GarmentMin>>{
     const query: GarmentQuery = {
-      //atelierId: this.userDataService.atelierId,
-      atelierId: 1,
+      atelierId: this.userDataService.atelierId,
       filterString: filterString,
       categories: categories,
       occasions: occasions,
@@ -44,7 +43,7 @@ export class GarmentsService {
       pageSize: pageSize
     };
 
-    return this.http.post<PagedResponse<GarmentMin>>(`${this.URI_GARMENTS}/by-query`, query).pipe(
+    return this.http.post<PagedResponse<GarmentMin>>(`${this.URI_GARMENTS}/by-query/web`, query).pipe(
       map((res) => {
         res.items.forEach(g => { if(!g.imageUrl) g.imageUrl = this.IMG_NOT_FOUND });
         return res;
@@ -53,21 +52,16 @@ export class GarmentsService {
   }
 
   save(body: GarmentWrite): Observable<boolean> {
-    //body.atelierId = this.userDataService.atelierId,
-    body.atelierId = 1
-    console.log('service');
-    console.log(body);
+    body.atelierId = this.userDataService.atelierId;
     return this.http.post<boolean>(`${this.URI_GARMENTS}/save`, body);
   }
 
   getDetail(codeGarment: string): Observable<GarmentRead> {
-    //const atelierId = this.userDataService.atelierId;
-    const atelierId = 1;
-
+    const atelierId = this.userDataService.atelierId;
     const params = new HttpParams()
     .set('codeGarment', codeGarment)
     .set('atelierId', String(atelierId));
 
-    return this.http.get<GarmentRead>(`${this.URI_GARMENTS}/details`, { params: params });
+    return this.http.get<GarmentRead>(`${this.URI_GARMENTS}/details/web`, { params: params });
   }
 }

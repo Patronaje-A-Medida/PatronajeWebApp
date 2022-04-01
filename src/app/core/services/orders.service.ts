@@ -29,8 +29,7 @@ export class OrdersService {
     orderStatus?: number,
   ): Observable<PagedResponse<OrderRead>> {
     const query: OrderQuery = {
-      atelierId: 1,
-      //atelierId: this.userDataService.atelierId,
+      atelierId: this.userDataService.atelierId,
       orderStatus: orderStatus,
       filterString: filterString,
       pageNumber: pageNumber,

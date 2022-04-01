@@ -22,15 +22,14 @@ export class ConfigurationTypesService {
   ) { }
 
   getAll(): Promise<boolean> {
-    /*if(!this.userDataService.token) {
+    if(!this.userDataService.token) {
       return new Promise((resolve, reject) => {
         resolve(true);
       })
     }
 
-    const atelierId = this.userDataService.atelierId;*/
+    const atelierId = this.userDataService.atelierId;
 
-    const atelierId = 1;
     return this.http.get<ConfigurationTypeRead>(`${this.URI_TYPES}/${atelierId}`)
       .pipe(
         map((res) => {
