@@ -77,7 +77,7 @@ const app_colors = {
 };
 
 module.exports = {
-  purge: [],
+  purge: ["./src/**/*.{html,ts}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     /*colors: {
