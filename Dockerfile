@@ -2,7 +2,7 @@
 FROM node:latest as node
 WORKDIR /app
 COPY ./ /app/
-RUN npm ci
+RUN npm install
 RUN npm run build:prod
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
