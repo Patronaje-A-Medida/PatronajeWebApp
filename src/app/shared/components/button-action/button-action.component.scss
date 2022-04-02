@@ -1,0 +1,31 @@
+.btn-action {
+  transition: .4s;
+  border-width: 1.5px;
+  @apply w-28 shadow-md bg-skin-green font-lato text-white text-sm px-3 py-1 rounded-3xl border-solid border-transparent
+  hover:bg-skin-light-green;
+}
+
+.btn-action:disabled {
+  @apply bg-skin-green shadow-none cursor-default;
+}
+
+.spinner {
+  border: 3.5px solid #bbde98;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border-left-color: #fafafa;
+  animation: spin 1s ease infinite;
+}
+
+/*
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+*/

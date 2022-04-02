@@ -1,0 +1,100 @@
+.sidenav {
+  @apply fixed top-0 h-screen px-4 pt-4 pb-12 bg-white shadow-md z-10
+      md:left-0 md:py-3 md:px-6; // md:w-20;
+  transition: 0.4s;
+}
+
+.sidenav-container {
+  scrollbar-width: none;
+  @apply h-full flex flex-col justify-between overflow-auto;
+}
+
+.sidenav-container::-webkit-scrollbar {
+  display: none;
+}
+
+.sidenav-logo {
+  @apply font-montserrat font-light mb-10 flex items-center gap-x-4;
+  img {
+    width: 40px;
+  }
+}
+
+.sidenav-list,
+.sidenav-items {
+  @apply grid;
+}
+
+.sidenav-list {
+  @apply gap-y-10;
+}
+
+.sidenav-items {
+  @apply gap-y-6 md:gap-y-7;
+}
+
+.sidenav-subtitle {
+  transition: 0.3s;
+  @apply font-lato font-semibold text-base tracking-widest uppercase text-skin-brown
+      md:opacity-0;
+}
+
+.sidenav-link {
+  @apply flex items-center;
+}
+
+.sidenav-link:hover {
+  @apply text-skin-orange cursor-pointer;
+}
+
+.sidenav-icon {
+  transition: 0.3s;
+  @apply text-xl mr-2;
+}
+
+.sidenav-name {
+  transition: 0.3s;
+  @apply text-base font-lato font-medium whitespace-nowrap
+      md:opacity-0;
+}
+
+.sidenav-logo-name {
+  transition: 0.3s;
+  @apply md:opacity-0 text-skin-brown;
+}
+
+.sidenav-logout {
+  @apply mt-20;
+}
+
+.show-sidebar {
+  @apply left-0;
+}
+
+.hide-sidebar {
+  @apply -left-full;
+}
+
+.is-active {
+  @apply text-skin-orange;
+}
+
+@media screen and (min-width: 768px) {
+  .sidenav {
+    @apply w-20;
+  }
+
+  .sidenav:hover {
+    width: 220px;
+  }
+
+  .sidenav:hover .sidenav-logo-name,
+  .sidenav:hover .sidenav-name,
+  .sidenav:hover .sidenav-subtitle {
+    opacity: 1;
+  }
+
+  .sidenav:hover .sidenav-icon {
+    @apply text-2xl;
+  }
+}

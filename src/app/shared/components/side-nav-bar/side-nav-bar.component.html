@@ -1,0 +1,64 @@
+<div class="sidenav" id="navbar2" [ngClass]="isOpen ? 'show-sidebar': 'hide-sidebar'">
+    <nav class="sidenav-container">
+        <div>
+            <a [routerLink]="['/dashboard']" class="sidenav-link sidenav-logo">
+                <img src="assets/images/dress.png" alt="logo" class="sidenav-logo-img">
+                <span class="sidenav-logo-name">Patronaje</span>
+            </a>
+
+            <div class="sidenav-list">
+                <div class="sidenav-items">
+                    <h3 class="sidenav-subtitle">Atelier</h3>
+
+                    <a class="sidenav-link" [routerLink]="['/dashboard']" [routerLinkActive]="'is-active'">
+                        <i class="fas fa-chart-line sidenav-icon"></i>
+                        <span class="sidenav-name">Dashboard</span>
+                    </a>
+
+                    <a class="sidenav-link" [routerLink]="['/orders']" [routerLinkActive]="'is-active'">
+                        <i class="fas fa-shopping-basket sidenav-icon"></i>
+                        <span class="sidenav-name">Pedidos</span>
+                    </a>
+
+                    <a class="sidenav-link" [routerLink]="['/catalogue']" [routerLinkActive]="'is-active'">
+                        <i class="fas fa-book-open sidenav-icon"></i>
+                        <span class="sidenav-name">Catálogo</span>
+                    </a>
+                </div>
+
+                <div class="sidenav-items">
+                    <h3 class="sidenav-subtitle">Patronaje</h3>
+
+                    <a href="#" class="sidenav-link">
+                        <i class="fas fa-store sidenav-icon"></i>
+                        <span class="sidenav-name">Prendas</span>
+                    </a>
+
+                    <a href="#" class="sidenav-link">
+                        <i class="fas fa-book-open sidenav-icon"></i>
+                        <span class="sidenav-name">Prendas</span>
+                    </a>
+                </div>
+
+                <div class="sidenav-items">
+                    <h3 class="sidenav-subtitle">Configuración</h3>
+
+                    <a href="#" class="sidenav-link">
+                        <i class="fas fa-store sidenav-icon"></i>
+                        <span class="sidenav-name">Empresa</span>
+                    </a>
+
+                    <a href="#" class="sidenav-link">
+                        <i class="fas fa-users sidenav-icon"></i>
+                        <span class="sidenav-name">Personal</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="sidenav-link sidenav-logout">
+            <i class="fas fa-sign-out-alt sidenav-icon"></i>
+            <span class="sidenav-name">Cerrar Sesión</span>
+        </a>
+    </nav>
+</div>

@@ -1,0 +1,198 @@
+<div class="basic-container">
+    <app-tittle-page [tittle]="'Detalles del Pedido'"></app-tittle-page>
+
+    <div class="details-card" *ngIf="orderDetail">
+        <div>
+            <div class="flex justify-between mb-3">
+                <p class="subtitle-garment">Datos de la prenda</p>
+
+                <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
+                </app-button-primary-outlined>
+            </div>
+        
+            <div class="details-section-card">
+                <div class="details-garment">
+                    <div class="detail-group">
+                        <div>
+                            <p class="detail-label">Código de orden</p>
+                            <p>{{orderDetail.codeOrder}}</p>
+                        </div>
+        
+                        <div>
+                            <p class="detail-label">Código de prenda</p>
+                            <p>{{orderDetail.garment.codeGarment}}</p>
+                        </div>
+        
+                        <div>
+                            <p class="detail-label">Nombre de prenda</p>
+                            <p>{{orderDetail.garment.nameGarment}}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="detail-label">Precio estimado</p>
+                            <p>{{orderDetail.garment.estimatedPrice | currency:'PEN':'S/ ':'.2-2'}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div>
+                            <p class="detail-label">Ocasión / eventos</p>
+                            <ng-container *ngFor="let ocs of orderDetail.garment.occasions; let i = index">
+                                <span>{{ocs}}</span>
+                                <span *ngIf="i != (orderDetail.garment.occasions.length - 1)">, </span>
+                            </ng-container>
+                        </div>
+        
+                        <div>
+                            <p class="detail-label">Telas</p>
+                            <ng-container *ngFor="let fbs of orderDetail.garment.fabrics; let j = index">
+                                <span>{{fbs}}</span>
+                                <span *ngIf="j != (orderDetail.garment.fabrics.length - 1)">, </span>
+                            </ng-container>
+                        </div>
+                        
+                        <div>
+                            <p class="detail-label">Color seleccionado</p>
+                            <div class="circle-color-garment" [style]="garmentColor(orderDetail.garment.color)"></div>
+                        </div>
+                    </div>
+        
+                    <div class="detail-group">
+                        <div>
+                            <p class="detail-label">Fecha del pedido</p>
+                            <p>{{orderDetail.orderDate | date:'MMM d, y'}}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="detail-label">Atendido por</p>
+                            <p>{{orderDetail.attendedBy || '-'}}</p>
+                        </div>
+                        
+                        <div>
+                            <p class="detail-label">Estado</p>
+                            <app-badge-status [status]="orderDetail.orderDetailStatus" [size]="'sm'">
+                            </app-badge-status>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="details-images">
+                    <ng-container *ngFor="let img of orderDetail.garment.images; let k = index">
+                        <img class="fixed-image" [src]="img" [alt]="'img-' + (k+1)">
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="flex justify-between mt-4 mb-3">
+                <p class="subtitle-client">Datos del cliente</p>
+
+                <app-button-primary-filled [text]="'Generar patrón'" [icon]="'fas fa-pencil-ruler'">
+                </app-button-primary-filled>
+            </div>
+
+            <div class="details-section-card gap-x-12">
+                <div class="detail-group-2 xl:w-1/5">
+                    <div>
+                        <p class="detail-label">Nombres del cliente</p>
+                        <p>{{orderDetail.client.nameClient}}</p>
+                    </div>
+
+                    <div>
+                        <p class="detail-label">Correo de contacto</p>
+                        <p>{{orderDetail.client.email}}</p>
+                    </div>
+
+                    <div>
+                        <p class="detail-label">Teléfono de contacto</p>
+                        <p>{{orderDetail.client.phone}}</p>
+                    </div>
+                </div>
+
+                <div class="container-body-params">
+                    <app-basic-body-params [basicDimensions]="basicDimensions">
+                    </app-basic-body-params>
+
+                    <div class="container-table">
+                        <div class="table-rounded">
+                            <div class="responsive-table">
+                                <table class="body-params-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Sección</th>
+                                            <th scope="col">Acrónimo</th>
+                                            <th scope="col">Medida</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Altura</td>
+                                            <td>alt</td>
+                                            <td>175 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Busto</td>
+                                            <td>b</td>
+                                            <td>80 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cintura</td>
+                                            <td>ct</td>
+                                            <td>70 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Caderas</td>
+                                            <td>cd</td>
+                                            <td>75 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Séptima cervical</td>
+                                            <td>7sv</td>
+                                            <td>150 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Altura pecho</td>
+                                            <td>p</td>
+                                            <td>70 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ancho hombros</td>
+                                            <td>h</td>
+                                            <td>60 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brazo</td>
+                                            <td>bz</td>
+                                            <td>20 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Muslo</td>
+                                            <td>ml</td>
+                                            <td>50 cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pantorrilla</td>
+                                            <td>pnt</td>
+                                            <td>25 cm</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div *ngIf="isLoading"  class="h-96 text-center">
+    <app-spinner  [diameter]="'48px'"></app-spinner>
+
+    <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
+    </app-button-primary-outlined>
+</div>
+
+<app-snack-bar [message]="messageAlert" [type]="typeAlert" [(showSnack)]="showAlert"></app-snack-bar>

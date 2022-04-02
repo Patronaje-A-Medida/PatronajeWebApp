@@ -1,0 +1,59 @@
+.tooltip-container {
+  @apply relative cursor-pointer text-center rounded-lg bg-transparent hover:text-skin-primary-base; // text-center;
+  max-width: fit-content;
+}
+
+.tooltip-icon {
+  @apply text-yellow-900 text-base;
+}
+
+.tooltip-content {
+  @apply opacity-0 absolute py-1 px-2 bg-gray-600 text-white 
+      font-lato text-xs font-bold
+      pointer-events-none whitespace-nowrap rounded;
+}
+
+.tooltip-content::after {
+  content: "";
+  border-radius: 2px;
+  @apply absolute w-3 h-3 bg-gray-600;
+}
+
+.tooltip-container,
+.tooltip-icon,
+.tooltip-content {
+  transition: 0.3s;
+}
+
+.tooltip-container:hover .tooltip-icon {
+  @apply text-skin-primary-base;
+}
+
+.tooltip-bottom {
+  @apply bottom-0 left-1/2;
+  transform: translate(-50%, 100%);
+}
+
+.tooltip-left {
+  @apply left-0;
+  top: 5%;
+  transform: translate(-100%);
+}
+
+.tooltip-bottom::after {
+  @apply left-1/2 top-px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.tooltip-left::after {
+  @apply right-px top-1/2;
+  transform: translate(50%, -50%) rotate(45deg);
+}
+
+.tooltip-container:hover .tooltip-bottom {
+  @apply opacity-100 -bottom-1;
+}
+
+.tooltip-container:hover .tooltip-left {
+  @apply opacity-100 -left-2;
+}

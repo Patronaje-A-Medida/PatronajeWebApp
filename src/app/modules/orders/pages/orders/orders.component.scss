@@ -1,0 +1,135 @@
+.table-container {
+  @apply py-2 align-middle min-w-full sm:px-6 lg:px-8;
+}
+
+.subtable-container {
+  @apply p-3 bg-skin-primary-50;
+}
+
+.table-rounded {
+  @apply shadow overflow-hidden border-b
+    border-gray-200 sm:rounded-lg;
+}
+
+.table-base,
+.subtable-base {
+  @apply divide-y divide-gray-200 min-w-full;
+}
+
+.table-base-head,
+.subtable-base-head {
+  @apply bg-gray-50;
+}
+
+.table-base-body,
+.subtable-base-body {
+  @apply bg-white divide-y divide-gray-200;
+}
+
+.table-base-th,
+.subtable-base-th {
+  @apply px-5 py-3 text-left font-lato font-semibold 
+    text-gray-500 uppercase tracking-wider;
+}
+
+.table-base-th {
+  @apply text-sm;
+}
+
+.subtable-base-th {
+  @apply text-xs;
+}
+
+.th-relative {
+  @apply relative px-6 py-3;
+}
+
+.table-base-tr {
+  @apply cursor-pointer font-lato text-sm text-gray-900;
+  td {
+    @apply px-5 py-3 whitespace-nowrap;
+  }
+}
+
+.subtable-base-tr {
+  @apply text-xs text-gray-900;
+}
+
+.td-subtable-content {
+  padding: 0;
+}
+
+.subtable-inactive {
+  padding: 0;
+  border-top-width: 0px !important;
+
+  .subtable-base-tr {
+    td {
+      @apply px-5 py-3 whitespace-nowrap;
+    }
+  }
+
+  div {
+    max-height: 0px;
+    padding: 0;
+    transition: all 0.5s;
+  }
+
+  transition: all 0.5s;
+}
+
+.subtable-active {
+  border-top-width: 1px !important;
+
+  div {
+    max-height: 500px;
+    transition: all 0.5s;
+  }
+
+  .subtable-container {
+    padding: 0.75rem;
+  }
+
+  .subtable-base-tr {
+    td {
+      @apply px-5 py-3 whitespace-nowrap;
+    }
+  }
+
+  transition: all 0.5s;
+}
+
+.text-subinfo {
+  @apply text-gray-500;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.responsive-table {
+  @apply overflow-x-auto overflow-y-auto;
+}
+
+.paginator-container {
+  @apply flex justify-between items-center 
+    px-2 sm:px-6 lg:px-8 
+    font-lato text-sm;
+}
+
+.paginator-btn-container {
+  @apply flex justify-between gap-x-4;
+}
+
+.paginator-btn {
+  transition: 0.3s;
+  @apply bg-white rounded shadow w-10 
+    text-lg px-2 hover:bg-gray-200;
+}
+
+.paginator-btn:active {
+  font-size: 1.5rem;
+  @apply bg-gray-300;
+}

@@ -1,0 +1,32 @@
+.details-body-params {
+  min-height: min-content;
+  @apply flex;
+}
+
+.height-param,
+.chest-param,
+.waist-param,
+.hip-param {
+  position: relative;
+}
+
+.height-param {
+  top: 8px;
+}
+
+.chest-param {
+  top: 96px;
+}
+
+.waist-param {
+  top: 106px;
+}
+
+.hip-param {
+  top: 116px;
+}
+
+.image-body {
+  height: 438px;
+  width: 217px;
+}
