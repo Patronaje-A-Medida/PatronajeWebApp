@@ -32,7 +32,7 @@
                                     <i>S/</i>
                                 </div>
                                 <p *ngIf="hasError('firstRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                                <p *ngIf="hasError('firstRangePrice', 'pattern')" class="invalid-feedback">Costo inválido.</p>
+                                <p *ngIf="hasError('firstRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
                            </div> 
             
                             <div class="flex-1">
@@ -44,7 +44,7 @@
                                     <i>S/</i>
                                 </div>
                                 <p *ngIf="hasError('secondRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                                <p *ngIf="hasError('secondRangePrice', 'pattern')" class="invalid-feedback">Costo inválido.</p>
+                                <p *ngIf="hasError('secondRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
                            </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     <div>
                         <label class="form-label" for="description">Descripción</label>
                         <textarea class="form-input" id="description" type="text" formControlName="description" 
-                        rows="3" maxlength="250" [ngClass]="{'is-invalid': isInvalid('description')}"
+                        rows="3" maxlength="200" [ngClass]="{'is-invalid': isInvalid('description')}"
                         >
                         </textarea>
                         <p *ngIf="hasError('description', 'maxlength')" class="invalid-feedback">
@@ -150,7 +150,11 @@
             <div class="flex-container-col">
                 <div>
                     <label class="form-label mb-2" for="">Imágenes de catálogo</label>
-                    <input class="hidden" type="file" accept="image/*" #inputImgHidden (change)="fileSelected($event, EFEATURES.images)" multiple/>
+                    <input class="hidden" type="file" accept="image/*" #inputImgHidden formControlName="images" 
+                    (change)="fileSelected($event, EFEATURES.images)" multiple/>
+                    <p *ngIf="garmentForm.controls['images'].touched && uploadImageFiles.length == 0" class="invalid-feedback mb-2">
+                        Agregar al menos 1 imágen de la prenda.
+                    </p>
                     <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-camera'" (onClick)="inputImgHidden.click()">
                     </app-button-primary-outlined>
                     <div class="flex-container-preview-imgs mt-2">
@@ -163,7 +167,11 @@
                 
                 <div>
                     <label class="form-label mb-2" for="">Patrones de confección</label>
-                    <input class="hidden" type="file" accept="image/*" #inputPttrnHidden (change)="fileSelected($event, EFEATURES.patterns)" multiple/>
+                    <input class="hidden" type="file" accept="image/*" #inputPttrnHidden formControlName="patterns" 
+                    (change)="fileSelected($event, EFEATURES.patterns)" multiple/>
+                    <p *ngIf="garmentForm.controls['patterns'].touched && uploadPatterns.length == 0" class="invalid-feedback mb-2">
+                        Agregar al menos 1 patrón de la prenda.
+                    </p>
                     <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-camera'" (onClick)="inputPttrnHidden.click()">
                     </app-button-primary-outlined>  
                     <div class="flex-container-preview-imgs mt-2">

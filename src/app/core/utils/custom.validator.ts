@@ -14,4 +14,13 @@ export class CunstomValidators {
         : { notMatch: true };
     };
   }
+
+  public static ValidateAmount(): (AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const amount: number = Number(control.value);
+
+      if(amount === NaN || amount < 1) return { invalidAmount: true };
+      return null
+    }
+  }
 }

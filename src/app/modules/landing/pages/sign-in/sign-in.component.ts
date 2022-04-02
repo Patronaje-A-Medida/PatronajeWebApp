@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserLogin } from 'src/app/core/models/auth/user-login';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ConfigurationTypesService } from 'src/app/core/services/configuration-types.service';
 import { UserDataService } from 'src/app/core/services/user-data.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private configurationTypesService: ConfigurationTypesService,
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +64,8 @@ export class SignInComponent implements OnInit {
     this.authService.signInUser(this.userLogin).subscribe(
       (_) => {
         this.isLoading = false;
-        this.navigateTo('orders');
+        this.configurationTypesService.getAll()
+          .then( () => this.navigateTo('orders'));
       },
       (err) => {
         this.messageAlert = err.message;

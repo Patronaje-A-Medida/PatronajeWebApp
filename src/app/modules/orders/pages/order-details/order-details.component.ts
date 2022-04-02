@@ -53,6 +53,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   }
 
   garmentColor(color: string): string {
+    if (color.toUpperCase() === '#FFFFFF') return `background-color: ${color}; border: solid 1px black`;
     return `background-color: ${color};`;
   }
 

@@ -8,6 +8,7 @@ import { GarmentImageFile } from 'src/app/core/models/garments/garment-image-fil
 import { GarmentWrite } from 'src/app/core/models/garments/garment-write';
 import { ConfigurationTypesService } from 'src/app/core/services/configuration-types.service';
 import { GarmentsService } from 'src/app/core/services/garments.service';
+import { CunstomValidators } from 'src/app/core/utils/custom.validator';
 import { EnumFeatures, EnumFeaturesString } from 'src/app/core/utils/features.enum';
 import { ImageUtil } from 'src/app/core/utils/images.util';
 import { RGXP_NUMBER_PRICE } from 'src/app/core/utils/regex.constants';
@@ -87,14 +88,16 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
     this.garmentForm = this.formBuilder.group({
       codeGarment: ['', Validators.required],
       nameGarment: ['', [Validators.required, Validators.maxLength(100)]],
-      firstRangePrice: ['', [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE)]],
-      secondRangePrice: ['', [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE)]],
+      firstRangePrice: ['', [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE), CunstomValidators.ValidateAmount()]],
+      secondRangePrice: ['', [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE), CunstomValidators.ValidateAmount()]],
       description: ['', Validators.maxLength(250)],
       category: ['', Validators.required],
       fabrics: ['', Validators.required],
       occasions: ['', Validators.required],
       colors: ['', Validators.required],
       available: [true, Validators.required],
+      images: [''],
+      patterns: [''],
     });
   }
 
