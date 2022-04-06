@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { UserAtelierToken } from '../models/auth/user-atelier-token';
 import { UserLogin } from '../models/auth/user-login';
 import { UserOwnerCreate } from '../models/users/user-owner-create';
+import { UserTechnicianCreate } from '../models/users/user-technician-create';
 import { UserDataService } from './user-data.service';
 
 
@@ -45,6 +46,13 @@ export class AuthService {
 
   get isLogged(): boolean {
     return this.userDataService.isLogged;
+  }
+
+  signUpTechnicia(body: UserTechnicianCreate): Observable<void> {
+    body.bossId = this.userDataService.userId;
+    body.atelierId = this.userDataService.atelierId;
+    
+    return this.http.post<void>(`${this.uriSignUp}/users-technician`, body);
   }
 
 }
