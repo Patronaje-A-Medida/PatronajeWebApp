@@ -17,6 +17,7 @@ import { UserDataService } from './core/services/user-data.service';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
 import { ConfigurationTypesService } from './core/services/configuration-types.service';
+import { EmployeesModule } from './modules/employees/employees.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ConfigurationTypesService } from './core/services/configuration-types.s
     DashboardModule,
     SharedModule,
     CoreModule,
+    EmployeesModule,
   ],
   providers: [
     UserDataService,
