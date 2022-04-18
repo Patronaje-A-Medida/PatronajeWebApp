@@ -1,3 +1,39 @@
 <div class="basic-container">
-    <app-button-primary-filled [text]="'Crear'" (onClick)="createEmployee()"></app-button-primary-filled>
+  <app-tittle-page [tittle]="'Personal'"></app-tittle-page>
+
+  <div class="query-container">
+    <div class="basic-container">
+      <app-button-primary-filled [text]="'Crear'" (onClick)="createEmployee()"></app-button-primary-filled>
+    </div>
+  </div>
+</div>
+
+<div class="table-container">
+  <div class="table-rounded">
+      <div class="responsive-table">
+          <table class="table-base">
+              <thead class="table-base-head">
+                  <tr>
+                      <th scope="col" class="table-base-th">Nombre</th>
+                      <th scope="col" class="table-base-th">Apellido</th>
+                      <th scope="col" class="table-base-th">Correo</th>
+                      <th scope="col" class="table-base-th">DNI</th>
+                  </tr>
+              </thead>
+              <tbody class="table-base-body">
+                  <ng-container *ngIf="technicians && !isLoading" >
+                      <ng-container *ngFor="let usr of technicians">
+                          <tr class="table-base-tr" >
+                              <td>{{usr.nameUser}}</td>
+                              <td>{{usr.lastNameUser}}</td>
+                              <td>{{usr.dni}}</td>
+                              <td>{{usr.email}}</td>
+                          </tr>
+                      </ng-container>
+                  </ng-container>
+
+              </tbody>
+          </table>
+      </div>
+  </div>
 </div>

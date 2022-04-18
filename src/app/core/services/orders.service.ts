@@ -23,7 +23,7 @@ export class OrdersService {
   ) { }
 
   getAllByQuery(
-    pageNumber: number = 1, 
+    pageNumber: number = 1,
     pageSize: number = 10,
     filterString?: string,
     orderStatus?: number,
@@ -35,7 +35,7 @@ export class OrdersService {
       pageNumber: pageNumber,
       pageSize: pageSize
     };
-    
+
     return this.http.post<PagedResponse<OrderRead>>(`${this.uriOrders}/by-query`, query).pipe(
       map((res) => {
         res.items.forEach(o => o.showDetails = false);
