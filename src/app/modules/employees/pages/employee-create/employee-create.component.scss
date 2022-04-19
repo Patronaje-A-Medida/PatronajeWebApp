@@ -1,0 +1,68 @@
+.signup-container {
+  min-height: 90vh;
+  @apply flex flex-col gap-y-9 mt-16
+    md:flex-row md:gap-x-9;
+}
+
+.form-container {
+  @apply flex p-6 gap-y-10 flex-col justify-center items-center
+    md:flex-1;
+}
+
+.img-container {
+  @apply flex justify-center
+    md:flex-1;
+}
+
+.form-container-title {
+  @apply mt-4;
+}
+
+.form-container-inputs {
+  @apply w-full p-4 rounded-lg shadow-lg
+    sm:w-96;
+}
+
+.form {
+  @apply flex flex-col gap-y-6;
+}
+
+.form-title {
+  @apply text-center font-montserrat text-lg font-semibold
+    md:text-2xl;
+}
+
+.form-subtitle {
+  @apply mt-2 text-center font-montserrat text-xs
+    md:text-sm;
+}
+
+.form-subtitle-link {
+  @apply font-montserrat font-medium text-skin-orange
+}
+
+.form-subtitle-link:hover {
+  @apply cursor-pointer text-skin-medium-orange;
+}
+
+.form-label {
+  @apply block font-montserrat text-sm font-medium text-skin-brown;
+}
+
+.form-btn-group {
+  @apply m-auto flex gap-x-4;
+}
+
+.signup-img {
+  max-height: 600px;
+  @apply self-center;
+}
+
+@media screen and (max-width: 768px) {
+  .signup-container {
+    height: fit-content;
+  }
+  .signup-img {
+    max-height: 300px;
+  }
+}
