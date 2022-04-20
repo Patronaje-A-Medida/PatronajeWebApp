@@ -49,7 +49,7 @@
   background: rgba(0, 0, 0, 0.4);
   visibility: hidden;
   @apply fixed top-0 left-0 h-screen w-screen
-    flex items-center justify-center content-center 
+    flex items-center justify-center content-center
     opacity-0;
   transition: opacity ease 0.4s;
 
@@ -82,4 +82,227 @@
   .flex-title {
     @apply flex-col gap-y-2;
   }
+}
+
+
+.flex-container-col {
+  @apply flex flex-col gap-y-4 gap-x-8;
+}
+
+.flex-container-row {
+  @apply flex flex-row gap-y-8 gap-x-4;
+}
+
+.flex-container-col-extend {
+  @extend .flex-container-col;
+  @apply md:flex-row;
+}
+
+.flex-container-center {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-container-preview-imgs {
+  @apply flex gap-4 flex-wrap;
+}
+
+.input-currency {
+  position: relative;
+
+  i {
+    transform: translate(0, -50%);
+    font-style: normal;
+    @apply absolute block top-1/2 text-center pointer-events-none
+      w-6 pt-1;
+  }
+
+  input {
+    @apply pl-6 pr-0;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+input[type="color"] {
+  padding: 1px 8px;
+  height: 43px;
+}
+
+.dropdown-input {
+  min-height: 43px;
+  @apply text-gray-700 border border-solid border-gray-300
+    rounded-lg transition ease-in-out w-full p-2 mt-1 font-lato
+    focus:text-gray-700 focus:bg-white focus:border-skin-primary-base
+    focus:outline-none;
+}
+
+.multi-dropdown {
+  position: relative;
+}
+
+.multi-dropdown-input {
+  min-height: 43px;
+  @apply mt-1 px-2 py-1 border border-solid border-gray-300
+  rounded-lg flex flex-row justify-between items-center;
+}
+
+.multi-dropdown-input:focus {
+  @apply border-skin-primary-base;
+}
+
+.selected-items {
+  @apply flex flex-row flex-wrap gap-y-1;
+}
+
+.chevron-icon {
+  transition: 0.5s;
+  @apply text-gray-700 text-sm;
+}
+
+.multi-dropdown-options {
+  z-index: 1;
+  @apply absolute mt-1 pt-2  border border-solid border-gray-300
+    bg-white w-full rounded-md font-lato shadow text-sm md:text-base; //py-2 px-3
+
+  p {
+    transition: 0.3s;
+    @apply px-3 py-1 hover:bg-skin-primary-100;
+  }
+}
+
+.chip-item {
+  padding: 2px 6px;
+  @apply cursor-default font-lato bg-skin-primary-base text-white
+    rounded-md mr-1 text-sm md:text-base;
+  i {
+    @apply text-sm ml-1 cursor-pointer;
+  }
+}
+
+.rotate-up {
+  transform: rotate(180deg);
+}
+
+.border-color-primary {
+  @apply border-skin-primary-base;
+}
+
+.circle-color-garment {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.tooltip-remove {
+  transition: 0.3s;
+  left: -75%;
+  @apply opacity-0 absolute top-8 py-1 px-2 bg-gray-600 text-white
+    font-lato text-xs font-bold
+    pointer-events-none whitespace-nowrap rounded;
+}
+
+.tooltip-remove::after {
+  content: "";
+  border-radius: 2px;
+  transform: rotate(45deg);
+  left: 40%;
+  @apply absolute w-3 h-3 bg-gray-600 -top-1;
+}
+
+.circle-color-garment:hover .tooltip-remove {
+  @apply opacity-100;
+}
+
+.preview-img {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  @apply rounded-lg cursor-pointer hover:shadow-md;
+
+  img {
+    height: 100%;
+    width: 100%;
+    @apply rounded-md hover:opacity-75 object-contain;
+  }
+}
+
+.delete-icon {
+  padding: 3px 5px;
+  border-radius: 50%;
+  @apply absolute bg-red-500 text-white;
+  top: -6%;
+  right: -4%;
+}
+
+.zoom-img {
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.4);
+  visibility: hidden;
+  @apply fixed top-0 left-0 h-screen w-screen
+    flex items-center justify-center content-center
+    opacity-0;
+  transition: opacity ease 0.4s;
+
+  img {
+    @apply w-3/4 md:w-1/2 h-auto;
+    object-fit: cover;
+  }
+}
+
+.show-zoom {
+  visibility: visible;
+  opacity: 1;
+}
+
+.label-radio {
+  @apply font-lato ml-2 text-gray-600;
+}
+
+input[type='radio']:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+  @apply bg-gray-300;
+}
+
+input[type='radio']:checked:after {
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+  @apply bg-skin-triadic-A-700;
+}
+
+.is-invalid {
+  @apply border-red-500;
+}
+
+
+.flex-container-col{
+  margin-left: 10px;
+  margin-right: 10px;
 }

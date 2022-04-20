@@ -1,35 +1,37 @@
 <div class="basic-container">
     <app-tittle-page [tittle]="'Detalles de la Prenda'"></app-tittle-page>
 
-    <div class="basic-card flex-container-col" *ngIf="garmentDetail">
-        
+    <div class="basic-card flex-container-col">
+
 
         <div>
             <div class="flex-title">
-                <p class="font-semibold">Datos de la prenda</p>
-    
+                <p class="font-semibold">Datos de la prenda
+
+                  <app-button-primary-filled *ngIf="!showedit" [text]="'Editar'" [icon]="'fas fa-edit'" (onClick)="showedit = !showedit">
+                  </app-button-primary-filled>
+                </p>
+
                 <div class="flex gap-x-2 justify-center">
                     <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
                     </app-button-primary-outlined>
-                    
-                    <app-button-primary-filled [text]="'Editar'" [icon]="'fas fa-edit'">
-                    </app-button-primary-filled>
                 </div>
             </div>
-
-            <div class="flex-container-row">
+            <form  [formGroup]="garmentDataForm">
+              <div class="flex-container-row">
                 <div class="flex-responsive-1 flex-1">
-                    <div class="flex-container-col">
+
+                    <div *ngIf="!showedit" class="flex-container-col">
                         <div>
                             <p class="detail-label">Código de prenda</p>
                             <p>{{garmentDetail.codeGarment}}</p>
                         </div>
-        
+
                         <div>
                             <p class="detail-label">Nombre de prenda</p>
                             <p>{{garmentDetail.nameGarment}}</p>
                         </div>
-        
+
                         <div>
                             <p class="detail-label">Costo</p>
                             <div class="flex gap-x-8">
@@ -37,26 +39,26 @@
                                     <p class="detail-label">Rango inicial</p>
                                     <p>{{garmentDetail.firstRangePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
                                 </div>
-            
+
                                 <div>
                                     <p class="detail-label">Rango final</p>
                                     <p>{{garmentDetail.secondRangePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
                                 </div>
                             </div>
                         </div>
-        
+
                         <div>
                             <p class="detail-label">Descripción</p>
                             <p>{{garmentDetail.description || '-'}}</p>
                         </div>
                     </div>
-    
-                    <div class="flex-container-col">
+
+                    <div *ngIf="!showedit" class="flex-container-col">
                         <div>
                             <p class="detail-label">Categoría</p>
                             <p>{{garmentDetail.category}}</p>
                         </div>
-    
+
                         <div>
                             <p class="detail-label">Telas</p>
                             <ng-container *ngFor="let fbc of garmentDetail.fabrics; let i = index">
@@ -64,7 +66,7 @@
                                 <span *ngIf="i != (garmentDetail.fabrics.length - 1)">, </span>
                             </ng-container>
                         </div>
-    
+
                         <div>
                             <p class="detail-label">Ocasión / eventos</p>
                             <ng-container *ngFor="let ocs of garmentDetail.occasions; let j = index">
@@ -72,8 +74,8 @@
                                 <span *ngIf="j != (garmentDetail.occasions.length - 1)">, </span>
                             </ng-container>
                         </div>
-        
-                        
+
+
                         <div>
                             <p class="detail-label">Colores</p>
                             <div class="flex gap-x-2">
@@ -82,7 +84,7 @@
                                 </ng-container>
                             </div>
                         </div>
-    
+
                         <div>
                             <p class="detail-label">Disponibilidad</p>
                             <div class="flex gap-x-2">
@@ -91,16 +93,173 @@
                             </div>
                         </div>
                     </div>
+
+                    <div *ngIf="showedit" class="flex-container-col">
+                      <div>
+                          <label class="form-label" for="codeGarment">Código de prenda</label>
+                          <input class="form-input" id="codeGarment" type="text" formControlName="codeGarment" [(ngModel)]="garmentDetail.codeGarment" maxlength="100"
+                          [ngClass]="{'is-invalid': isInvalid('codeGarment')}"/>
+                          <p *ngIf="hasError('codeGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="nameGarment">Prenda</label>
+                          <input class="form-input" id="nameGarment" type="text" formControlName="nameGarment" maxlength="100" [(ngModel)]="garmentDetail.nameGarment"
+                          [ngClass]="{'is-invalid': isInvalid('nameGarment')}"/>
+                          <p *ngIf="hasError('nameGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                          <p *ngIf="hasError('nameGarment', 'maxlength')" class="invalid-feedback">El nombre de la prenda no debe superar los 100 caracteres.</p>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="">Costo</label>
+                          <div class="flex gap-x-8">
+                              <div class="flex-1">
+                                  <label class="form-label" for="firstRangePrice">Rango inicial</label>
+                                  <div class="input-currency">
+                                      <input class="form-input" id="firstRangePrice" type="number" formControlName="firstRangePrice" [(ngModel)]="garmentDetail.firstRangePrice"
+                                      placeholder="0.00" [ngClass]="{'is-invalid': isInvalid('firstRangePrice')}"
+                                      />
+                                      <i>S/</i>
+                                  </div>
+                                  <p *ngIf="hasError('firstRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                  <p *ngIf="hasError('firstRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
+                             </div>
+
+                              <div class="flex-1">
+                                  <label class="form-label" for="secondRangePrice">Rango final</label>
+                                  <div class="input-currency">
+                                      <input class="form-input" id="secondRangePrice" type="number" formControlName="secondRangePrice" [(ngModel)]="garmentDetail.secondRangePrice"
+                                      placeholder="0.00" [ngClass]="{'is-invalid': isInvalid('secondRangePrice')}"
+                                      />
+                                      <i>S/</i>
+                                  </div>
+                                  <p *ngIf="hasError('secondRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                  <p *ngIf="hasError('secondRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
+                             </div>
+                          </div>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="description">Descripción</label>
+                          <textarea class="form-input" id="description" type="text" formControlName="description" [(ngModel)]="garmentDetail.description"
+                          rows="3" maxlength="200" [ngClass]="{'is-invalid': isInvalid('description')}"
+                          >
+                          </textarea>
+                          <p *ngIf="hasError('description', 'maxlength')" class="invalid-feedback">
+                              la descripción de la prenda no debe superar los 100 caracteres.
+                          </p>
+                      </div>
+                    </div>
+
+                    <div *ngIf="showedit" class="flex-container-col">
+                      <div>
+                          <label class="form-label" for="">Categoría</label>
+                          <select class="dropdown-input" name="category" id="category" formControlName="category"
+                          [ngClass]="{'is-invalid': isInvalid('category')}">
+                              <option *ngFor="let ctg of categories" [value]="ctg.value" >{{ctg.description}}</option>>
+                          </select>
+                          <p *ngIf="hasError('category', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="">Telas</label>
+                          <input type="hidden" class="hidden" formControlName="fabrics">
+                          <div class="multi-dropdown" #fabricOptions>
+                              <div class="multi-dropdown-input"
+                              [ngClass]="{'border-color-primary': showFabricOpts, 'is-invalid': isInvalid('fabrics')}"
+                              (click)="showFabricOpts = !showFabricOpts" tabindex="0"
+                              >
+                                  <div class="selected-items">
+                                      <span class="chip-item" *ngFor="let sf of selectedFabrics">
+                                          {{sf.description}}
+                                          <i class="fas fa-times" (click)="removeSelectedItem(sf, EFEATURES.fabric)"></i>
+                                      </span>
+                                  </div>
+                                  <i class="fas fa-angle-down chevron-icon" [ngClass]="{'rotate-up': this.showFabricOpts}"></i>
+                              </div>
+                              <div class="multi-dropdown-options" *ngIf="showFabricOpts">
+                                  <p *ngFor="let fbc of fabrics" (click)="selectItem(fbc, EFEATURES.fabric)">{{fbc.description}}</p>
+                              </div>
+                          </div>
+                          <p *ngIf="hasError('fabrics', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="">Ocasión/Eventos</label>
+                          <input type="hidden" class="hidden" formControlName="occasions">
+                          <div class="multi-dropdown" #occasionOptions>
+                              <div class="multi-dropdown-input"
+                              [ngClass]="{'border-color-primary': showOccasionOpts, 'is-invalid': isInvalid('occasions')}"
+                              (click)="showOccasionOpts = !showOccasionOpts" tabindex="1"
+                              >
+                                  <div class="selected-items">
+                                      <span class="chip-item" *ngFor="let so of selectedOccasions">
+                                          {{so.description}}
+                                          <i class="fas fa-times" (click)="removeSelectedItem(so, EFEATURES.occasion)"></i>
+                                      </span>
+                                  </div>
+                                  <i class="fas fa-angle-down chevron-icon" [ngClass]="{'rotate-up': this.showOccasionOpts}"></i>
+                              </div>
+                              <div class="multi-dropdown-options" *ngIf="showOccasionOpts">
+                                  <p *ngFor="let ocs of occasions" (click)="selectItem(ocs, EFEATURES.occasion)">{{ocs.description}}</p>
+                              </div>
+                          </div>
+                          <p *ngIf="hasError('occasions', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="">Colores</label>
+                          <input type="hidden" class="hidden" formControlName="colors">
+                          <input class="form-input" id="" type="color" (change)="changeColor($event)"
+                          [ngClass]="{'is-invalid': isInvalid('colors')}"
+                          />
+                          <div class="selected-items mt-2">
+                              <div class="circle-color-garment mr-1" *ngFor="let sc of selectedColors" [style]="getItemColor(sc)" (click)="removeSelectedColor(sc)">
+                                  <div class="tooltip-remove">remover</div>
+                              </div>
+                          </div>
+                          <p *ngIf="hasError('colors', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                      </div>
+
+                      <div>
+                          <label class="form-label" for="">Disponibilidad</label>
+                          <div class="flex-container-row">
+                              <div>
+                                  <input type="radio" formControlName="available" [value]="true" placeholder="hola">
+                                  <label class="label-radio" for="">Disponible</label>
+                              </div>
+                              <div>
+                                  <input type="radio" formControlName="available" [value]="false" placeholder="hola">
+                                  <label class="label-radio" for="">No disponible</label>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
                 </div>
-                    
+
                 <div class="image-view">
                     <div class="basic-card">
                         <img [src]="selectedImage" alt="" (click)="zoomSelectedImage(selectedImage)">
                     </div>
                 </div>
-            </div>
+              </div>
+              <div *ngIf="showedit" class="flex-container-center">
+              <app-button-primary-filled *ngIf="!isSaving" [text]="'Guardar'" [icon]="'fas fa-save'"
+              (onClick)="buildGarmentData()"
+              >
+              </app-button-primary-filled>
+
+              <app-button-loading *ngIf="isSaving"></app-button-loading>
+
+              <app-button-primary-outlined [text]="'Cancelar'" [icon]="'fas fa-times'" [disabled]="isSaving"
+              (onClick)="showedit = !showedit"
+              >
+              </app-button-primary-outlined>
+              </div>
+            </form>
         </div>
-        
+
         <div>
             <p class="font-semibold mb-3">Imágenes y Patrones</p>
 
@@ -109,7 +268,7 @@
                     <p class="detail-label mb-3">Imágenes de catálogo</p>
                     <div class="flex-container-preview-imgs" >
                         <ng-container *ngIf="garmentDetail.images.length > 0; else noimages">
-                            <div class="preview-img" *ngFor="let img of garmentDetail.images" 
+                            <div class="preview-img" *ngFor="let img of garmentDetail.images"
                             [ngClass]="{'border-selected-img': borderImagePreview(img)}"
                             >
                                 <img [src]="img" (click)="selectImageToView(img)">
@@ -120,12 +279,12 @@
                         </ng-template>
                     </div>
                 </div>
-    
+
                 <div>
                     <p class="detail-label mb-3">Patrónes de confección</p>
                     <div class="flex-container-preview-imgs">
                         <ng-container *ngIf="garmentDetail.patterns.length > 0; else nopatterns">
-                            <div class="preview-img"*ngFor="let pttrn of garmentDetail.patterns" 
+                            <div class="preview-img"*ngFor="let pttrn of garmentDetail.patterns"
                             [ngClass]="{'border-selected-img': borderImagePreview(pttrn)}"
                             >
                                 <img [src]="pttrn" (click)="selectImageToView(pttrn)">
@@ -144,3 +303,5 @@
         <img [src]="selectedImageToZoom" alt="">
     </div>
 </div>
+
+
