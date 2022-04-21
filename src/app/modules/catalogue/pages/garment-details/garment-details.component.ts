@@ -52,10 +52,10 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
   codeGarment: string;
   garmentDetail: GarmentRead;
 
-  @ViewChild('fabricOptions', {read: ElementRef, static: true})
+  @ViewChild('fabricOptions', {read: ElementRef, static: false})
   fabricOptions: ElementRef;
 
-  @ViewChild('occasionOptions', {read: ElementRef, static: true})
+  @ViewChild('occasionOptions', {read: ElementRef, static: false})
   occasionOptions: ElementRef;
 
   private _toogleOptionsSub: Subscription;
@@ -83,12 +83,12 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       (params: any) => {
         this.codeGarment = params.codeGarment;
         this.getGarmentDetail();
+        //this.buildGarmentDataForm();
       }
     );
-    this.buildGarmentDataForm();
-    this._toogleOptionsSub = this.docEventsService.documentClickedTarget.subscribe(
+    /*this._toogleOptionsSub = this.docEventsService.documentClickedTarget.subscribe(
       target => this.documentClickListener(target)
-    );
+    );*/
   }
 
   private documentClickListener(target: any): void {
@@ -102,16 +102,16 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
 
   private buildGarmentDataForm(): void {
     this.garmentDataForm = this.formBuilder.group({
-      codeGarment: ['', Validators.required],
-      nameGarment: ['', [Validators.required, Validators.maxLength(100)]],
-      firstRangePrice: ['', [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE), CunstomValidators.ValidateAmount()]],
-      secondRangePrice: ['', [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE), CunstomValidators.ValidateAmount()]],
-      description: ['', Validators.maxLength(250)],
-      category: ['', Validators.required],
-      fabrics: ['', Validators.required],
-      occasions: ['', Validators.required],
-      colors: ['', Validators.required],
-      available: [true, Validators.required],
+      codeGarment: [this.garmentDetail.codeGarment, Validators.required],
+      nameGarment: [this.garmentDetail.nameGarment, [Validators.required, Validators.maxLength(100)]],
+      firstRangePrice: [this.garmentDetail.firstRangePrice, [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE), CunstomValidators.ValidateAmount()]],
+      secondRangePrice: [this.garmentDetail.secondRangePrice, [Validators.required, Validators.pattern(RGXP_NUMBER_PRICE), CunstomValidators.ValidateAmount()]],
+      description: [this.garmentDetail.description, Validators.maxLength(250)],
+      category: [this.garmentDetail.categoryId, Validators.required],
+      fabrics: [this.selectedFabrics, Validators.required],
+      occasions: [this.selectedOccasions, Validators.required],
+      colors: [this.selectedColors, Validators.required],
+      available: [this.garmentDetail.available, Validators.required],
     });
   }
 
@@ -146,6 +146,8 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
         console.log(res);
         this.selectedCategory = this.categories.find(e => e.description === res.category);
         this._selectedImage = this.garmentDetail.images[0];
+
+        this.buildGarmentDataForm()
       },
       err => {
         this.isLoading = true;
@@ -271,6 +273,8 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       patterns: [],
     }
 
+    console.log(fabrics);
+
     const fabricFeatures: FeatureGarmentUpdate[] = fabrics.map((e:TypeRead) => {
       return {
         key: e.key,
@@ -303,6 +307,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       ...colorFeatures
     );
 
+    console.log(this.newgarmentData);
     this.isSaving = true;
     this.garmentService.update(this.newgarmentData).subscribe(
       res => {
@@ -341,6 +346,14 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
 
   navigateToBack(): void {
     this.location.back();
+  }
+
+  showEditMode(): void {
+    this.showedit = !this.showedit;
+    this._toogleOptionsSub = this.docEventsService.documentClickedTarget.subscribe(
+      target => this.documentClickListener(target)
+    );
+
   }
 
   ngOnDestroy(): void {

@@ -4,11 +4,11 @@
     <div class="basic-card flex-container-col">
 
 
-        <div>
+        <div *ngIf="garmentDetail">
             <div class="flex-title">
                 <p class="font-semibold">Datos de la prenda
 
-                  <app-button-primary-filled *ngIf="!showedit" [text]="'Editar'" [icon]="'fas fa-edit'" (onClick)="showedit = !showedit">
+                  <app-button-primary-filled *ngIf="!showedit" [text]="'Editar'" [icon]="'fas fa-edit'" (onClick)="showEditMode()">
                   </app-button-primary-filled>
                 </p>
 
@@ -17,8 +17,7 @@
                     </app-button-primary-outlined>
                 </div>
             </div>
-            <form  [formGroup]="garmentDataForm">
-              <div class="flex-container-row">
+            <div class="flex-container-row">
                 <div class="flex-responsive-1 flex-1">
 
                     <div *ngIf="!showedit" class="flex-container-col">
@@ -94,148 +93,151 @@
                         </div>
                     </div>
 
-                    <div *ngIf="showedit" class="flex-container-col">
-                      <div>
-                          <label class="form-label" for="codeGarment">Código de prenda</label>
-                          <input class="form-input" id="codeGarment" type="text" formControlName="codeGarment" [(ngModel)]="garmentDetail.codeGarment" maxlength="100"
-                          [ngClass]="{'is-invalid': isInvalid('codeGarment')}"/>
-                          <p *ngIf="hasError('codeGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="nameGarment">Prenda</label>
-                          <input class="form-input" id="nameGarment" type="text" formControlName="nameGarment" maxlength="100" [(ngModel)]="garmentDetail.nameGarment"
-                          [ngClass]="{'is-invalid': isInvalid('nameGarment')}"/>
-                          <p *ngIf="hasError('nameGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                          <p *ngIf="hasError('nameGarment', 'maxlength')" class="invalid-feedback">El nombre de la prenda no debe superar los 100 caracteres.</p>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="">Costo</label>
-                          <div class="flex gap-x-8">
-                              <div class="flex-1">
-                                  <label class="form-label" for="firstRangePrice">Rango inicial</label>
-                                  <div class="input-currency">
-                                      <input class="form-input" id="firstRangePrice" type="number" formControlName="firstRangePrice" [(ngModel)]="garmentDetail.firstRangePrice"
-                                      placeholder="0.00" [ngClass]="{'is-invalid': isInvalid('firstRangePrice')}"
-                                      />
-                                      <i>S/</i>
-                                  </div>
-                                  <p *ngIf="hasError('firstRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                                  <p *ngIf="hasError('firstRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
-                             </div>
-
-                              <div class="flex-1">
-                                  <label class="form-label" for="secondRangePrice">Rango final</label>
-                                  <div class="input-currency">
-                                      <input class="form-input" id="secondRangePrice" type="number" formControlName="secondRangePrice" [(ngModel)]="garmentDetail.secondRangePrice"
-                                      placeholder="0.00" [ngClass]="{'is-invalid': isInvalid('secondRangePrice')}"
-                                      />
-                                      <i>S/</i>
-                                  </div>
-                                  <p *ngIf="hasError('secondRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                                  <p *ngIf="hasError('secondRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
-                             </div>
-                          </div>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="description">Descripción</label>
-                          <textarea class="form-input" id="description" type="text" formControlName="description" [(ngModel)]="garmentDetail.description"
-                          rows="3" maxlength="200" [ngClass]="{'is-invalid': isInvalid('description')}"
-                          >
-                          </textarea>
-                          <p *ngIf="hasError('description', 'maxlength')" class="invalid-feedback">
-                              la descripción de la prenda no debe superar los 100 caracteres.
-                          </p>
-                      </div>
+                    <div *ngIf="showedit">
+                        <form [formGroup]="garmentDataForm">
+                            <div  class="flex-container-col">
+                                <div>
+                                    <label class="form-label" for="codeGarment">Código de prenda</label>
+                                    <input class="form-input" id="codeGarment" type="text" formControlName="codeGarment" maxlength="100"
+                                    [ngClass]="{'is-invalid': isInvalid('codeGarment')}"/>
+                                    <p *ngIf="hasError('codeGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="nameGarment">Prenda</label>
+                                    <input class="form-input" id="nameGarment" type="text" formControlName="nameGarment" maxlength="100"
+                                    [ngClass]="{'is-invalid': isInvalid('nameGarment')}"/>
+                                    <p *ngIf="hasError('nameGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                    <p *ngIf="hasError('nameGarment', 'maxlength')" class="invalid-feedback">El nombre de la prenda no debe superar los 100 caracteres.</p>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="">Costo</label>
+                                    <div class="flex gap-x-8">
+                                        <div class="flex-1">
+                                            <label class="form-label" for="firstRangePrice">Rango inicial</label>
+                                            <div class="input-currency">
+                                                <input class="form-input" id="firstRangePrice" type="number" formControlName="firstRangePrice"
+                                                placeholder="0.00" [ngClass]="{'is-invalid': isInvalid('firstRangePrice')}"
+                                                />
+                                                <i>S/</i>
+                                            </div>
+                                            <p *ngIf="hasError('firstRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                            <p *ngIf="hasError('firstRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
+                                       </div>
+          
+                                        <div class="flex-1">
+                                            <label class="form-label" for="secondRangePrice">Rango final</label>
+                                            <div class="input-currency">
+                                                <input class="form-input" id="secondRangePrice" type="number" formControlName="secondRangePrice"
+                                                placeholder="0.00" [ngClass]="{'is-invalid': isInvalid('secondRangePrice')}"
+                                                />
+                                                <i>S/</i>
+                                            </div>
+                                            <p *ngIf="hasError('secondRangePrice', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                            <p *ngIf="hasError('secondRangePrice', 'pattern') || hasError('firstRangePrice', 'invalidAmount')" class="invalid-feedback">Costo inválido.</p>
+                                       </div>
+                                    </div>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="description">Descripción</label>
+                                    <textarea class="form-input" id="description" type="text" formControlName="description"
+                                    rows="3" maxlength="200" [ngClass]="{'is-invalid': isInvalid('description')}"
+                                    >
+                                    </textarea>
+                                    <p *ngIf="hasError('description', 'maxlength')" class="invalid-feedback">
+                                        la descripción de la prenda no debe superar los 100 caracteres.
+                                    </p>
+                                </div>
+                              </div>
+          
+                              <div class="flex-container-col">
+                                <div>
+                                    <label class="form-label" for="">Categoría</label>
+                                    <select class="dropdown-input" name="category" id="category" formControlName="category"
+                                    [ngClass]="{'is-invalid': isInvalid('category')}">
+                                        <option *ngFor="let ctg of categories" [value]="ctg.value" >{{ctg.description}}</option>>
+                                    </select>
+                                    <p *ngIf="hasError('category', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="">Telas</label>
+                                    <input type="hidden" class="hidden" formControlName="fabrics">
+                                    <div class="multi-dropdown" #fabricOptions>
+                                        <div class="multi-dropdown-input"
+                                        [ngClass]="{'border-color-primary': showFabricOpts, 'is-invalid': isInvalid('fabrics')}"
+                                        (click)="showFabricOpts = !showFabricOpts" tabindex="0"
+                                        >
+                                            <div class="selected-items">
+                                                <span class="chip-item" *ngFor="let sf of selectedFabrics">
+                                                    {{sf.description}}
+                                                    <i class="fas fa-times" (click)="removeSelectedItem(sf, EFEATURES.fabric)"></i>
+                                                </span>
+                                            </div>
+                                            <i class="fas fa-angle-down chevron-icon" [ngClass]="{'rotate-up': this.showFabricOpts}"></i>
+                                        </div>
+                                        <div class="multi-dropdown-options" *ngIf="showFabricOpts">
+                                            <p *ngFor="let fbc of fabrics" (click)="selectItem(fbc, EFEATURES.fabric)">{{fbc.description}}</p>
+                                        </div>
+                                    </div>
+                                    <p *ngIf="hasError('fabrics', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="">Ocasión/Eventos</label>
+                                    <input type="hidden" class="hidden" formControlName="occasions">
+                                    <div class="multi-dropdown" #occasionOptions>
+                                        <div class="multi-dropdown-input"
+                                        [ngClass]="{'border-color-primary': showOccasionOpts, 'is-invalid': isInvalid('occasions')}"
+                                        (click)="showOccasionOpts = !showOccasionOpts" tabindex="1"
+                                        >
+                                            <div class="selected-items">
+                                                <span class="chip-item" *ngFor="let so of selectedOccasions">
+                                                    {{so.description}}
+                                                    <i class="fas fa-times" (click)="removeSelectedItem(so, EFEATURES.occasion)"></i>
+                                                </span>
+                                            </div>
+                                            <i class="fas fa-angle-down chevron-icon" [ngClass]="{'rotate-up': this.showOccasionOpts}"></i>
+                                        </div>
+                                        <div class="multi-dropdown-options" *ngIf="showOccasionOpts">
+                                            <p *ngFor="let ocs of occasions" (click)="selectItem(ocs, EFEATURES.occasion)">{{ocs.description}}</p>
+                                        </div>
+                                    </div>
+                                    <p *ngIf="hasError('occasions', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="">Colores</label>
+                                    <input type="hidden" class="hidden" formControlName="colors">
+                                    <input class="form-input" id="" type="color" (change)="changeColor($event)"
+                                    [ngClass]="{'is-invalid': isInvalid('colors')}"
+                                    />
+                                    <div class="selected-items mt-2">
+                                        <div class="circle-color-garment mr-1" *ngFor="let sc of selectedColors" [style]="getItemColor(sc)" (click)="removeSelectedColor(sc)">
+                                            <div class="tooltip-remove">remover</div>
+                                        </div>
+                                    </div>
+                                    <p *ngIf="hasError('colors', 'required')" class="invalid-feedback">Este campo es requerido.</p>
+                                </div>
+          
+                                <div>
+                                    <label class="form-label" for="">Disponibilidad</label>
+                                    <div class="flex-container-row">
+                                        <div>
+                                            <input type="radio" formControlName="available" [value]="true" placeholder="hola">
+                                            <label class="label-radio" for="">Disponible</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" formControlName="available" [value]="false" placeholder="hola">
+                                            <label class="label-radio" for="">No disponible</label>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </form>
                     </div>
-
-                    <div *ngIf="showedit" class="flex-container-col">
-                      <div>
-                          <label class="form-label" for="">Categoría</label>
-                          <select class="dropdown-input" name="category" id="category" formControlName="category"
-                          [ngClass]="{'is-invalid': isInvalid('category')}">
-                              <option *ngFor="let ctg of categories" [value]="ctg.value" >{{ctg.description}}</option>>
-                          </select>
-                          <p *ngIf="hasError('category', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="">Telas</label>
-                          <input type="hidden" class="hidden" formControlName="fabrics">
-                          <div class="multi-dropdown" #fabricOptions>
-                              <div class="multi-dropdown-input"
-                              [ngClass]="{'border-color-primary': showFabricOpts, 'is-invalid': isInvalid('fabrics')}"
-                              (click)="showFabricOpts = !showFabricOpts" tabindex="0"
-                              >
-                                  <div class="selected-items">
-                                      <span class="chip-item" *ngFor="let sf of selectedFabrics">
-                                          {{sf.description}}
-                                          <i class="fas fa-times" (click)="removeSelectedItem(sf, EFEATURES.fabric)"></i>
-                                      </span>
-                                  </div>
-                                  <i class="fas fa-angle-down chevron-icon" [ngClass]="{'rotate-up': this.showFabricOpts}"></i>
-                              </div>
-                              <div class="multi-dropdown-options" *ngIf="showFabricOpts">
-                                  <p *ngFor="let fbc of fabrics" (click)="selectItem(fbc, EFEATURES.fabric)">{{fbc.description}}</p>
-                              </div>
-                          </div>
-                          <p *ngIf="hasError('fabrics', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="">Ocasión/Eventos</label>
-                          <input type="hidden" class="hidden" formControlName="occasions">
-                          <div class="multi-dropdown" #occasionOptions>
-                              <div class="multi-dropdown-input"
-                              [ngClass]="{'border-color-primary': showOccasionOpts, 'is-invalid': isInvalid('occasions')}"
-                              (click)="showOccasionOpts = !showOccasionOpts" tabindex="1"
-                              >
-                                  <div class="selected-items">
-                                      <span class="chip-item" *ngFor="let so of selectedOccasions">
-                                          {{so.description}}
-                                          <i class="fas fa-times" (click)="removeSelectedItem(so, EFEATURES.occasion)"></i>
-                                      </span>
-                                  </div>
-                                  <i class="fas fa-angle-down chevron-icon" [ngClass]="{'rotate-up': this.showOccasionOpts}"></i>
-                              </div>
-                              <div class="multi-dropdown-options" *ngIf="showOccasionOpts">
-                                  <p *ngFor="let ocs of occasions" (click)="selectItem(ocs, EFEATURES.occasion)">{{ocs.description}}</p>
-                              </div>
-                          </div>
-                          <p *ngIf="hasError('occasions', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="">Colores</label>
-                          <input type="hidden" class="hidden" formControlName="colors">
-                          <input class="form-input" id="" type="color" (change)="changeColor($event)"
-                          [ngClass]="{'is-invalid': isInvalid('colors')}"
-                          />
-                          <div class="selected-items mt-2">
-                              <div class="circle-color-garment mr-1" *ngFor="let sc of selectedColors" [style]="getItemColor(sc)" (click)="removeSelectedColor(sc)">
-                                  <div class="tooltip-remove">remover</div>
-                              </div>
-                          </div>
-                          <p *ngIf="hasError('colors', 'required')" class="invalid-feedback">Este campo es requerido.</p>
-                      </div>
-
-                      <div>
-                          <label class="form-label" for="">Disponibilidad</label>
-                          <div class="flex-container-row">
-                              <div>
-                                  <input type="radio" formControlName="available" [value]="true" placeholder="hola">
-                                  <label class="label-radio" for="">Disponible</label>
-                              </div>
-                              <div>
-                                  <input type="radio" formControlName="available" [value]="false" placeholder="hola">
-                                  <label class="label-radio" for="">No disponible</label>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-
                 </div>
 
                 <div class="image-view">
@@ -257,10 +259,12 @@
               >
               </app-button-primary-outlined>
               </div>
-            </form>
+            <!--<form  [formGroup]="garmentDataForm">
+              
+            </form>-->
         </div>
 
-        <div>
+        <div *ngIf="garmentDetail">
             <p class="font-semibold mb-3">Imágenes y Patrones</p>
 
             <div class="flex-container-col">
