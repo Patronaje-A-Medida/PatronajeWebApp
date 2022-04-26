@@ -57,3 +57,7 @@
 .tooltip-container:hover .tooltip-left {
   @apply opacity-100 -left-2;
 }
+
+.disabled-icon {
+  @apply text-gray-400 text-base;
+}

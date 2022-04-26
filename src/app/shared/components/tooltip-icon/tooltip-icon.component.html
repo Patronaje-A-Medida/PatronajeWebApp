@@ -1,6 +1,8 @@
-<div class="tooltip-container">
-    <a (click)="onClick()">
-        <i [class]="tooltipIcon"></i>
-    </a>
+<div *ngIf="!isDisabled" class="tooltip-container">
+    <i [class]="tooltipIcon" (click)="onClick()"></i>
     <div [class]="tooltipPosition">{{description}}</div>
+</div>
+
+<div *ngIf="isDisabled">
+    <i [class]="disabledIcon"></i>
 </div>

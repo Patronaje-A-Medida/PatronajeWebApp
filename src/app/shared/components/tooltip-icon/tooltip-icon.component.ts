@@ -10,6 +10,7 @@ export class TooltipIconComponent implements OnInit {
   @Input('icon') icon: string;
   @Input('description') description: string = '';
   @Input('position') position: string = 'bottom';
+  @Input('disabled') isDisabled: boolean = false;
   @Output('onClick') clickAction = new EventEmitter<void>();
 
   constructor() { }
@@ -19,6 +20,10 @@ export class TooltipIconComponent implements OnInit {
 
   get tooltipIcon() {
     return `${this.icon} tooltip-icon`;
+  }
+
+  get disabledIcon() {
+    return `${this.icon} disabled-icon`;
   }
 
   get tooltipPosition(): string {

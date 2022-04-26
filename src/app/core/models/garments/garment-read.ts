@@ -1,4 +1,5 @@
 export interface GarmentRead {
+  id: number;
   codeGarment: string;
   nameGarment: string;
   description: string;

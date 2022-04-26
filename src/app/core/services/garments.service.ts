@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { GarmentMin } from '../models/garments/garment-min';
 import { GarmentQuery } from '../models/garments/garment-query';
 import { GarmentRead } from '../models/garments/garment-read';
+import { GarmentUpdate } from '../models/garments/garment-update';
 import { GarmentWrite } from '../models/garments/garment-write';
 import { PagedResponse } from '../models/generics/paged-response';
 import { IMAGE_NOT_FOUND } from '../utils/assets.constants';
@@ -26,7 +27,7 @@ export class GarmentsService {
   ) { }
 
   getAllByQuery(
-    pageNumber: number = 1, 
+    pageNumber: number = 1,
     pageSize: number = 10,
     categories: number[],
     occasions: number[],
@@ -54,6 +55,11 @@ export class GarmentsService {
   save(body: GarmentWrite): Observable<boolean> {
     body.atelierId = this.userDataService.atelierId;
     return this.http.post<boolean>(`${this.URI_GARMENTS}/save`, body);
+  }
+
+  update(body: GarmentUpdate): Observable<boolean> {
+    body.atelierId = this.userDataService.atelierId;
+    return this.http.put<boolean>(`${this.URI_GARMENTS}/update`, body);
   }
 
   getDetail(codeGarment: string): Observable<GarmentRead> {
