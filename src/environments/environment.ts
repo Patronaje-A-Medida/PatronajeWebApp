@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   apiUrl: '*',
   apiAuthUrl: 'https://autenticacion-service.azurewebsites.net/api/v1',
-  apiGestionUrl: 'http://localhost:5010/api/v1',
-  /*apiGestionUrl: 'https://gestion-service.azurewebsites.net/api/v1',*/
+  //apiGestionUrl: 'http://localhost:5010/api/v1',
+  apiGestionUrl: 'https://gestion-service.azurewebsites.net/api/v1',
 };
 
 /*

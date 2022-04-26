@@ -83,15 +83,17 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       (params: any) => {
         this.codeGarment = params.codeGarment;
         this.getGarmentDetail();
-        //this.buildGarmentDataForm();
       }
     );
-    /*this._toogleOptionsSub = this.docEventsService.documentClickedTarget.subscribe(
+    this._toogleOptionsSub = this.docEventsService.documentClickedTarget.subscribe(
       target => this.documentClickListener(target)
-    );*/
+    );
   }
 
   private documentClickListener(target: any): void {
+
+    if(this.fabricOptions === undefined || this.occasionOptions === undefined) return;
+
     const clickedInside = this.fabricOptions.nativeElement.contains(target);
     if(!clickedInside) this.showFabricOpts = false;
 
@@ -115,38 +117,13 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  isInvalid(controlName: string): boolean {
-    const formControl = this.garmentDataForm.get(controlName);
-    return formControl.errors && formControl.touched;
-  }
-
-  hasError(controlName: string, validator: string): boolean {
-    const formControl = this.garmentDataForm.get(controlName);
-    return formControl.errors?.[validator] && formControl.touched;
-  }
-
   private getGarmentDetail() {
-
-
     this._garmentDetial$ = this.garmentService.getDetail(this.codeGarment).subscribe(
       res => {
         this.garmentDetail = res;
-        for (let aux of res.colors){
-          this.selectedColors.push(aux);
-        }
-        for (let aux1 of res.fabrics){
-          const fabric = this.fabrics.find(e => e.description === aux1);
-          this.selectedFabrics.push(fabric);
-        }
-        for (let aux2 of res.occasions){
-          const occasion = this.occasions.find(e => e.description === aux2);
-          this.selectedOccasions.push(occasion);
-        }
-        console.log(res);
+        this.setGarmentFeatures(this.garmentDetail);
         this.selectedCategory = this.categories.find(e => e.description === res.category);
         this._selectedImage = this.garmentDetail.images[0];
-
         this.buildGarmentDataForm()
       },
       err => {
@@ -156,7 +133,45 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
         this.showAlert = true;
       }
     );
+  }
 
+  private resetForm(): void {
+    this.garmentDataForm.reset();
+    /*this.selectedFabrics = [];
+    this.selectedOccasions = [];
+    this.selectedColors = [];
+    this.categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);*/
+    this.setGarmentFeatures(this.garmentDetail);
+    this.buildGarmentDataForm();
+  }
+
+  private setGarmentFeatures(grmt: GarmentRead): void {
+    this.selectedFabrics = [];
+    this.selectedOccasions = [];
+    this.selectedColors = [];
+    this.categories = Array.from<TypeRead>(this.configurationTypesService.categoryTypes);
+
+    for (let aux of grmt.colors){
+      this.selectedColors.push(aux);
+    }
+    for (let aux1 of grmt.fabrics){
+      const fabric = this.fabrics.find(e => e.description === aux1);
+      this.selectedFabrics.push(fabric);
+    }
+    for (let aux2 of grmt.occasions){
+      const occasion = this.occasions.find(e => e.description === aux2);
+      this.selectedOccasions.push(occasion);
+    }
+  }
+
+  isInvalid(controlName: string): boolean {
+    const formControl = this.garmentDataForm.get(controlName);
+    return formControl.errors && formControl.touched;
+  }
+
+  hasError(controlName: string, validator: string): boolean {
+    const formControl = this.garmentDataForm.get(controlName);
+    return formControl.errors?.[validator] && formControl.touched;
   }
 
   removeSelectedItem(item: TypeRead, feature: number): void {
@@ -245,6 +260,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
 
   buildGarmentData(): void {
 
+    if(this.garmentDataForm.invalid) return;
 
     const {
       codeGarment,
@@ -260,6 +276,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
     } = this.garmentDataForm.value;
 
     this.newgarmentData = {
+      id: this.garmentDetail.id,
       codeGarment,
       nameGarment,
       firstRangePrice,
@@ -272,8 +289,6 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       images: [],
       patterns: [],
     }
-
-    console.log(fabrics);
 
     const fabricFeatures: FeatureGarmentUpdate[] = fabrics.map((e:TypeRead) => {
       return {
@@ -307,15 +322,18 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       ...colorFeatures
     );
 
-    console.log(this.newgarmentData);
     this.isSaving = true;
+
+    console.log(this.newgarmentData);
+
     this.garmentService.update(this.newgarmentData).subscribe(
-      res => {
-        this.messageAlert = 'Prenda agregada al catálogo con éxito';
+      _ => {
+        this.messageAlert = 'Prenda actualizada con éxito';
         this.typeAlert = 'success';
         this.showAlert = true;
         this.isSaving = false;
         this.getGarmentDetail();
+        this._toogleOptionsSub.unsubscribe();
         this.showedit = false;
       },
       err => {
@@ -323,7 +341,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
         this.typeAlert = 'error';
         this.showAlert = true;
         this.isSaving = false;
-        this.showedit = false;
+        this.hideEditMode();
       }
     );
 
@@ -349,15 +367,21 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
   }
 
   showEditMode(): void {
-    this.showedit = !this.showedit;
+    this.showedit = true;
     this._toogleOptionsSub = this.docEventsService.documentClickedTarget.subscribe(
       target => this.documentClickListener(target)
     );
+  }
 
+  hideEditMode(): void {
+    this.showedit = false;
+    this.resetForm();
+    this._toogleOptionsSub.unsubscribe();
   }
 
   ngOnDestroy(): void {
     this._garmentDetial$.unsubscribe();
+    this._toogleOptionsSub.unsubscribe();
   }
 
 }

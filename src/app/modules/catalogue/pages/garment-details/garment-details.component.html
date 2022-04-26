@@ -3,24 +3,24 @@
 
     <div class="basic-card flex-container-col">
 
-
         <div *ngIf="garmentDetail">
             <div class="flex-title">
-                <p class="font-semibold">Datos de la prenda
-
-                  <app-button-primary-filled *ngIf="!showedit" [text]="'Editar'" [icon]="'fas fa-edit'" (onClick)="showEditMode()">
-                  </app-button-primary-filled>
-                </p>
+                <div class="flex flex-row gap-x-3">
+                    <p class="font-semibold"> Datos de la prenda</p>
+                    <app-tooltip-icon *ngIf="!showedit" [icon]="'fas fa-edit'" [description]="'Editar'" (onClick)="showEditMode()"></app-tooltip-icon>
+                    <app-tooltip-icon *ngIf="showedit" [icon]="'fas fa-save'" [description]="'Guardar'" (onClick)="buildGarmentData()" [disabled]="isSaving"></app-tooltip-icon>
+                    <app-tooltip-icon *ngIf="showedit" [icon]="'fas fa-times'" [description]="'Cancelar'" (onClick)="hideEditMode()" [disabled]="isSaving"></app-tooltip-icon>
+                </div>
 
                 <div class="flex gap-x-2 justify-center">
                     <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
                     </app-button-primary-outlined>
                 </div>
             </div>
-            <div class="flex-container-row">
-                <div class="flex-responsive-1 flex-1">
 
-                    <div *ngIf="!showedit" class="flex-container-col">
+            <div class="flex-container-row">
+                <div *ngIf="!showedit" class="flex-responsive-1 flex-1">
+                    <div  class="flex-container-col">
                         <div>
                             <p class="detail-label">Código de prenda</p>
                             <p>{{garmentDetail.codeGarment}}</p>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="!showedit" class="flex-container-col">
+                    <div class="flex-container-col">
                         <div>
                             <p class="detail-label">Categoría</p>
                             <p>{{garmentDetail.category}}</p>
@@ -79,26 +79,28 @@
                             <p class="detail-label">Colores</p>
                             <div class="flex gap-x-2">
                                 <ng-container *ngFor="let color of garmentDetail.colors; let k = index">
-                                    <div class="circle-color-garment" [style]="colorGarment(color)"></div>
+                                    <div class="circle-color-garment cursor-wait" [style]="colorGarment(color)"></div>
                                 </ng-container>
                             </div>
                         </div>
 
                         <div>
                             <p class="detail-label">Disponibilidad</p>
-                            <div class="flex gap-x-2">
-                                <div class="circle-color-garment" [style]="colorAvailable(garmentDetail.available)"></div>
+                            <div class="flex gap-x-2 items-center">
+                                <div class="circle-availability-garment" [style]="colorAvailable(garmentDetail.available)"></div>
                                 {{garmentDetail.available ? 'Disponible' : 'No disponible'}}
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div *ngIf="showedit">
-                        <form [formGroup]="garmentDataForm">
+                <ng-container *ngIf="showedit">
+                    <form [formGroup]="garmentDataForm">
+                        <div class="flex-responsive-1 flex-1">
                             <div  class="flex-container-col">
                                 <div>
                                     <label class="form-label" for="codeGarment">Código de prenda</label>
-                                    <input class="form-input" id="codeGarment" type="text" formControlName="codeGarment" maxlength="100"
+                                    <input class="form-input" id="codeGarment" type="text" formControlName="codeGarment" maxlength="100" readonly
                                     [ngClass]="{'is-invalid': isInvalid('codeGarment')}"/>
                                     <p *ngIf="hasError('codeGarment', 'required')" class="invalid-feedback">Este campo es requerido.</p>
                                 </div>
@@ -150,9 +152,9 @@
                                         la descripción de la prenda no debe superar los 100 caracteres.
                                     </p>
                                 </div>
-                              </div>
-          
-                              <div class="flex-container-col">
+                            </div>
+
+                            <div class="flex-container-col">
                                 <div>
                                     <label class="form-label" for="">Categoría</label>
                                     <select class="dropdown-input" name="category" id="category" formControlName="category"
@@ -226,19 +228,19 @@
                                     <label class="form-label" for="">Disponibilidad</label>
                                     <div class="flex-container-row">
                                         <div>
-                                            <input type="radio" formControlName="available" [value]="true" placeholder="hola">
+                                            <input type="radio" formControlName="available" [value]="true">
                                             <label class="label-radio" for="">Disponible</label>
                                         </div>
                                         <div>
-                                            <input type="radio" formControlName="available" [value]="false" placeholder="hola">
+                                            <input type="radio" formControlName="available" [value]="false">
                                             <label class="label-radio" for="">No disponible</label>
                                         </div>
                                     </div>
                                 </div>
-                              </div>
-                        </form>
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-container>
 
                 <div class="image-view">
                     <div class="basic-card">
@@ -246,22 +248,6 @@
                     </div>
                 </div>
               </div>
-              <div *ngIf="showedit" class="flex-container-center">
-              <app-button-primary-filled *ngIf="!isSaving" [text]="'Guardar'" [icon]="'fas fa-save'"
-              (onClick)="buildGarmentData()"
-              >
-              </app-button-primary-filled>
-
-              <app-button-loading *ngIf="isSaving"></app-button-loading>
-
-              <app-button-primary-outlined [text]="'Cancelar'" [icon]="'fas fa-times'" [disabled]="isSaving"
-              (onClick)="showedit = !showedit"
-              >
-              </app-button-primary-outlined>
-              </div>
-            <!--<form  [formGroup]="garmentDataForm">
-              
-            </form>-->
         </div>
 
         <div *ngIf="garmentDetail">
@@ -308,4 +294,6 @@
     </div>
 </div>
 
+<app-snack-bar [message]="messageAlert" [type]="typeAlert" [(showSnack)]="showAlert">
+</app-snack-bar>
 

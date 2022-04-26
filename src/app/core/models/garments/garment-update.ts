@@ -2,6 +2,7 @@ import { FeatureGarmentUpdate } from './feature-garment-update';
 import { GarmentImageFile } from './garment-image-file';
 
 export interface GarmentUpdate {
+  id: number;
   codeGarment: string;
   nameGarment: string;
   description: string;

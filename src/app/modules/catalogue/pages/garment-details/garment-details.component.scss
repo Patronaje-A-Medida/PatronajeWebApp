@@ -17,7 +17,7 @@
 .basic-card img {
   width: 350px;
   height: 350px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .flex-container-preview-imgs {
@@ -204,6 +204,13 @@ input[type="color"] {
   cursor: pointer;
 }
 
+.circle-availability-garment {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
 .tooltip-remove {
   transition: 0.3s;
   left: -75%;
@@ -305,4 +312,9 @@ input[type='radio']:checked:after {
 .flex-container-col{
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.icon-btn {
+  @apply text-skin-primary-base hover:text-skin-primary-900
+    cursor-pointer;
 }
