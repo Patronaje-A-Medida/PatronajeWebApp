@@ -153,7 +153,7 @@
                     <input class="hidden" type="file" accept="image/*" #inputImgHidden formControlName="images" 
                     (change)="fileSelected($event, EFEATURES.images)" multiple/>
                     <p *ngIf="garmentForm.controls['images'].touched && uploadImageFiles.length == 0" class="invalid-feedback mb-2">
-                        Agregar al menos 1 imágen de la prenda.
+                        Agregar al menos 1 imagen de la prenda.
                     </p>
                     <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-camera'" (onClick)="inputImgHidden.click()">
                     </app-button-primary-outlined>

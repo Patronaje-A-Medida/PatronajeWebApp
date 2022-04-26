@@ -251,39 +251,82 @@
         </div>
 
         <div *ngIf="garmentDetail">
-            <p class="font-semibold mb-3">Imágenes y Patrones</p>
+            <!--<p class="font-semibold mb-3">Imágenes y Patrones</p>-->
+
+            <div class="flex flex-row gap-x-3 mb-3">
+                <p class="font-semibold">Imágenes y Patrones</p>
+                <app-tooltip-icon *ngIf="!editModeImages" [icon]="'fas fa-edit'" [description]="'Editar'" (onClick)="showEditModeImages()"></app-tooltip-icon>
+                <app-tooltip-icon *ngIf="editModeImages" [icon]="'fas fa-save'" [description]="'Guardar'" (onClick)="updateGarmentImagesAndPatterns()" [disabled]="isSaving"></app-tooltip-icon>
+                <app-tooltip-icon *ngIf="editModeImages" [icon]="'fas fa-times'" [description]="'Cancelar'" (onClick)="hideEditModeImages()" [disabled]="isSaving"></app-tooltip-icon>
+            </div>
 
             <div class="flex-container-col">
                 <div>
                     <p class="detail-label mb-3">Imágenes de catálogo</p>
-                    <div class="flex-container-preview-imgs" >
+                                        
+                    <div *ngIf="!editModeImages" class="flex-container-preview-imgs" >
                         <ng-container *ngIf="garmentDetail.images.length > 0; else noimages">
                             <div class="preview-img" *ngFor="let img of garmentDetail.images"
-                            [ngClass]="{'border-selected-img': borderImagePreview(img)}"
+                            [ngClass]="{'border-selected-img': borderImagePreview(img.value)}"
                             >
-                                <img [src]="img" (click)="selectImageToView(img)">
+                                <img [src]="img.value" (click)="selectImageToView(img.value)">
                             </div>
                         </ng-container>
                         <ng-template #noimages>
                             <p class="no-images-text">No posee imágenes de catálogo añadidos</p>
                         </ng-template>
                     </div>
+
+                    <ng-container *ngIf="editModeImages">
+                        <input class="hidden" type="file" accept="image/*" #inputImgHidden
+                        (change)="fileSelected($event, EFEATURES.images)" multiple/>
+
+                        <p *ngIf="uploadImageFiles.length == 0" class="invalid-feedback mb-2">
+                            Agregar al menos 1 imágen de la prenda.
+                        </p>
+
+                        <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-camera'" (onClick)="inputImgHidden.click()">
+                        </app-button-primary-outlined>
+                        <div class="flex-container-preview-imgs mt-4">
+                            <div *ngFor="let img of uploadImageFiles; let i = index" class="preview-img">
+                                <img [src]="img.image" (click)="zoomSelectedImage(img.image)"/>
+                                <i class="fas fa-times delete-icon" (click)="removeImage(i, EFEATURES.images)"></i>
+                            </div>
+                        </div>
+                    </ng-container>
+
                 </div>
 
                 <div>
                     <p class="detail-label mb-3">Patrónes de confección</p>
-                    <div class="flex-container-preview-imgs">
+                    <div *ngIf="!editModeImages" class="flex-container-preview-imgs">
                         <ng-container *ngIf="garmentDetail.patterns.length > 0; else nopatterns">
                             <div class="preview-img"*ngFor="let pttrn of garmentDetail.patterns"
-                            [ngClass]="{'border-selected-img': borderImagePreview(pttrn)}"
+                            [ngClass]="{'border-selected-img': borderImagePreview(pttrn.imagePattern)}"
                             >
-                                <img [src]="pttrn" (click)="selectImageToView(pttrn)">
+                                <img [src]="pttrn.imagePattern" (click)="selectImageToView(pttrn.imagePattern)">
                             </div>
                         </ng-container>
                         <ng-template #nopatterns>
                             <p class="no-images-text">No posee patrones de confección añadidos</p>
                         </ng-template>
                     </div>
+
+                    <ng-container *ngIf="editModeImages">
+                        <input class="hidden" type="file" accept="image/*" #inputPttrnHidden formControlName="patterns" 
+                        (change)="fileSelected($event, EFEATURES.patterns)" multiple/>
+                        <p *ngIf="uploadPatterns.length == 0" class="invalid-feedback mb-2">
+                            Agregar al menos 1 patrón de la prenda.
+                        </p>
+                        <app-button-primary-outlined [text]="'Agregar'" [icon]="'fas fa-camera'" (onClick)="inputPttrnHidden.click()">
+                        </app-button-primary-outlined>  
+                        <div class="flex-container-preview-imgs mt-2">
+                            <div *ngFor="let ptrn of uploadPatterns; let j = index" class="preview-img">
+                                <img [src]="ptrn" (click)="zoomSelectedImage(ptrn)"/>
+                                <i class="fas fa-times delete-icon" (click)="removeImage(j, EFEATURES.patterns)"></i>
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </div>

@@ -15,6 +15,10 @@ import { CunstomValidators } from 'src/app/core/utils/custom.validator';
 import { EnumFeatures, EnumFeaturesString } from 'src/app/core/utils/features.enum';
 import { RGXP_NUMBER_PRICE } from 'src/app/core/utils/regex.constants';
 import { DocumentEventsService } from 'src/app/shared/services/document-events.service';
+import { GarmentUpdateFile } from 'src/app/core/models/garments/garment-update-file';
+import { GarmentUpdateImages } from 'src/app/core/models/garments/garment-update-images';
+import { ImageUtil } from 'src/app/core/utils/images.util';
+import { PatternGarmentMin } from 'src/app/core/models/pattern-garments/pattern-garment-min';
 
 @Component({
   selector: 'app-garment-details',
@@ -26,6 +30,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   showZoomImage: boolean = false;
   showedit: boolean = false;
+  editModeImages: boolean = false;
   showAlert: boolean;
   messageAlert: string;
   typeAlert: string;
@@ -45,6 +50,9 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
   selectedFabrics: TypeRead[] = [];
   selectedOccasions: TypeRead[] = [];
   selectedColors: string[] = [];
+  uploadImageFiles: GarmentUpdateFile[] = [];
+  uploadPatterns: any[] = [];
+  uploadPatternFiles: GarmentUpdateFile[] = [];
 
   isSaving: boolean = false;
 
@@ -123,7 +131,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
         this.garmentDetail = res;
         this.setGarmentFeatures(this.garmentDetail);
         this.selectedCategory = this.categories.find(e => e.description === res.category);
-        this._selectedImage = this.garmentDetail.images[0];
+        this._selectedImage = this.garmentDetail.images[0].value;
         this.buildGarmentDataForm()
       },
       err => {
@@ -373,10 +381,156 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  showEditModeImages(): void {
+    this.editModeImages = true;
+    this.uploadImageFiles = [];
+    this.uploadPatterns = [];
+    this.uploadPatternFiles = []
+    this.uploadImageFiles = this.garmentDetail.images.map(e => {
+      return {
+        id: e.id,
+        image: e.value,
+        fileName: '',
+        folderPath: 'garments',
+      } as GarmentUpdateFile
+    });
+    this.uploadPatternFiles = this.garmentDetail.patterns.map(e => {
+      return {
+        id: e.id,
+        image: e.imagePattern,
+        fileName: '',
+        folderPath: 'patterns',
+      } as GarmentUpdateFile
+    });
+    this.uploadPatterns = this.garmentDetail.patterns.map(e => e.imagePattern);
+  }
+
   hideEditMode(): void {
     this.showedit = false;
     this.resetForm();
     this._toogleOptionsSub.unsubscribe();
+  }
+
+  hideEditModeImages(): void {
+    this.editModeImages = false;
+  }
+
+  fileSelected($event: any, feature: number): void {
+    let files: File[] = [];
+    files.push(...$event.target.files);
+
+    if(files.filter(e => !e.type.match('image/*')).length > 0) {
+      this.messageAlert = 'Los archivos que no son imágenes serán descartados';
+      this.typeAlert = 'warning',
+      this.showAlert = true;
+    }
+
+    const filterFiles = files.filter(e => e.type.match('image/*'));
+    if(filterFiles.length == 0) return;
+
+    switch(feature) {
+      case this.EFEATURES.images:
+        filterFiles.forEach(e => {
+          ImageUtil.resizeImage(e, 640).subscribe(
+            newFile => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                this.uploadImageFiles.push({
+                  id: 0,
+                  image: String(reader.result), 
+                  fileName: newFile.name, 
+                  folderPath: 'garments'
+                });
+              }
+              reader.readAsDataURL(newFile);
+            }
+          );
+        });
+        break;
+        case this.EFEATURES.patterns:
+          filterFiles.forEach(e => {
+            // imagen de tamaño original para mejor calidad de procesamiento
+            const reader = new FileReader();
+            reader.onload = () => {
+              this.uploadPatternFiles.push({
+                id: 0,
+                image: String(reader.result),
+                fileName: e.name,
+                folderPath: 'patterns'
+              });
+            };
+            reader.readAsDataURL(e);
+  
+            // imagen de scalada para mejor visualización
+            ImageUtil.resizeImage(e, 640).subscribe(
+              newFile => {
+                const reader2 = new FileReader();
+                reader2.onload = () => this.uploadPatterns.push(reader2.result);
+                reader2.readAsDataURL(newFile);
+              }
+            );
+          });
+          break;
+    }
+
+    $event.target.value = '';
+  }
+
+  removeImage(idx: number, feature: number) {
+    if(feature == this.EFEATURES.images)
+      this.uploadImageFiles = this.uploadImageFiles.filter((_, index) => index !== idx);
+    else {
+      this.uploadPatterns = this.uploadPatterns.filter((_, index) => index !== idx);
+      this.uploadPatternFiles = this.uploadPatternFiles.filter((_, index) => index !== idx);
+    }
+  }
+
+  updateGarmentImagesAndPatterns() {
+    const garmentUpdateImages: GarmentUpdateImages = {
+      codeGarment: this.garmentDetail.codeGarment,
+      atelierId: 0,
+      images: this.uploadImageFiles,
+    };
+
+    const garmetUpdatePatterns: GarmentUpdateImages = {
+      codeGarment: this.garmentDetail.codeGarment,
+      atelierId: 0,
+      images: this.uploadPatternFiles,
+    }
+
+    console.log(garmentUpdateImages);
+    
+    this.isSaving = true;
+    this.garmentService.updateImages(garmentUpdateImages).subscribe(
+      res => {
+        this.garmentService.updatePatterns(garmetUpdatePatterns).subscribe(
+          res2 => {
+            this.messageAlert = 'Prenda actualizada con éxito';
+            this.typeAlert = 'success';
+            this.showAlert = true;
+            this.getGarmentDetail();
+            //this._toogleOptionsSub.unsubscribe();
+            setTimeout(() => {
+              this.editModeImages = false;
+              this.isSaving = false;
+            }, 2000);
+          },
+          err2 => {
+            this.messageAlert = err2.message;
+            this.typeAlert = 'error'
+            this.showAlert = true;
+            this.isSaving = false;
+          }
+        );
+      },
+      (err) => {
+        this.messageAlert = err.message;
+        this.typeAlert = 'error'
+        this.showAlert = true;
+        this.isSaving = false;
+      }
+    );
+
   }
 
   ngOnDestroy(): void {
