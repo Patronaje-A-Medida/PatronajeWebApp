@@ -2,7 +2,7 @@
 FROM node:latest as node
 WORKDIR /app
 COPY ./ /app/
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm run build:docker
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
