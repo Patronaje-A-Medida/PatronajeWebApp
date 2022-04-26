@@ -1,3 +1,6 @@
+import { PatternGarmentMin } from "../pattern-garments/pattern-garment-min";
+import { FeatureGarmentMin } from "./feature-garment-min";
+
 export interface GarmentRead {
   id: number;
   codeGarment: string;
@@ -11,6 +14,7 @@ export interface GarmentRead {
   colors: string[];
   fabrics: string[];
   occasions: string[];
-  images: string[];
-  patterns: string[];
+  //images: string[];
+  images: FeatureGarmentMin[];
+  patterns: PatternGarmentMin[];
 }

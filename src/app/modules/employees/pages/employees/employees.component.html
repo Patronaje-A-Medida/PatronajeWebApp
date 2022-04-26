@@ -2,8 +2,8 @@
   <app-tittle-page [tittle]="'Personal'"></app-tittle-page>
 
   <div class="query-container">
-    <div class="basic-container">
-      <app-button-primary-filled [text]="'Crear'" (onClick)="createEmployee()"></app-button-primary-filled>
+    <div class="">
+      <app-button-primary-filled [text]="'Crear'" [icon]="'fas fa-plus'" (onClick)="createEmployee()"></app-button-primary-filled>
     </div>
   </div>
 </div>
@@ -16,8 +16,8 @@
                   <tr>
                       <th scope="col" class="table-base-th">Nombre</th>
                       <th scope="col" class="table-base-th">Apellido</th>
-                      <th scope="col" class="table-base-th">Correo</th>
                       <th scope="col" class="table-base-th">DNI</th>
+                      <th scope="col" class="table-base-th">Correo</th>
                   </tr>
               </thead>
               <tbody class="table-base-body">

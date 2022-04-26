@@ -7,6 +7,7 @@ import { GarmentMin } from '../models/garments/garment-min';
 import { GarmentQuery } from '../models/garments/garment-query';
 import { GarmentRead } from '../models/garments/garment-read';
 import { GarmentUpdate } from '../models/garments/garment-update';
+import { GarmentUpdateImages } from '../models/garments/garment-update-images';
 import { GarmentWrite } from '../models/garments/garment-write';
 import { PagedResponse } from '../models/generics/paged-response';
 import { IMAGE_NOT_FOUND } from '../utils/assets.constants';
@@ -57,11 +58,6 @@ export class GarmentsService {
     return this.http.post<boolean>(`${this.URI_GARMENTS}/save`, body);
   }
 
-  update(body: GarmentUpdate): Observable<boolean> {
-    body.atelierId = this.userDataService.atelierId;
-    return this.http.put<boolean>(`${this.URI_GARMENTS}/update`, body);
-  }
-
   getDetail(codeGarment: string): Observable<GarmentRead> {
     const atelierId = this.userDataService.atelierId;
     const params = new HttpParams()
@@ -69,5 +65,20 @@ export class GarmentsService {
     .set('atelierId', String(atelierId));
 
     return this.http.get<GarmentRead>(`${this.URI_GARMENTS}/details/web`, { params: params });
+  }
+
+  update(body: GarmentUpdate): Observable<boolean> {
+    body.atelierId = this.userDataService.atelierId;
+    return this.http.put<boolean>(`${this.URI_GARMENTS}/update`, body);
+  }
+
+  updateImages(body: GarmentUpdateImages): Observable<boolean> {
+    body.atelierId = this.userDataService.atelierId;
+    return this.http.put<boolean>(`${this.URI_GARMENTS}/update-images`, body);
+  }
+
+  updatePatterns(body: GarmentUpdateImages): Observable<boolean> {
+    body.atelierId = this.userDataService.atelierId;
+    return this.http.put<boolean>(`${this.URI_GARMENTS}/update-patterns`, body);
   }
 }

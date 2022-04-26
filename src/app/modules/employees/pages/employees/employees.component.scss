@@ -133,3 +133,8 @@
   font-size: 1.5rem;
   @apply bg-gray-300;
 }
+
+.query-container {
+  display: flex;
+  justify-content: end;
+}
