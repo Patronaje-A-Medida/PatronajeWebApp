@@ -328,3 +328,50 @@ button {
 .basic-card {
   @apply bg-white rounded-lg shadow-md text-base py-6 px-4;
 }
+
+
+/* owl carousel */
+.banner .owl-next, .banner .owl-prev{
+  width: 110px;
+  height: 110px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent  !important;
+}
+
+.banner .owl-prev{
+  left:15px;
+}
+.banner .owl-next{
+  right:-60px;
+}
+.banner .owl-prev::before, .banner .owl-next::before{
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  background: #F49D4E;
+  content: '';
+  border-radius: 50%;
+}
+
+.banner .owl-prev::before{
+    left: 55px;
+}
+
+.banner .owl-next::before{
+  right: -25px;
+}
+
+.banner .owl-next i, .banner .owl-prev i{
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner .owl-next i{
+  right: 0;
+}
