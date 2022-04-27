@@ -65,6 +65,10 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['..'], {relativeTo: this.route});
   }
 
+  navigateToPattern(): void {
+    this.router.navigate(['/orders/details/pattern'], {relativeTo: this.route});
+  }
+
   ngOnDestroy(): void {
     this._orderDetail$.unsubscribe();
   }

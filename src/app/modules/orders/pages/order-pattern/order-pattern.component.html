@@ -1,0 +1,148 @@
+<div class="basic-container">
+    <app-tittle-page [tittle]="'Generar patrones escalados'"></app-tittle-page>
+</div>
+
+<div class="basic-container" >
+  <div class="details-card">
+    <div class="flex justify-between mt-4 mb-3">
+      <p class="subtitle-client"></p>
+
+      <div class="flex gap-x-4">
+        <app-button-primary-outlined [text]="'Atrás'" [icon]="'fas fa-arrow-left'" (onClick)="navigateToBack()">
+        </app-button-primary-outlined>
+        <app-button-primary-filled [text]="'Exportar'" [icon]="'fas fa-file-export'" (onClick)="savePattern()">
+        </app-button-primary-filled>
+      </div>
+    </div>
+
+    <div class="details-section-card">
+        <div class="details-garment" >
+          <section class="banner">
+            <owl-carousel-o [options]="customOptions">
+              <ng-template carouselSlide>
+                  <img class="fixed-image" src="assets/images/image 11.png">
+              </ng-template>
+              <ng-template carouselSlide>
+                <img class="fixed-image" src="assets/images/image 12.png">
+              </ng-template>
+              <ng-template carouselSlide>
+                <img class="fixed-image" src="assets/images/image 13.png">
+              </ng-template>
+            </owl-carousel-o>
+          </section>
+        </div>
+
+        <div class="details-garment">
+
+            <div class="container-table">
+                <div class="table-rounded">
+                    <div class="responsive-table">
+                        <table class="body-params-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Medida</th>
+                                    <th scope="col">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Contorno de pecho</td>
+                                    <td>90 cm </td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de cintura</td>
+                                    <td>85 cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de cadera (10cm de la cintura)</td>
+                                    <td>45 cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de cadera (20cm de la cintura)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Alto de talle de la espalda</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Alto de talle delantero</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Alto de pecho</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Alto de las caderas (a 10 cm de la cintura)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Alto de las caderas (a 20 cm de la cintura)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Separación del pecho</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Ancho de espalda</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Ancho de busto</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de cuello</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Ancho de hombro</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Largo de brazo</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de brazo</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de la muñeca</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Entrepierna o tiro</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Entrepierna delantera</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Entrepierna trasera</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Ancho de muslo</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de Pantorrilla</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Contorno de rodilla</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
