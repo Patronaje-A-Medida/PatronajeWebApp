@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import * as jsPDF from 'jspdf';
+import { MeasurementsService } from 'src/app/core/services/measurements.service';
+import { Measurements } from 'src/app/core/models/measurements/measurements';
 
 @Component({
   selector: 'app-order-pattern',
@@ -12,45 +14,13 @@ import * as jsPDF from 'jspdf';
 export class OrderPatternComponent implements OnInit {
 
   @ViewChild('table',{static:false}) el!: ElementRef
-  currentIndexSlide: number;
+  @ViewChild('table2',{static:false}) el2!: ElementRef
+  currentIndexSlide: number = 0;
+  clientId: number = 3;
+  measurements: Measurements[] = [];
 
-  espalda = [
-   { 'segmento': "A->C",'value': 45},
-    { 'segmento': "A->B ", 'value': 45},
-    { 'segmento': "A->E", 'value': 44},
-    { 'segmento': "A->F",    'value': 44},
-    { 'segmento': "C->G",    'value': 44},
-    { 'segmento': "E->H",    'value': 44},
-    { 'segmento': "D->I",    'value': 44},
-    { 'segmento': "J->K",    'value': 44},
-    { 'segmento': "B->M",    'value': 44},
-    { 'segmento': "M->N",    'value': 44},
-    { 'segmento': "M->M1",    'value': 44},
-    { 'segmento': "N->N1",    'value': 44},
-    { 'segmento': "B->O",    'value': 44},
-    { 'segmento': "B->P",    'value': 44},
-    { 'segmento': "P->Q",    'value': 44},
-
-  ]
-  delantero = [
-    { 'segmento': "A->C",'value': 44},
-     { 'segmento': "A->B ", 'value': 44},
-     { 'segmento': "A->E", 'value': 44},
-     { 'segmento': "A->F",    'value': 44},
-     { 'segmento': "C->G",    'value': 44},
-     { 'segmento': "E->H",    'value': 44},
-     { 'segmento': "D->I",    'value': 44},
-     { 'segmento': "J->K",    'value': 44},
-     { 'segmento': "K->K1",    'value': 44},
-     { 'segmento': "B->M",    'value': 44},
-    { 'segmento': "M->N",    'value': 44},
-    { 'segmento': "M->M1",    'value': 44},
-    { 'segmento': "N->N1",    'value': 44},
-    { 'segmento': "B->O",    'value': 44},
-    { 'segmento': "B->P",    'value': 44},
-    { 'segmento': "P->Q",    'value': 44},
- 
-   ]
+  espalda = [];
+  delantero = [];
 
   customOptions: OwlOptions = {
     loop: true,
@@ -81,9 +51,55 @@ export class OrderPatternComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
+    private measurementsService: MeasurementsService,
   ) { }
 
   ngOnInit(): void {
+    this.getMeasurements();
+  }
+
+  getMeasurements() {
+    this.measurementsService.getLastMeasurements(this.clientId).subscribe(
+      res => {
+        this.measurements = res.measurements;
+        this.espalda = [
+          { 'segmento': "A->C",'value': (this.measurements[13].value/4) -1},
+          { 'segmento': "A->B ", 'value': this.measurements[6].value},
+          { 'segmento': "A->E", 'value': (this.measurements[14].value/4) - 1},
+          { 'segmento': "A->F",    'value': 2},
+          { 'segmento': "C->G",    'value': 3},
+          { 'segmento': "E->H",    'value': 12},
+          { 'segmento': "D->I",    'value': 21},
+          { 'segmento': "J->K",    'value': (this.measurements[12].value/2) + 1},
+          { 'segmento': "B->M",    'value': this.measurements[9].value},
+          { 'segmento': "M->N",    'value': 55-this.measurements[9].value},
+          { 'segmento': "M->M1",    'value': (this.measurements[5].value/4) - 1},
+          { 'segmento': "N->N1",    'value': (this.measurements[5].value/4) - 1},
+          { 'segmento': "B->O",    'value': (this.measurements[3].value/4) + 2},
+          { 'segmento': "B->P",    'value': ((this.measurements[3].value/4) + 2) / 2},
+          { 'segmento': "P->Q",    'value': 14},
+      
+        ];
+        this.delantero = [
+          { 'segmento': "A->C",'value': (this.measurements[1].value/4) +1},
+           { 'segmento': "A->B ", 'value':this.measurements[7].value},
+           { 'segmento': "A->E", 'value': (this.measurements[14].value/4) -1},
+           { 'segmento': "A->F",    'value': (this.measurements[14].value/4)},
+           { 'segmento': "C->G",    'value': 4},
+           { 'segmento': "E->H",    'value': 12},
+           { 'segmento': "D->I",    'value': 21},
+           { 'segmento': "J->K",    'value': (this.measurements[12].value/2) +1},
+           { 'segmento': "K->K1",    'value': 2.7},
+           { 'segmento': "B->M",    'value': this.measurements[9].value},
+          { 'segmento': "M->N",    'value': 55-this.measurements[9].value},
+          { 'segmento': "M->M1",    'value': (this.measurements[5].value/4) - 1},
+          { 'segmento': "N->N1",    'value': (this.measurements[5].value/4) - 1},
+          { 'segmento': "B->O",    'value': (this.measurements[3].value/4) + 2},
+          { 'segmento': "B->P",    'value': ((this.measurements[3].value/4) + 2) / 2},
+          { 'segmento': "P->Q",    'value': 14},
+         ];
+      }
+    );
   }
 
   navigateToBack() {
@@ -104,16 +120,28 @@ export class OrderPatternComponent implements OnInit {
       }
     };
     doc.fromHTML(content.innerHTML,10,0,{
-
       'width':500,
       'elementHandlers':_elementHandlers
     });
     var img = new Image()
-    img.src = 'assets/images/image 11.png'
+    img.src = 'assets/images/patron_vestido_01_01.png'
 
-    doc.addImage(img, 'png', 0, 150)
+    doc.addImage(img, 'png', 10, 120);
 
-    doc.save('test.pdf');
+    //
+
+    let doc2 = new jsPDF();
+    doc2.fromHTML(content.innerHTML,10,0,{
+      'width':500,
+      'elementHandlers':_elementHandlers
+    });
+
+    var img2 = new Image();
+    img2.src = 'assets/images/patron_vestido_01_02.png';
+    doc2.addImage(img2, 'png', 10, 120);
+
+    doc.save('patron_espalda.pdf');
+    doc2.save('patron_delantero.pdf');
   }
 
 }
