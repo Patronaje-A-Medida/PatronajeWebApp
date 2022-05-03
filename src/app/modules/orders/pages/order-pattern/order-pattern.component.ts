@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-order-pattern',
@@ -9,6 +10,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./order-pattern.component.scss']
 })
 export class OrderPatternComponent implements OnInit {
+
+  @ViewChild('table',{static:false}) el!: ElementRef
 
   customOptions: OwlOptions = {
     loop: true,
@@ -49,7 +52,25 @@ export class OrderPatternComponent implements OnInit {
   }
 
   savePattern() {
-    return;
+    let content=this.el.nativeElement;
+    let doc = new jsPDF();
+    let _elementHandlers =
+    {
+      '#editor':function(element,renderer){
+        return true;
+      }
+    };
+    doc.fromHTML(content.innerHTML,10,0,{
+
+      'width':500,
+      'elementHandlers':_elementHandlers
+    });
+    var img = new Image()
+    img.src = 'assets/images/image 11.png'
+
+    doc.addImage(img, 'png', 0, 150)
+
+    doc.save('test.pdf');
   }
 
 }
