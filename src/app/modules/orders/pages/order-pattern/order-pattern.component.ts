@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import * as jsPDF from 'jspdf';
 
 @Component({
@@ -12,6 +12,45 @@ import * as jsPDF from 'jspdf';
 export class OrderPatternComponent implements OnInit {
 
   @ViewChild('table',{static:false}) el!: ElementRef
+  currentIndexSlide: number;
+
+  espalda = [
+   { 'segmento': "A->C",'value': 45},
+    { 'segmento': "A->B ", 'value': 45},
+    { 'segmento': "A->E", 'value': 44},
+    { 'segmento': "A->F",    'value': 44},
+    { 'segmento': "C->G",    'value': 44},
+    { 'segmento': "E->H",    'value': 44},
+    { 'segmento': "D->I",    'value': 44},
+    { 'segmento': "J->K",    'value': 44},
+    { 'segmento': "B->M",    'value': 44},
+    { 'segmento': "M->N",    'value': 44},
+    { 'segmento': "M->M1",    'value': 44},
+    { 'segmento': "N->N1",    'value': 44},
+    { 'segmento': "B->O",    'value': 44},
+    { 'segmento': "B->P",    'value': 44},
+    { 'segmento': "P->Q",    'value': 44},
+
+  ]
+  delantero = [
+    { 'segmento': "A->C",'value': 44},
+     { 'segmento': "A->B ", 'value': 44},
+     { 'segmento': "A->E", 'value': 44},
+     { 'segmento': "A->F",    'value': 44},
+     { 'segmento': "C->G",    'value': 44},
+     { 'segmento': "E->H",    'value': 44},
+     { 'segmento': "D->I",    'value': 44},
+     { 'segmento': "J->K",    'value': 44},
+     { 'segmento': "K->K1",    'value': 44},
+     { 'segmento': "B->M",    'value': 44},
+    { 'segmento': "M->N",    'value': 44},
+    { 'segmento': "M->M1",    'value': 44},
+    { 'segmento': "N->N1",    'value': 44},
+    { 'segmento': "B->O",    'value': 44},
+    { 'segmento': "B->P",    'value': 44},
+    { 'segmento': "P->Q",    'value': 44},
+ 
+   ]
 
   customOptions: OwlOptions = {
     loop: true,
@@ -49,6 +88,10 @@ export class OrderPatternComponent implements OnInit {
 
   navigateToBack() {
     this.location.back();
+  }
+
+  changedSlide(data: SlidesOutputData) {
+    this.currentIndexSlide = data.startPosition!
   }
 
   savePattern() {
