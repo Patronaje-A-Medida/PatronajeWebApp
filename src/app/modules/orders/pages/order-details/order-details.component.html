@@ -126,7 +126,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let m of measurements">
+                                            <td>{{m.name_measurement | titlecase}}</td>
+                                            <td>{{m.acronym}}</td>
+                                            <td>{{m.value | number:'1.2-2'}} {{m.units}}</td>
+                                        </tr>
+                                        <!--<tr>
                                             <td>Altura</td>
                                             <td>alt</td>
                                             <td>175 cm</td>
@@ -175,7 +180,7 @@
                                             <td>Pantorrilla</td>
                                             <td>pnt</td>
                                             <td>25 cm</td>
-                                        </tr>
+                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
