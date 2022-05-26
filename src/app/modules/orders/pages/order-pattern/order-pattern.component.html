@@ -2,7 +2,7 @@
     <app-tittle-page [tittle]="'Generar patrones escalados'"></app-tittle-page>
 </div>
 
-<div class="basic-container" >
+<div class="basic-container" *ngIf="measurements">
   <div class="details-card">
     <div class="flex justify-between mt-4 mb-3">
       <p class="subtitle-client"></p>
@@ -18,15 +18,12 @@
     <div class="details-section-card">
         <div class="details-garment" >
           <section class="banner">
-            <owl-carousel-o [options]="customOptions">
+            <owl-carousel-o [options]="customOptions" (changed)="changedSlide($event)">
               <ng-template carouselSlide>
-                  <img class="fixed-image" src="assets/images/image 11.png">
+                  <img class="fixed-image" src="assets/images/patron_vestido_01_01.png">
               </ng-template>
               <ng-template carouselSlide>
-                <img class="fixed-image" src="assets/images/image 12.png">
-              </ng-template>
-              <ng-template carouselSlide>
-                <img class="fixed-image" src="assets/images/image 13.png">
+                <img class="fixed-image" src="assets/images/patron_vestido_01_02.png">
               </ng-template>
             </owl-carousel-o>
           </section>
@@ -36,107 +33,38 @@
 
             <div class="container-table">
                 <div class="table-rounded">
-                    <div class="responsive-table">
+                    <div class="responsive-table" #table *ngIf="currentIndexSlide==0">
                         <table class="body-params-table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Medida</th>
+                                    <th scope="col">Segmento</th>
                                     <th scope="col">Valor</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Contorno de pecho</td>
-                                    <td>90 cm </td>
+                            <tbody *ngFor="let medida of espalda" >
+                                <tr> 
+                                    <td>{{medida.segmento}}</td>
+                                    <td>{{medida.value | number:'1.0-2'}} cm</td>
                                 </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="responsive-table" #table2 *ngIf="currentIndexSlide==1">
+                        <table class="body-params-table">
+                            <thead>
                                 <tr>
-                                    <td>Contorno de cintura</td>
-                                    <td>85 cm</td>
+                                    <th scope="col">Segmento</th>
+                                    <th scope="col">Valor</th>
                                 </tr>
-                                <tr>
-                                    <td>Contorno de cadera (10cm de la cintura)</td>
-                                    <td>45 cm</td>
+                            </thead>
+                            <tbody *ngFor="let medida of delantero" >
+                                <tr> 
+                                    <td>{{medida.segmento}}</td>
+                                    <td>{{medida.value | number:'1.0-2'}} cm</td>
                                 </tr>
-                                <tr>
-                                    <td>Contorno de cadera (20cm de la cintura)</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Alto de talle de la espalda</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Alto de talle delantero</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Alto de pecho</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Alto de las caderas (a 10 cm de la cintura)</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Alto de las caderas (a 20 cm de la cintura)</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Separación del pecho</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Ancho de espalda</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Ancho de busto</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Contorno de cuello</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Ancho de hombro</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Largo de brazo</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Contorno de brazo</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Contorno de la muñeca</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Entrepierna o tiro</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Entrepierna delantera</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Entrepierna trasera</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Ancho de muslo</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Contorno de Pantorrilla</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Contorno de rodilla</td>
-                                    <td></td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>

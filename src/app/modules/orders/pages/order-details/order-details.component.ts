@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { Measurements } from 'src/app/core/models/measurements/measurements';
 import { OrderDetailRead } from 'src/app/core/models/orders/order-detail-read';
+import { MeasurementsService } from 'src/app/core/services/measurements.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
 
 @Component({
@@ -20,13 +22,15 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   codeGarment: string;
 
   orderDetail: OrderDetailRead;
+  measurements: Measurements[];
 
   private _orderDetail$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private measurementService: MeasurementsService,
   ) { }
   
 
@@ -36,6 +40,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
         this.codeOrder = params.codeOrder;
         this.codeGarment = params.codeGarment;
         this.getOrderDetail();
+        this.getBodyMeasurements();
       }
     );
   }
@@ -52,13 +57,20 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  private getBodyMeasurements(): void {
+    this.measurementService.getLastMeasurements(3).subscribe(
+      res => this.measurements = res.measurements,
+    );
+  }
+
   garmentColor(color: string): string {
     if (color.toUpperCase() === '#FFFFFF') return `background-color: ${color}; border: solid 1px black`;
     return `background-color: ${color};`;
   }
 
   get basicDimensions(): number[] {
-    return [175, 80, 70, 75];
+    let values = this.measurements.map(e => e.value);
+    return [values[0], values[1], values[2], values[4]];
   }
 
   navigateToBack() {

@@ -42,6 +42,7 @@
 .fixed-image {
   transition: 0.4s;
   max-height: 438px;
+  object-fit: contain;
 }
 
 @media screen and (max-width: 640px) {
