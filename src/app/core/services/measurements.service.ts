@@ -9,7 +9,8 @@ import { BodyMeasurements } from '../models/measurements/body-measurements';
 })
 export class MeasurementsService {
 
-  private readonly PATRONES_MEDIDAS_API = environment.apiPatronesMedidas;
+  //private readonly PATRONES_MEDIDAS_API = environment.apiPatronesMedidas;
+  private readonly PATRONES_MEDIDAS_API = environment.apiGestionUrl;
   private readonly URI_BODYMEASUREMENTS = this.PATRONES_MEDIDAS_API + '/body-measurements';
 
   constructor(

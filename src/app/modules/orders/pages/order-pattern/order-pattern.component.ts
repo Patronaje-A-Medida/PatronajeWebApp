@@ -9,12 +9,11 @@ import { Measurements } from 'src/app/core/models/measurements/measurements';
 @Component({
   selector: 'app-order-pattern',
   templateUrl: './order-pattern.component.html',
-  styleUrls: ['./order-pattern.component.scss']
+  styleUrls: ['./order-pattern.component.scss'],
 })
 export class OrderPatternComponent implements OnInit {
-
-  @ViewChild('table',{static:false}) el!: ElementRef
-  @ViewChild('table2',{static:false}) el2!: ElementRef
+  @ViewChild('table', { static: false }) el!: ElementRef;
+  @ViewChild('table2', { static: false }) el2!: ElementRef;
   currentIndexSlide: number = 0;
   clientId: number = 3;
   measurements: Measurements[] = [];
@@ -29,77 +28,80 @@ export class OrderPatternComponent implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 700,
-    navText: ['<i class="fa fa-arrow-left"></i>','<i class="fa fa-arrow-right"></i>'],
+    navText: [
+      '<i class="fa fa-arrow-left"></i>',
+      '<i class="fa fa-arrow-right"></i>',
+    ],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       400: {
-        items: 1
+        items: 1,
       },
       740: {
-        items: 1
+        items: 1,
       },
       940: {
-        items: 1
-      }
+        items: 1,
+      },
     },
-    nav: true
-  }
-  
+    nav: true,
+  };
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private measurementsService: MeasurementsService,
-  ) { }
+    private measurementsService: MeasurementsService
+  ) {}
 
   ngOnInit(): void {
     this.getMeasurements();
   }
 
   getMeasurements() {
-    this.measurementsService.getLastMeasurements(this.clientId).subscribe(
-      res => {
+    this.clientId = Number(sessionStorage.getItem('clientId'));
+    this.measurementsService
+      .getLastMeasurements(this.clientId)
+      .subscribe((res) => {
         this.measurements = res.measurements;
         this.espalda = [
-          { 'segmento': "A->C",'value': (this.measurements[13].value/4) -1},
-          { 'segmento': "A->B ", 'value': this.measurements[6].value},
-          { 'segmento': "A->E", 'value': (this.measurements[14].value/4) - 1},
-          { 'segmento': "A->F",    'value': 2},
-          { 'segmento': "C->G",    'value': 3},
-          { 'segmento': "E->H",    'value': 12},
-          { 'segmento': "D->I",    'value': 21},
-          { 'segmento': "J->K",    'value': (this.measurements[12].value/2) + 1},
-          { 'segmento': "B->M",    'value': this.measurements[9].value},
-          { 'segmento': "M->N",    'value': this.measurements[9].value},
-          { 'segmento': "M->R",    'value': (this.measurements[5].value/4) - 1},
-          { 'segmento': "N->S",    'value': (this.measurements[5].value/4) - 1},
-          { 'segmento': "B->O",    'value': (this.measurements[3].value/4) + 2},
-          { 'segmento': "B->P",    'value': ((this.measurements[3].value/4) + 2) / 2},
-          { 'segmento': "P->Q",    'value': 14},
-      
+          { segmento: 'A->C', value: this.measurements[13].value / 4 - 1 },
+          { segmento: 'A->B ', value: this.measurements[6].value },
+          { segmento: 'A->E', value: this.measurements[14].value / 4 - 1 },
+          { segmento: 'A->F', value: 2 },
+          { segmento: 'C->G', value: 3 },
+          { segmento: 'E->H', value: 12 },
+          { segmento: 'D->I', value: 21 },
+          { segmento: 'J->K', value: this.measurements[12].value / 2 + 1 },
+          { segmento: 'B->M', value: this.measurements[9].value },
+          { segmento: 'M->N', value: this.measurements[9].value },
+          { segmento: 'M->R', value: this.measurements[5].value / 4 - 1 },
+          { segmento: 'N->S', value: this.measurements[5].value / 4 - 1 },
+          { segmento: 'B->O', value: this.measurements[3].value / 4 + 2 },
+          { segmento: 'B->P', value: (this.measurements[3].value / 4 + 2) / 2 },
+          { segmento: 'P->Q', value: 14 },
         ];
         this.delantero = [
-          { 'segmento': "A->C",'value': (this.measurements[1].value/4) +1},
-           { 'segmento': "A->B ", 'value':this.measurements[7].value},
-           { 'segmento': "A->E", 'value': (this.measurements[14].value/4) -1},
-           { 'segmento': "A->F",    'value': (this.measurements[14].value/4)},
-           { 'segmento': "C->G",    'value': 4},
-           { 'segmento': "E->H",    'value': 12},
-           { 'segmento': "D->I",    'value': 21},
-           { 'segmento': "J->K",    'value': (this.measurements[12].value/2) +1},
-           { 'segmento': "K->K1",    'value': 2.7},
-           { 'segmento': "B->M",    'value': this.measurements[9].value},
-          { 'segmento': "M->N",    'value': this.measurements[9].value},
-          { 'segmento': "M->T",    'value': (this.measurements[5].value/4) - 1},
-          { 'segmento': "N->U",    'value': (this.measurements[5].value/4) - 1},
-          { 'segmento': "B->O",    'value': (this.measurements[3].value/4) + 2},
-          { 'segmento': "B->P",    'value': ((this.measurements[3].value/4) + 2) / 2},
-          { 'segmento': "P->Q",    'value': 14},
-         ];
-      }
-    );
+          { segmento: 'A->C', value: this.measurements[1].value / 4 + 1 },
+          { segmento: 'A->B ', value: this.measurements[7].value },
+          { segmento: 'A->E', value: this.measurements[14].value / 4 - 1 },
+          { segmento: 'A->F', value: this.measurements[14].value / 4 },
+          { segmento: 'C->G', value: 4 },
+          { segmento: 'E->H', value: 12 },
+          { segmento: 'D->I', value: 21 },
+          { segmento: 'J->K', value: this.measurements[12].value / 2 + 1 },
+          { segmento: 'K->K1', value: 2.7 },
+          { segmento: 'B->M', value: this.measurements[9].value },
+          { segmento: 'M->N', value: this.measurements[9].value },
+          { segmento: 'M->T', value: this.measurements[5].value / 4 - 1 },
+          { segmento: 'N->U', value: this.measurements[5].value / 4 - 1 },
+          { segmento: 'B->O', value: this.measurements[3].value / 4 + 2 },
+          { segmento: 'B->P', value: (this.measurements[3].value / 4 + 2) / 2 },
+          { segmento: 'P->Q', value: 14 },
+        ];
+      });
   }
 
   navigateToBack() {
@@ -107,33 +109,32 @@ export class OrderPatternComponent implements OnInit {
   }
 
   changedSlide(data: SlidesOutputData) {
-    this.currentIndexSlide = data.startPosition!
+    this.currentIndexSlide = data.startPosition!;
   }
 
   savePattern() {
-    let content=this.el.nativeElement;
+    let content = this.el.nativeElement;
     let doc = new jsPDF();
-    let _elementHandlers =
-    {
-      '#editor':function(element,renderer){
+    let _elementHandlers = {
+      '#editor': function (element, renderer) {
         return true;
-      }
+      },
     };
-    doc.fromHTML(content.innerHTML,10,0,{
-      'width':500,
-      'elementHandlers':_elementHandlers
+    doc.fromHTML(content.innerHTML, 10, 0, {
+      width: 500,
+      elementHandlers: _elementHandlers,
     });
-    var img = new Image()
-    img.src = 'assets/images/patron_vestido_01_01.png'
+    var img = new Image();
+    img.src = 'assets/images/patron_vestido_01_01.png';
 
     doc.addImage(img, 'png', 10, 120);
 
     //
 
     let doc2 = new jsPDF();
-    doc2.fromHTML(content.innerHTML,10,0,{
-      'width':500,
-      'elementHandlers':_elementHandlers
+    doc2.fromHTML(content.innerHTML, 10, 0, {
+      width: 500,
+      elementHandlers: _elementHandlers,
     });
 
     var img2 = new Image();
@@ -143,5 +144,5 @@ export class OrderPatternComponent implements OnInit {
     doc.save('patron_espalda.pdf');
     doc2.save('patron_delantero.pdf');
   }
-
+  
 }

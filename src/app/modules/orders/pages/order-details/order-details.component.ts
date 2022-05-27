@@ -40,14 +40,16 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
         this.codeOrder = params.codeOrder;
         this.codeGarment = params.codeGarment;
         this.getOrderDetail();
-        this.getBodyMeasurements();
       }
     );
   }
 
   private getOrderDetail(): void {
     this._orderDetail$ = this.ordersService.getDetail(this.codeOrder, this.codeGarment).subscribe(
-      res => this.orderDetail = res,
+      res => {
+        this.orderDetail = res;
+        this.getBodyMeasurements(this.orderDetail.client.id)
+      },
       err => {
         this.isLoading = true;
         this.messageAlert = err.message;
@@ -57,8 +59,8 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getBodyMeasurements(): void {
-    this.measurementService.getLastMeasurements(3).subscribe(
+  private getBodyMeasurements(clientId: number): void {
+    this.measurementService.getLastMeasurements(clientId).subscribe(
       res => this.measurements = res.measurements,
     );
   }
@@ -78,6 +80,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   }
 
   navigateToPattern(): void {
+    sessionStorage.setItem('clientId', this.orderDetail.client.id.toString());
     this.router.navigate(['/orders/details/pattern'], {relativeTo: this.route});
   }
 
