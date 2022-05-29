@@ -44,7 +44,6 @@ export class EmployeesComponent implements OnInit {
     this._TechniciansSub = this.authService.getAllByAtelierId().subscribe(
       (res) => {
         this.technicians = res.map((tuser) => {
-          console.log(tuser);
           return {
             email: tuser.email,
             nameUser: tuser.nameUser,
@@ -69,8 +68,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   private computeItems() {
-    console.log(this.technicians);
-
+    return;
   }
 
 }

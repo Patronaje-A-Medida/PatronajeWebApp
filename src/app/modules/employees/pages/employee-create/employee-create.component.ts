@@ -20,10 +20,8 @@ export class EmployeeCreateComponent implements OnInit {
   typeAlert: string = '';
 
   userTechnicalForm: FormGroup;
-  atelierForm: FormGroup;
 
   private userTechnical: UserTechnicianCreate;
-  private atelier: AtelierCreate;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,25 +49,16 @@ export class EmployeeCreateComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(RGXP_MID_PASSWORD_2),
-        ],
-      ],
-      confirmPassword: ['', [Validators.required, CunstomValidators.ComparePassword('password')]],
     });
   }
 
   isInvalid(controlName: string): boolean {
-    const formControl = this.userTechnicalForm.get(controlName) ?? this.atelierForm.get(controlName);
+    const formControl = this.userTechnicalForm.get(controlName) 
     return formControl.errors && formControl.touched;
   }
 
   hasError(controlName: string, validator: string): boolean {
-    const formControl = this.userTechnicalForm.get(controlName) ?? this.atelierForm.get(controlName);
+    const formControl = this.userTechnicalForm.get(controlName) 
     return formControl.errors?.[validator] && formControl.touched;
   }
 
@@ -84,10 +73,9 @@ export class EmployeeCreateComponent implements OnInit {
     }
 
     this.isLoading = true;
-    const { names, lastNames, dni, email, password } = this.userTechnicalForm.value;
+    const { names, lastNames, dni, email } = this.userTechnicalForm.value;
     this.userTechnical = {
       email: email,
-      password: password,
       nameUser: names,
       lastNameUser: lastNames,
       dni: dni,
