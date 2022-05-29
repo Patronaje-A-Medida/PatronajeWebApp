@@ -52,11 +52,11 @@
                     <div>
                         <label class="form-label" for="description">Descripción</label>
                         <textarea class="form-input" id="description" type="text" formControlName="description" 
-                        rows="3" maxlength="200" [ngClass]="{'is-invalid': isInvalid('description')}"
+                        rows="3" maxlength="250" [ngClass]="{'is-invalid': isInvalid('description')}"
                         >
                         </textarea>
                         <p *ngIf="hasError('description', 'maxlength')" class="invalid-feedback">
-                            la descripción de la prenda no debe superar los 100 caracteres.
+                            la descripción de la prenda no debe superar los 250 caracteres.
                         </p>
                     </div>
                 </div>

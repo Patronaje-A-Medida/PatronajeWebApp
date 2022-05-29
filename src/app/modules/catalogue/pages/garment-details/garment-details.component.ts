@@ -486,6 +486,8 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateGarmentImagesAndPatterns() {
+
+    if(this.uploadImageFiles.length !=0 && this.uploadPatterns.length != 0) {
     const garmentUpdateImages: GarmentUpdateImages = {
       codeGarment: this.garmentDetail.codeGarment,
       atelierId: 0,
@@ -530,7 +532,11 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
         this.isSaving = false;
       }
     );
-
+    } else {
+      this.messageAlert = 'Tiene que existir al menos una imagen de catálogo y un patrón de confección';
+      this.typeAlert = 'error';
+      this.showAlert = true;
+    }
   }
 
   ngOnDestroy(): void {
