@@ -24,7 +24,7 @@
                     <p *ngIf="hasError('password', 'required')" class="invalid-feedback">Debe ingresar su contraseña.</p>
                 </div>
 
-                <a class="form-label-link" (click)="navigateTo('home')" >¿Olvidaste tu contraseña?</a>
+                <a class="form-label-link" (click)="navigateTo('reset-credentials')" >¿Olvidaste tu contraseña?</a>
 
                 <app-button-action class="m-auto" [text]="'Iniciar sesión'" [disabled]="isLoading" (onClick)="signInUser()"></app-button-action>
             </form>

@@ -85,7 +85,7 @@ export class EmployeeCreateComponent implements OnInit {
 
     this.authService.signUpTechnicia(this.userTechnical).subscribe(
       (_) => {
-        this.messageAlert = 'Se enviará un correo al personal con las credenciales para acceder a la aplicación.'; //de confirmación de la cuenta creada con éxito.';
+        this.messageAlert = 'Se enviará un correo al personal con las credenciales para acceder a la aplicación.'; 
         this.typeAlert = 'success';
         this.isLoading = false;
         this.showAlert = true;
