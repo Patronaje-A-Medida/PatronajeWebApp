@@ -4,10 +4,11 @@
     </div>
     <div class="garment-card-info">
         <div class="flex justify-between items-center">
-            <p class="main-info">{{garment.nameGarment}}</p>
+            <p class="main-info overflow-ellipsis">{{garment.nameGarment}}</p>
             <div class="circle-available" [ngClass]="garment.available ? 'glowing-available' : 'glowing-unavailable'"></div>
         </div>
-        <p class="sub-info">{{garment.codeGarment}}</p>
+        <p class="sub-info overflow-ellipsis">{{garment.codeGarment}}</p>    
+        
         <p class="sub-info">{{garment.averagePrice | currency:'PEN':'S/ ':'.2-2'}}</p>
     </div>
 </div>

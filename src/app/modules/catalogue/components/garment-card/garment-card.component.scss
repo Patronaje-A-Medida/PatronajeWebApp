@@ -19,6 +19,12 @@
   height: 6rem;
   @apply p-2 border-gray-300 border-t border-solid flex flex-col gap-y-1;
 }
+.overflow-ellipsis {  
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis  !important;
+}
 
 .main-info {
   @apply font-montserrat font-semibold;

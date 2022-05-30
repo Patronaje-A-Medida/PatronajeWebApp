@@ -148,7 +148,7 @@ export class SignUpComponent implements OnInit {
     this.userOnwer.atelier = this.atelier;
     this.authService.signUpOwner(this.userOnwer).subscribe(
       (_) => {
-        this.messageAlert = 'Se le enviará un enlace de confirmación a su correo electrónico';
+        this.messageAlert = 'Se enviará un correo de confirmación de la cuenta creada con éxito.';
         this.typeAlert = 'success';
         this.isLoading = false;
         this.showAlert = true;

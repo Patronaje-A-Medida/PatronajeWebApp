@@ -64,6 +64,18 @@
   opacity: 1;
 }
 
+.overflow-ellipsis {  
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis  !important;
+}
+
+.wrap-text {
+  inline-size: 200px;
+  overflow-wrap: break-word;
+}
+
 @media screen and (max-width: 900px) {
   .flex-container-row {
     @apply flex-col-reverse;

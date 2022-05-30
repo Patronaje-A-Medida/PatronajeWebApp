@@ -23,6 +23,7 @@ export class AuthService {
   private readonly uriSignUp: string = this.AUTH_API + '/sign-up';
   private readonly uriSignIn: string = this.AUTH_API + '/sign-in';
   private readonly uriUserTechnician: string = this.AUTH_API + '/user-atelier';
+  private readonly uriProfiles: string = this.AUTH_API + '/profiles';
 
   constructor(
     private http: HttpClient,
@@ -65,6 +66,12 @@ export class AuthService {
     return this.http.get<Array<UserTechnicianRead>>(`${this.uriUserTechnician}/${this.userDataService.atelierId}`);
   }
 
+  resetPassword(email: string): Observable<boolean> {
+    let data = new FormData();
+    data.append('userEmail', email);
+
+    return this.http.post<boolean>(`${this.uriProfiles}/reset-password`, data);
+  }
 
 
 }
