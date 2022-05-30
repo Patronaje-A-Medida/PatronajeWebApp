@@ -1,7 +1,9 @@
 .btn-action {
   transition: .4s;
   border-width: 1.5px;
-  @apply w-28 shadow-md bg-skin-green font-lato text-white text-sm px-3 py-1 rounded-3xl border-solid border-transparent
+  max-width: 10rem;
+  min-width: 7rem;
+  @apply shadow-md bg-skin-green font-lato text-white text-sm px-3 py-1 rounded-3xl border-solid border-transparent
   hover:bg-skin-light-green;
 }
 
