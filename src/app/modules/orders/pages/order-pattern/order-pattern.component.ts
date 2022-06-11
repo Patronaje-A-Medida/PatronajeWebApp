@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import * as jsPDF from 'jspdf';
+import PDFDocument  from 'pdfkit';
+import * as fs from 'fs';
 import { MeasurementsService } from 'src/app/core/services/measurements.service';
 import { Measurements } from 'src/app/core/models/measurements/measurements';
 
@@ -145,4 +147,29 @@ export class OrderPatternComponent implements OnInit {
     doc2.save('patron_delantero.pdf');
   }
   
+
+  getDocument() {
+    /// doc pdf normal
+    let doc_delantero = new PDFDocument();
+    doc_delantero.pipe(fs.createWriteStream('patron_delantero.pdf'));
+
+    ;(async function createTable(){
+      // table
+      const table = { 
+        title: 'titulo de nos e que',
+        headers: ["Segmento", "valor"],
+        rows: [
+          [ "Switzerland", "12%", "+1.12%" ],
+          [ "France", "67%", "-0.98%" ],
+          [ "England", "33%", "+4.44%" ]
+        ],
+      };
+  
+      // the magic (async/await)
+      await doc_delantero.table(table, { width: 500 });
+
+      doc_delantero.end();
+    })();
+
+  }
 }
