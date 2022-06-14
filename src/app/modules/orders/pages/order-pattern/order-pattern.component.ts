@@ -4,9 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import * as jsPDF from 'jspdf';
 import PDFDocument  from 'pdfkit';
-import * as fs from 'fs';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { MeasurementsService } from 'src/app/core/services/measurements.service';
 import { Measurements } from 'src/app/core/models/measurements/measurements';
+
+(<any>pdfMake).addVirtualFileSystem(pdfFonts);
 
 @Component({
   selector: 'app-order-pattern',
@@ -22,6 +25,11 @@ export class OrderPatternComponent implements OnInit {
 
   espalda = [];
   delantero = [];
+
+  pdf_espalda = [];
+  pdf_delantero = [];
+  image_64_delantero: string;
+  image_64_espalda: string;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -60,6 +68,9 @@ export class OrderPatternComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMeasurements();
+    this.getImageDataUrlFromLocalPath('assets/images/patron_vestido_01_02.png').then(res => this.image_64_delantero = res);
+    this.getImageDataUrlFromLocalPath('assets/images/patron_vestido_01_01.png').then(res => this.image_64_espalda = res);
+
   }
 
   getMeasurements() {
@@ -102,6 +113,44 @@ export class OrderPatternComponent implements OnInit {
           { segmento: 'B->O', value: this.measurements[3].value / 4 + 2 },
           { segmento: 'B->P', value: (this.measurements[3].value / 4 + 2) / 2 },
           { segmento: 'P->Q', value: 14 },
+        ];
+
+        this.pdf_delantero = [
+          [ 'SEGMENTO', 'VALOR'],
+          [  'A->C',  (this.measurements[1].value / 4 + 1).toFixed(2) ],
+          [  'A->B ',  (this.measurements[7].value).toFixed(2) ],
+          [  'A->E',  (this.measurements[14].value / 4 - 1).toFixed(2) ],
+          [  'A->F',  (this.measurements[14].value / 4).toFixed(2) ],
+          [  'C->G',  4 ],
+          [  'E->H',  12 ],
+          [  'D->I',  21 ],
+          [  'J->K',  (this.measurements[12].value / 2 + 1).toFixed(2) ],
+          [  'K->K1',  2.7 ],
+          [  'B->M',  (this.measurements[9].value).toFixed(2) ],
+          [  'M->N',  (this.measurements[9].value ).toFixed(2)],
+          [  'M->T',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
+          [  'N->U',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
+          [  'B->O',  (this.measurements[3].value / 4 + 2).toFixed(2) ],
+          [  'B->P',  ((this.measurements[3].value / 4 + 2) / 2).toFixed(2) ],
+          [  'P->Q',  14 ],
+        ];
+        this.pdf_espalda = [
+          [ 'SEGMENTO', 'VALOR'],
+          [  'A->C',  (this.measurements[13].value / 4 - 1 ).toFixed(2)],
+          [  'A->B ',  (this.measurements[6].value).toFixed(2) ],
+          [  'A->E',  (this.measurements[14].value / 4 - 1).toFixed(2) ],
+          [  'A->F',  2 ],
+          [  'C->G',  3 ],
+          [  'E->H',  12 ],
+          [  'D->I',  21 ],
+          [  'J->K',  (this.measurements[12].value / 2 + 1).toFixed(2) ],
+          [  'B->M',  (this.measurements[9].value).toFixed(2) ],
+          [  'M->N',  (this.measurements[9].value).toFixed(2) ],
+          [  'M->R',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
+          [  'N->S',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
+          [  'B->O',  (this.measurements[3].value / 4 + 2).toFixed(2) ],
+          [  'B->P',  ((this.measurements[3].value / 4 + 2) / 2).toFixed(2) ],
+          [  'P->Q',  14 ],
         ];
       });
   }
@@ -149,27 +198,67 @@ export class OrderPatternComponent implements OnInit {
   
 
   getDocument() {
-    /// doc pdf normal
-    let doc_delantero = new PDFDocument();
-    doc_delantero.pipe(fs.createWriteStream('patron_delantero.pdf'));
+    let pdfbody = {
+      content: [
+        {text: 'PATRÓN DELANTERO', style: 'header'},
+        {
+          style: 'tableExample',
+          table: {
+            body: this.pdf_delantero
+          },          
+          layout: 'lightHorizontalLines'
+        },
+        { image: this.image_64_delantero,
+          height: 800
+        },
+        {text: 'PATRÓN ESPALDA', style: 'header2'},
+        {
+          style: 'tableExample',
+          table: {
+            body: this.pdf_espalda
+          },
+          layout: 'lightHorizontalLines'
+        },
+        {image: this.image_64_espalda,height: 800}
+      ],
+      styles:{
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [170, 0, 0, 10]
+        },
+        tableExample: {
+          margin: [200, 5, 0, 15]
+        },
+        header2: {
+          fontSize: 18,
+          bold: true,
+          margin: [180, 5, 0, 15]
+        }
+       },
+       defaultStyle: {
+        alignment: 'justify'
+      }
+    }
 
-    ;(async function createTable(){
-      // table
-      const table = { 
-        title: 'titulo de nos e que',
-        headers: ["Segmento", "valor"],
-        rows: [
-          [ "Switzerland", "12%", "+1.12%" ],
-          [ "France", "67%", "-0.98%" ],
-          [ "England", "33%", "+4.44%" ]
-        ],
-      };
-  
-      // the magic (async/await)
-      await doc_delantero.table(table, { width: 500 });
+    let pdf = pdfMake.createPdf(pdfbody);
+    pdf.download('patron_detantero_y_trasero.pdf');
+    //pdf.open();
+  }
 
-      doc_delantero.end();
-    })();
 
+  getImageDataUrlFromLocalPath(localPath: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        let canvas = document.createElement('canvas');
+        let img = new Image();
+        img.onload = () => {
+            canvas.height = img.height;
+            canvas.width = img.width;
+            canvas.getContext("2d").drawImage(img, 0, 0);
+            resolve(canvas.toDataURL('image/png'));
+        }
+        img.onerror = () => reject('Imagen no disponible')
+        img.src = localPath;
+    })
   }
 }
