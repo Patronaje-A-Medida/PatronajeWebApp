@@ -2,8 +2,6 @@ import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
-import * as jsPDF from 'jspdf';
-import PDFDocument  from 'pdfkit';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { MeasurementsService } from 'src/app/core/services/measurements.service';
@@ -169,7 +167,7 @@ export class OrderPatternComponent implements OnInit {
     this.currentIndexSlide = data.startPosition!;
   }
 
-  savePattern() {
+  /*savePattern() {
     let content = this.el.nativeElement;
     let doc = new jsPDF();
     let _elementHandlers = {
@@ -201,7 +199,7 @@ export class OrderPatternComponent implements OnInit {
     doc.save('patron_espalda.pdf');
     doc2.save('patron_delantero.pdf');
   }
-  
+  */
 
   getDocument() {
     let pdfbody = {
