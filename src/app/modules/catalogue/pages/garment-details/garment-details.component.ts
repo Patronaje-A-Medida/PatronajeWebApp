@@ -487,7 +487,8 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
 
   updateGarmentImagesAndPatterns() {
 
-    if(this.uploadImageFiles.length !=0 && this.uploadPatterns.length != 0) {
+    //if(this.uploadImageFiles.length !=0 && this.uploadPatterns.length != 0) {
+    if(this.uploadImageFiles.length !=0) {
     const garmentUpdateImages: GarmentUpdateImages = {
       codeGarment: this.garmentDetail.codeGarment,
       atelierId: 0,
@@ -497,15 +498,25 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
     const garmetUpdatePatterns: GarmentUpdateImages = {
       codeGarment: this.garmentDetail.codeGarment,
       atelierId: 0,
-      images: this.uploadPatternFiles,
+      //images: this.uploadPatternFiles,
+      images: this.uploadImageFiles,
     }
 
-    console.log(garmentUpdateImages);
+    //console.log(garmentUpdateImages);
     
     this.isSaving = true;
     this.garmentService.updateImages(garmentUpdateImages).subscribe(
       res => {
-        this.garmentService.updatePatterns(garmetUpdatePatterns).subscribe(
+        this.messageAlert = 'Prenda actualizada con éxito';
+        this.typeAlert = 'success';
+        this.showAlert = true;
+        this.getGarmentDetail();
+        //this._toogleOptionsSub.unsubscribe();
+        setTimeout(() => {
+          this.editModeImages = false;
+          this.isSaving = false;
+        }, 2000);
+        /*this.garmentService.updatePatterns(garmetUpdatePatterns).subscribe(
           res2 => {
             this.messageAlert = 'Prenda actualizada con éxito';
             this.typeAlert = 'success';
@@ -523,7 +534,7 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
             this.showAlert = true;
             this.isSaving = false;
           }
-        );
+        );*/
       },
       (err) => {
         this.messageAlert = err.message;
@@ -533,7 +544,8 @@ export class GarmentDetailsComponent implements OnInit, OnDestroy {
       }
     );
     } else {
-      this.messageAlert = 'Tiene que existir al menos una imagen de catálogo y un patrón de confección';
+      //this.messageAlert = 'Tiene que existir al menos una imagen de catálogo y un patrón de confección';
+      this.messageAlert = 'Tiene que existir al menos una imagen de catálogo';
       this.typeAlert = 'error';
       this.showAlert = true;
     }

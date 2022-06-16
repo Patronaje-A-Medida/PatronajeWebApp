@@ -339,7 +339,8 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
       ...colorFeatures
     );
     this.newGarment.images = this.uploadImageFiles;
-    this.newGarment.patterns = this.uploadPatternFiles;
+    //this.newGarment.patterns = this.uploadPatternFiles;
+    this.newGarment.patterns = this.uploadImageFiles;
 
     this.buildInfoModal();
     this.showModal = true;
@@ -350,12 +351,12 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
     const numImg = this.newGarment.images.length;
     const numPttrn = this.newGarment.patterns.length;
 
-    if(numImg == 0 && numPttrn == 0) {
+    /*if(numImg == 0 && numPttrn == 0) {
       this.typeModal = 'error';
       this.messageModal = 'La prenda a agregar no cuenta con imágenes para el catálogo y patrones de confección para el escalado a medida del cliente.';
       this.canSave = false;
       return;
-    }
+    }*/
 
     if(numImg == 0) {
       this.typeModal = 'error';
@@ -364,12 +365,12 @@ export class GarmentCreateComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if(numPttrn == 0) {
+    /*if(numPttrn == 0) {
       this.typeModal = 'error';
       this.messageModal = 'La prenda a agregar no cuenta con patrones de confección para el escalado a medida del cliente.';
       this.canSave = false;
       return;
-    }
+    }*/
 
     this.messageModal = '¿Estás seguro de agregar esta prenda al catálogo?';
     this.typeModal = 'warning'

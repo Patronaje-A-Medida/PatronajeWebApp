@@ -61,7 +61,9 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
 
   private getBodyMeasurements(clientId: number): void {
     this.measurementService.getLastMeasurements(clientId).subscribe(
-      res => this.measurements = res.measurements,
+      res => {
+        this.measurements = res.measurements;
+      },
     );
   }
 
