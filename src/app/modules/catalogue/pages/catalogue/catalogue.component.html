@@ -57,7 +57,7 @@
     </div>
 
     <div style="text-align: center; padding-top: 50px;">
-        <p *ngIf="garments.length == 0">No se encontraron prendas</p>
+        <p *ngIf="garments.length == 0 && !isLoading">No se encontraron prendas</p>
     </div>
     <div class="garments-container" #garmentsCard *ngIf="!firstLoad">
         <ng-container *ngFor="let gmt of garments">
