@@ -68,8 +68,8 @@ export class OrderPatternComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMeasurements();
-    this.getImageDataUrlFromLocalPath('assets/images/patron_vestido_01_02.png').then(res => this.image_64_delantero = res);
-    this.getImageDataUrlFromLocalPath('assets/images/patron_vestido_01_01.png').then(res => this.image_64_espalda = res);
+    this.getImageDataUrlFromLocalPath('assets/images/patron_vestido_delantero.png').then(res => this.image_64_delantero = res);
+    this.getImageDataUrlFromLocalPath('assets/images/patron_vestido_espalda.png').then(res => this.image_64_espalda = res);
 
   }
 
@@ -80,20 +80,20 @@ export class OrderPatternComponent implements OnInit {
       .subscribe((res) => {
         this.measurements = res.measurements;
         this.espalda = [
-          { segmento: 'A->C', value: this.measurements[13].value / 4 - 1 },
+          { segmento: 'A->C', value: this.measurements[1].value / 4 - 1 },
           { segmento: 'A->B ', value: this.measurements[6].value },
           { segmento: 'A->E', value: this.measurements[14].value / 4 - 1 },
           { segmento: 'A->F', value: 2 },
           { segmento: 'C->G', value: 3 },
-          { segmento: 'E->H', value: 12 },
+          { segmento: 'E->H', value: this.measurements[15].value },
           { segmento: 'D->I', value: 21 },
           { segmento: 'J->K', value: this.measurements[12].value / 2 + 1 },
-          { segmento: 'B->M', value: this.measurements[9].value },
-          { segmento: 'M->N', value: this.measurements[9].value },
-          { segmento: 'M->R', value: this.measurements[5].value / 4 - 1 },
-          { segmento: 'N->S', value: this.measurements[5].value / 4 - 1 },
-          { segmento: 'B->O', value: this.measurements[3].value / 4 + 2 },
-          { segmento: 'B->P', value: (this.measurements[3].value / 4 + 2) / 2 },
+          { segmento: 'B->M', value: this.measurements[26].value },
+          { segmento: 'M->N', value: 55 - this.measurements[26].value },
+          { segmento: 'M->M1', value: this.measurements[4].value / 4 - 1 },
+          { segmento: 'N->N1', value: this.measurements[4].value / 4 - 1 },
+          { segmento: 'B->O', value: this.measurements[2].value / 4 + 2 },
+          { segmento: 'B->P', value: (this.measurements[2].value / 4 + 2) / 2 },
           { segmento: 'P->Q', value: 14 },
         ];
         this.delantero = [
@@ -102,54 +102,60 @@ export class OrderPatternComponent implements OnInit {
           { segmento: 'A->E', value: this.measurements[14].value / 4 - 1 },
           { segmento: 'A->F', value: this.measurements[14].value / 4 },
           { segmento: 'C->G', value: 4 },
-          { segmento: 'E->H', value: 12 },
-          { segmento: 'D->I', value: 21 },
-          { segmento: 'J->K', value: this.measurements[12].value / 2 + 1 },
+          { segmento: 'E->H', value: this.measurements[15].value },
+          { segmento: 'D->I', value: 21 + Math.abs(this.measurements[6].value - this.measurements[7].value) },
+          { segmento: 'J->K', value: this.measurements[13].value / 2 + 1 },
           { segmento: 'K->K1', value: 2.7 },
-          { segmento: 'B->M', value: this.measurements[9].value },
-          { segmento: 'M->N', value: this.measurements[9].value },
-          { segmento: 'M->T', value: this.measurements[5].value / 4 - 1 },
-          { segmento: 'N->U', value: this.measurements[5].value / 4 - 1 },
-          { segmento: 'B->O', value: this.measurements[3].value / 4 + 2 },
-          { segmento: 'B->P', value: (this.measurements[3].value / 4 + 2) / 2 },
-          { segmento: 'P->Q', value: 14 },
+          { segmento: 'A->M', value: this.measurements[8].value},
+          { segmento: 'A->N', value: this.measurements[11].value/2},
+          { segmento: 'I->O', value: 4},
+          { segmento: 'O->P', value: Math.abs(this.measurements[6].value - this.measurements[7].value) },
+          { segmento: 'B->Q', value: this.measurements[26].value},
+          { segmento: 'Q->R', value: 55 - this.measurements[26].value},
+          { segmento: 'Q->Q1', value: this.measurements[4].value / 4 + 1 },
+          { segmento: 'R->R1', value: this.measurements[4].value / 4 + 1 },
+          { segmento: 'B->S', value: this.measurements[2].value / 4 + 3.5 },
+          { segmento: 'T->U', value: 10}
         ];
 
         this.pdf_delantero = [
           [ 'SEGMENTO', 'VALOR'],
           [  'A->C',  (this.measurements[1].value / 4 + 1).toFixed(2) ],
-          [  'A->B ',  (this.measurements[7].value).toFixed(2) ],
-          [  'A->E',  (this.measurements[14].value / 4 - 1).toFixed(2) ],
+          [  'A->B ', ( this.measurements[7].value).toFixed(2) ],
+          [  'A->E',  (this.measurements[14].value / 4 - 1 ).toFixed(2)],
           [  'A->F',  (this.measurements[14].value / 4).toFixed(2) ],
           [  'C->G',  4 ],
-          [  'E->H',  12 ],
-          [  'D->I',  21 ],
-          [  'J->K',  (this.measurements[12].value / 2 + 1).toFixed(2) ],
+          [  'E->H',  (this.measurements[15].value).toFixed(2) ],
+          [  'D->I',  (21 + Math.abs(this.measurements[6].value - this.measurements[7].value) ).toFixed(2)],
+          [  'J->K',  (this.measurements[13].value / 2 + 1 ).toFixed(2)],
           [  'K->K1',  2.7 ],
-          [  'B->M',  (this.measurements[9].value).toFixed(2) ],
-          [  'M->N',  (this.measurements[9].value ).toFixed(2)],
-          [  'M->T',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
-          [  'N->U',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
-          [  'B->O',  (this.measurements[3].value / 4 + 2).toFixed(2) ],
-          [  'B->P',  ((this.measurements[3].value / 4 + 2) / 2).toFixed(2) ],
-          [  'P->Q',  14 ],
+          [  'A->M',  (this.measurements[8].value).toFixed(2)],
+          [  'A->N',  (this.measurements[11].value/2).toFixed(2)],
+          [  'I->O',  4],
+          [  'O->P',  (Math.abs(this.measurements[6].value - this.measurements[7].value) ).toFixed(2)],
+          [  'B->Q',  (this.measurements[26].value).toFixed(2)],
+          [  'Q->R',  (55 - this.measurements[26].value).toFixed(2)],
+          [  'Q->Q1', ( this.measurements[4].value / 4 + 1 ).toFixed(2)],
+          [  'R->R1', ( this.measurements[4].value / 4 + 1 ).toFixed(2)],
+          [  'B->S',  (this.measurements[2].value / 4 + 3.5 ).toFixed(2)],
+          [  'T->U',  10]
         ];
         this.pdf_espalda = [
           [ 'SEGMENTO', 'VALOR'],
-          [  'A->C',  (this.measurements[13].value / 4 - 1 ).toFixed(2)],
+          [  'A->C',  (this.measurements[1].value / 4 - 1).toFixed(2) ],
           [  'A->B ',  (this.measurements[6].value).toFixed(2) ],
-          [  'A->E',  (this.measurements[14].value / 4 - 1).toFixed(2) ],
+          [  'A->E',  (this.measurements[14].value / 4 - 1 ).toFixed(2)],
           [  'A->F',  2 ],
           [  'C->G',  3 ],
-          [  'E->H',  12 ],
+          [  'E->H',  (this.measurements[15].value).toFixed(2) ],
           [  'D->I',  21 ],
-          [  'J->K',  (this.measurements[12].value / 2 + 1).toFixed(2) ],
-          [  'B->M',  (this.measurements[9].value).toFixed(2) ],
-          [  'M->N',  (this.measurements[9].value).toFixed(2) ],
-          [  'M->R',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
-          [  'N->S',  (this.measurements[5].value / 4 - 1).toFixed(2) ],
-          [  'B->O',  (this.measurements[3].value / 4 + 2).toFixed(2) ],
-          [  'B->P',  ((this.measurements[3].value / 4 + 2) / 2).toFixed(2) ],
+          [  'J->K',  (this.measurements[12].value / 2 + 1 ).toFixed(2)],
+          [  'B->M',  (this.measurements[26].value ).toFixed(2)],
+          [  'M->N',  (55 -  this.measurements[26].value ).toFixed(2) ],
+          [  'M->M1',  (this.measurements[4].value / 4 - 1 ).toFixed(2)],
+          [  'N->N1',  (this.measurements[4].value / 4 - 1 ).toFixed(2)],
+          [  'B->O',  (this.measurements[2].value / 4 + 2 ).toFixed(2)],
+          [  'B->P',  ((this.measurements[2].value / 4 + 2) / 2 ).toFixed(2)],
           [  'P->Q',  14 ],
         ];
       });
